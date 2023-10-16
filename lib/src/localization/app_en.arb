@@ -1,0 +1,6 @@
+{
+  "appTitle": "unidate",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
