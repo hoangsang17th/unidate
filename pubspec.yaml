@@ -12,21 +12,39 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+  get: ^4.6.6
+  flutter_svg:
+  json_annotation: ^4.5.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^1.0.0
+  json_serializable: ^6.2.0
+  build_runner: ^2.1.11
+  flutter_gen: ^5.3.2
+  flutter_gen_runner: ^5.3.1
+
 
 flutter:
+
   uses-material-design: true
 
-  # Enable generation of localized Strings from arb files.
-  generate: true
-
   assets:
-    # Add assets from the images directory to the application.
     - assets/images/
+    - assets/icons/
+
+flutter_gen:
+  output: lib/generated/
+  line_length: 80
+  
+  assets:
+    enabled: true
+    outputs:
+      class_name: AppAssets
+      package_parameter_enabled: false
+    
