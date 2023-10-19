@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:unidate/app/modules/auth/views/login.view.dart';
 
 import '../modules/dashboard/bindings/home.binding.dart';
 import '../bindings/auth.binding.dart';
@@ -15,6 +16,10 @@ class AppPages {
       name: AppRoutes.AUTH,
       page: () => const WelcomeView(),
       bindings: [AuthBinding()],
+    ),
+     GetPage(
+      name: AppRoutes.LOGIN,
+      page: () => const LoginView(),
     ),
     GetPage(
       name: AppRoutes.HOME,

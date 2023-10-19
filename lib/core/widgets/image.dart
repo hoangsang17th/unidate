@@ -6,7 +6,7 @@ class AppSvgPicture extends StatelessWidget {
   const AppSvgPicture(
     this.svg, {
     super.key,
-    required this.size,
+    this.size,
     this.color,
     this.radius,
   });
