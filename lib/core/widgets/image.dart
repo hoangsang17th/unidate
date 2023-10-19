@@ -31,7 +31,6 @@ class AppSvgPicture extends StatelessWidget {
       fit: BoxFit.scaleDown,
       child: SvgPicture.asset(
         svg,
-        color: color,
         height: size,
         width: size,
       ),

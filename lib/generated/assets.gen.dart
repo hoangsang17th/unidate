@@ -9,26 +9,79 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/logo.svg
+  String get logo => 'assets/icons/logo.svg';
+
+  /// List of all assets
+  List<String> get values => [logo];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/login.svg
-  String get login => 'assets/images/login.svg';
+  $AssetsImagesAuthGen get auth => const $AssetsImagesAuthGen();
 
-  /// File path: assets/images/logo.svg
-  String get logo => 'assets/images/logo.svg';
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
   /// File path: assets/images/native_splash.png
   AssetGenImage get nativeSplash =>
       const AssetGenImage('assets/images/native_splash.png');
 
+  $AssetsImagesUsersGen get users => const $AssetsImagesUsersGen();
+
   /// List of all assets
-  List<dynamic> get values => [login, logo, nativeSplash];
+  List<AssetGenImage> get values => [logo, nativeSplash];
+}
+
+class $AssetsImagesAuthGen {
+  const $AssetsImagesAuthGen();
+
+  /// File path: assets/images/auth/member.png
+  AssetGenImage get member =>
+      const AssetGenImage('assets/images/auth/member.png');
+
+  /// File path: assets/images/auth/title.svg
+  String get title => 'assets/images/auth/title.svg';
+
+  /// List of all assets
+  List<dynamic> get values => [member, title];
+}
+
+class $AssetsImagesUsersGen {
+  const $AssetsImagesUsersGen();
+
+  /// File path: assets/images/users/user1.jpg
+  AssetGenImage get user1 =>
+      const AssetGenImage('assets/images/users/user1.jpg');
+
+  /// File path: assets/images/users/user2.jpg
+  AssetGenImage get user2 =>
+      const AssetGenImage('assets/images/users/user2.jpg');
+
+  /// File path: assets/images/users/user3.jpg
+  AssetGenImage get user3 =>
+      const AssetGenImage('assets/images/users/user3.jpg');
+
+  /// File path: assets/images/users/user4.jpg
+  AssetGenImage get user4 =>
+      const AssetGenImage('assets/images/users/user4.jpg');
+
+  /// File path: assets/images/users/user5.jpeg
+  AssetGenImage get user5 =>
+      const AssetGenImage('assets/images/users/user5.jpeg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [user1, user2, user3, user4, user5];
 }
 
 class AppAssets {
   AppAssets._();
 
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 

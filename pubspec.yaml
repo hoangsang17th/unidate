@@ -21,6 +21,7 @@ dependencies:
   get_it: ^7.6.0
   injectable: ^2.1.2
   flutter_native_splash: ^2.3.4
+  appinio_swiper: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +41,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/users/
+    - assets/images/auth/
     - assets/icons/
 
 flutter_gen:

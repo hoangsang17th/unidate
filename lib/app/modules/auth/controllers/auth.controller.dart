@@ -7,7 +7,7 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Get.offAndToNamed(AppRoutes.LOGIN);
+      Get.offAndToNamed(AppRoutes.WELCOME);
     });
 
     super.onInit();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:unidate/app/routes/app_pages.dart';
 
-import 'package:flutter/material.dart';
 import 'package:unidate/core/widgets/image.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
@@ -14,13 +15,6 @@ class LoginView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Expanded(
-              child: Center(
-                child: AppSvgPicture(
-                  AppAssets.images.login,
-                ),
-              ),
-            ),
             Container(
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
@@ -57,13 +51,16 @@ class LoginView extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => Get.toNamed(AppRoutes.DASHBOARD),
                     child: const Text('Login'),
                   ),
                   const SizedBox(height: 20),
-                  const Text(
-                    'Don\'t have an account? Sign up',
-                    textAlign: TextAlign.center,
+                  InkWell(
+                    onTap: () => Get.toNamed(AppRoutes.REGISTER),
+                    child: const Text(
+                      'Don\'t have an account? Sign up',
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),
