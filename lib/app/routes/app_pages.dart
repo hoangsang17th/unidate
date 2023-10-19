@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import '../modules/dashboard/bindings/home.binding.dart';
-import '../modules/auth/bindings/auth.binding.dart';
+import '../bindings/auth.binding.dart';
 import '../modules/dashboard/views/home.view.dart';
 import '../modules/auth/views/splash.view.dart';
 

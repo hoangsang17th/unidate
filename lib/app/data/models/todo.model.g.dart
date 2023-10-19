@@ -7,7 +7,7 @@ part of 'todo.model.dart';
 // **************************************************************************
 
 TodoModel _$TodoModelFromJson(Map<String, dynamic> json) => TodoModel(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       name: json['name'] as String,
       isCompleted: json['isCompleted'] as bool,
       creatAt: DateTime.parse(json['creatAt'] as String),

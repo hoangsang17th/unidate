@@ -15,11 +15,15 @@ class $AssetsImagesGen {
   /// File path: assets/images/login.svg
   String get login => 'assets/images/login.svg';
 
-  /// File path: assets/images/splash.svg
-  String get splash => 'assets/images/splash.svg';
+  /// File path: assets/images/logo.svg
+  String get logo => 'assets/images/logo.svg';
+
+  /// File path: assets/images/native_splash.png
+  AssetGenImage get nativeSplash =>
+      const AssetGenImage('assets/images/native_splash.png');
 
   /// List of all assets
-  List<String> get values => [login, splash];
+  List<dynamic> get values => [login, logo, nativeSplash];
 }
 
 class AppAssets {

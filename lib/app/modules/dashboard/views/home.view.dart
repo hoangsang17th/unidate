@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../../core/values/string.dart';
+import '../../../../core/values/string.dart';
 
 import '../controllers/home.controller.dart';
 
@@ -25,16 +25,16 @@ class HomeView extends GetView<HomeController> {
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Row(
                   children: [
-                    InkWell(
-                      onTap: () =>
-                          controller.onComplete(controller.todos[index].id!),
-                      child: controller.todos[index].isCompleted
-                          ? SvgPicture.asset(
-                              "assets/icons/check-square.svg",
-                              color: const Color(0xFF2ECC71),
-                            )
-                          : SvgPicture.asset("assets/icons/square.svg"),
-                    ),
+                    // InkWell(
+                    //   onTap: () =>
+                    //       controller.onComplete(controller.todos[index].id!),
+                    //   child: controller.todos[index].isCompleted
+                    //       ? SvgPicture.asset(
+                    //           "assets/icons/check-square.svg",
+                    //           color: const Color(0xFF2ECC71),
+                    //         )
+                    //       : SvgPicture.asset("assets/icons/square.svg"),
+                    // ),
                     const SizedBox(
                       width: 15,
                     ),
@@ -44,22 +44,22 @@ class HomeView extends GetView<HomeController> {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    InkWell(
-                      onTap: () {
-                        controller.todoNameController.text =
-                            controller.todos[index].name;
-                        Get.bottomSheet(
-                          TodoBottomSheet(
-                            id: controller.todos[index].id,
-                            isUpdate: true,
-                          ),
-                        ).whenComplete(() {
-                          controller.todoNameController.text = "";
-                          controller.isSave.value = false;
-                        });
-                      },
-                      child: SvgPicture.asset("assets/icons/edit.svg"),
-                    ),
+                    // InkWell(
+                    //   onTap: () {
+                    //     controller.todoNameController.text =
+                    //         controller.todos[index].name;
+                    //     Get.bottomSheet(
+                    //       TodoBottomSheet(
+                    //         id: controller.todos[index].id,
+                    //         isUpdate: true,
+                    //       ),
+                    //     ).whenComplete(() {
+                    //       controller.todoNameController.text = "";
+                    //       controller.isSave.value = false;
+                    //     });
+                    //   },
+                    // child: SvgPicture.asset("assets/icons/edit.svg"),
+                    // ),
                   ],
                 ),
               );
