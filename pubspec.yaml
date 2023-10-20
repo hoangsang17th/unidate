@@ -44,6 +44,7 @@ flutter:
     - assets/images/users/
     - assets/images/auth/
     - assets/icons/
+    - assets/icons/navigation_bar/
 
 flutter_gen:
   output: lib/generated/

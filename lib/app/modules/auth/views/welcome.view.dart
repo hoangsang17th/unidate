@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/routes/app_pages.dart';
+import 'package:unidate/core/widgets/button.dart';
+import 'package:unidate/core/widgets/image.dart';
 import 'package:unidate/core/widgets/spacer.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
@@ -54,28 +56,9 @@ class WelcomeView extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ElevatedButton(
+              child: SecondaryButton(
                 onPressed: () => Get.toNamed(AppRoutes.REGISTER),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: const EdgeInsets.all(16),
-                ),
-                child: const SizedBox(
-                  width: double.infinity,
-                  child: Center(
-                    child: Text(
-                      'Join now',
-                      style: TextStyle(
-                        color: Color(0xff2AAC7A),
-                        fontSize: 16,
-                        letterSpacing: 1.4,
-                      ),
-                    ),
-                  ),
-                ),
+                text: 'Join now',
               ),
             ),
             Padding(

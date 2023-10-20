@@ -12,11 +12,30 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/chevron.left.svg
+  String get chevronLeft => 'assets/icons/chevron.left.svg';
+
+  /// File path: assets/icons/dislike.svg
+  String get dislike => 'assets/icons/dislike.svg';
+
+  /// File path: assets/icons/like.svg
+  String get like => 'assets/icons/like.svg';
+
+  /// File path: assets/icons/location.svg
+  String get location => 'assets/icons/location.svg';
+
   /// File path: assets/icons/logo.svg
   String get logo => 'assets/icons/logo.svg';
 
+  $AssetsIconsNavigationBarGen get navigationBar =>
+      const $AssetsIconsNavigationBarGen();
+
+  /// File path: assets/icons/notification.svg
+  String get notification => 'assets/icons/notification.svg';
+
   /// List of all assets
-  List<String> get values => [logo];
+  List<String> get values =>
+      [chevronLeft, dislike, like, location, logo, notification];
 }
 
 class $AssetsImagesGen {
@@ -35,6 +54,25 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [logo, nativeSplash];
+}
+
+class $AssetsIconsNavigationBarGen {
+  const $AssetsIconsNavigationBarGen();
+
+  /// File path: assets/icons/navigation_bar/Chat.svg
+  String get chat => 'assets/icons/navigation_bar/Chat.svg';
+
+  /// File path: assets/icons/navigation_bar/Heart.svg
+  String get heart => 'assets/icons/navigation_bar/Heart.svg';
+
+  /// File path: assets/icons/navigation_bar/Home.svg
+  String get home => 'assets/icons/navigation_bar/Home.svg';
+
+  /// File path: assets/icons/navigation_bar/Profile.svg
+  String get profile => 'assets/icons/navigation_bar/Profile.svg';
+
+  /// List of all assets
+  List<String> get values => [chat, heart, home, profile];
 }
 
 class $AssetsImagesAuthGen {
