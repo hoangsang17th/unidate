@@ -15,34 +15,43 @@ class DashBoardView extends StatelessWidget {
       ),
       body: const CardsStackWidget(),
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: Colors.white,
-          border: Border(
+          border: const Border(
             top: BorderSide(
               color: Colors.grey,
               width: 0.2,
             ),
           ),
+          borderRadius: BorderRadius.circular(16),
         ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildButton(AppAssets.icons.navigationBar.home),
-            _buildButton(AppAssets.icons.navigationBar.heart),
-            _buildButton(AppAssets.icons.navigationBar.chat),
-            _buildButton(AppAssets.icons.navigationBar.profile),
+            _buildButton(AppAssets.icons.navigationBar.home, true),
+            _buildButton(AppAssets.icons.navigationBar.heart, false),
+            _buildButton(AppAssets.icons.navigationBar.chat, false),
+            _buildButton(AppAssets.icons.navigationBar.profile, false),
           ],
         ),
       ),
     );
   }
 
-  InkWell _buildButton(String icon) {
-    return InkWell(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-        child: AppSvgPicture(icon),
+  Widget _buildButton(String icon, bool isActive) {
+    return Material(
+      child: InkWell(
+        onTap: () {},
+        borderRadius: BorderRadius.circular(8),
+        child: Padding(
+          padding: const EdgeInsets.all(6),
+          child: AppSvgPicture(
+            icon,
+            size: 24,
+            color: isActive ? const Color(0xff2AAC7A) : null,
+          ),
+        ),
       ),
     );
   }
