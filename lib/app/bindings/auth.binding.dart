@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
+import 'package:unidate/app/modules/auth/controllers/login.controller.dart';
 
-import '../modules/auth/controllers/auth.controller.dart';
 
 class AuthBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(AuthController());
+    Get.lazyPut(() =>LoginController());
   }
 }

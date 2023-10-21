@@ -12,6 +12,13 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/add.svg
+  String get add => 'assets/icons/add.svg';
+
+  /// File path: assets/icons/adjust-horizontal-settings.svg
+  String get adjustHorizontalSettings =>
+      'assets/icons/adjust-horizontal-settings.svg';
+
   /// File path: assets/icons/chevron.left.svg
   String get chevronLeft => 'assets/icons/chevron.left.svg';
 
@@ -34,8 +41,16 @@ class $AssetsIconsGen {
   String get notification => 'assets/icons/notification.svg';
 
   /// List of all assets
-  List<String> get values =>
-      [chevronLeft, dislike, like, location, logo, notification];
+  List<String> get values => [
+        add,
+        adjustHorizontalSettings,
+        chevronLeft,
+        dislike,
+        like,
+        location,
+        logo,
+        notification
+      ];
 }
 
 class $AssetsImagesGen {
@@ -78,15 +93,14 @@ class $AssetsIconsNavigationBarGen {
 class $AssetsImagesAuthGen {
   const $AssetsImagesAuthGen();
 
-  /// File path: assets/images/auth/member.png
-  AssetGenImage get member =>
-      const AssetGenImage('assets/images/auth/member.png');
+  /// File path: assets/images/auth/member.svg
+  String get member => 'assets/images/auth/member.svg';
 
   /// File path: assets/images/auth/title.svg
   String get title => 'assets/images/auth/title.svg';
 
   /// List of all assets
-  List<dynamic> get values => [member, title];
+  List<String> get values => [member, title];
 }
 
 class $AssetsImagesUsersGen {

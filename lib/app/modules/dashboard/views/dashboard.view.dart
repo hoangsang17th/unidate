@@ -1,55 +1,77 @@
 import 'package:flutter/material.dart';
-import 'package:unidate/app/modules/dashboard/views/cards_stack_widget.dart';
+import 'package:get/get.dart';
+import 'package:unidate/app/modules/dashboard/controllers/dashboard.controller.dart';
+import 'package:unidate/app/modules/dashboard/views/chat.view.dart';
+import 'package:unidate/app/modules/dashboard/views/matches.view.dart';
+import 'package:unidate/app/modules/dashboard/views/home.view.dart';
+import 'package:unidate/app/modules/dashboard/views/settings.view.dart';
+import 'package:unidate/core/values/app_colors.dart';
+import 'package:unidate/core/widgets/animated_index_stack.dart';
 import 'package:unidate/core/widgets/image.dart';
-import 'package:unidate/generated/assets.gen.dart';
 
-class DashBoardView extends StatelessWidget {
+class DashBoardView extends GetView<DashBoardController> {
   const DashBoardView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('DashBoardView'),
-      ),
-      body: const CardsStackWidget(),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: const Border(
-            top: BorderSide(
-              color: Colors.grey,
-              width: 0.2,
+    return GetX<DashBoardController>(
+      builder: (context) {
+        return Scaffold(
+          backgroundColor: AppColors.bgPaper,
+          body: AnimatedIndexStack(
+            children: const [
+              HomeView(),
+              MatchesView(),
+              ChatView(),
+              SettingsView(),
+            ],
+            index: controller.currentIndex,
+          ),
+          extendBody: true,
+          bottomNavigationBar: Material(
+            color: Colors.transparent,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.bg,
+                  border: Border.all(
+                    color: AppColors.divider,
+                    width: 0.5,
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(
+                    controller.iconNavigations.length,
+                    (index) => _buildButton(index),
+                  ),
+                ),
+              ),
             ),
           ),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildButton(AppAssets.icons.navigationBar.home, true),
-            _buildButton(AppAssets.icons.navigationBar.heart, false),
-            _buildButton(AppAssets.icons.navigationBar.chat, false),
-            _buildButton(AppAssets.icons.navigationBar.profile, false),
-          ],
-        ),
-      ),
+        );
+      },
     );
   }
 
-  Widget _buildButton(String icon, bool isActive) {
-    return Material(
-      child: InkWell(
-        onTap: () {},
-        borderRadius: BorderRadius.circular(8),
-        child: Padding(
-          padding: const EdgeInsets.all(6),
-          child: AppSvgPicture(
-            icon,
-            size: 24,
-            color: isActive ? const Color(0xff2AAC7A) : null,
+  Widget _buildButton(int index) {
+    return Expanded(
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => controller.onChangedTab(index),
+          borderRadius: BorderRadius.circular(16),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: AppSvgPicture(
+              controller.iconNavigations[index],
+              size: 24,
+              color: index == controller.currentIndex
+                  ? const Color(0xff2AAC7A)
+                  : null,
+            ),
           ),
         ),
       ),

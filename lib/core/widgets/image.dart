@@ -27,15 +27,12 @@ class AppSvgPicture extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    return FittedBox(
-      fit: BoxFit.scaleDown,
-      child: SvgPicture.asset(
-        svg,
-        height: size,
-        width: size,
-        colorFilter:
-            color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
-      ),
+    return SvgPicture.asset(
+      svg,
+      height: size,
+      width: size,
+      colorFilter:
+          color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/routes/app_pages.dart';
+import 'package:unidate/core/values/app_colors.dart';
+import 'package:unidate/core/values/app_text_styles.dart';
 import 'package:unidate/core/widgets/button.dart';
 import 'package:unidate/core/widgets/image.dart';
 import 'package:unidate/core/widgets/spacer.dart';
@@ -12,76 +14,62 @@ class WelcomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xff22D197),
-              Color(0xff0D8972),
-            ],
+      backgroundColor: AppColors.bg,
+      body: Column(
+        children: [
+          AppSvgPicture(
+            AppAssets.images.auth.member,
           ),
-        ),
-        child: Column(
-          children: [
-            Image.asset(
-              AppAssets.images.auth.member.path,
-              fit: BoxFit.fitWidth,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 16, 48, 48),
+            child: Column(
+              children: [
+                const VSpacer(12),
+                Text(
+                  'Find your partner in life',
+                  style: AppTextStyles.h2,
+                ),
+                const VSpacer(12),
+                Text(
+                  'We created to bring together amazing singles who want to find love, laughter and happily ever after! ',
+                  style: AppTextStyles.body2,
+                ),
+              ],
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20, right: 50),
-              child: Column(
-                children: [
-                  VSpacer(12),
-                  Text(
-                    'Find your partner in life',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: PrimaryButton(
+              onPressed: () => Get.toNamed(AppRoutes.REGISTER),
+              text: 'Join now',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+            child: InkWell(
+              onTap: () => Get.toNamed(AppRoutes.LOGIN),
+              borderRadius: BorderRadius.circular(16),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Already have account? ',
+                      style: AppTextStyles.body2,
                     ),
-                  ),
-                  VSpacer(12),
-                  Text(
-                    'We created to bring together amazing singles who want to find love, laughter and happily ever after! ',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
-                  ),
-                  VSpacer(60),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: SecondaryButton(
-                onPressed: () => Get.toNamed(AppRoutes.REGISTER),
-                text: 'Join now',
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Already have account? '),
-                  InkWell(
-                    onTap: () => Get.toNamed(AppRoutes.LOGIN),
-                    child: const Text(
+                    Text(
                       'Log in',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: AppTextStyles.subtitle2,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

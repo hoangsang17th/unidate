@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:unidate/core/values/app_colors.dart';
 
 class PrimaryButton extends StatelessWidget {
   final Function() onPressed;
@@ -15,8 +16,8 @@ class PrimaryButton extends StatelessWidget {
     return _Button(
       onPressed: onPressed,
       text: text,
-      backgroundColor: const Color(0xff2AAC7A),
-      textColor: Colors.white,
+      backgroundColor: AppColors.primary,
+      textColor: AppColors.white,
     );
   }
 }
@@ -35,8 +36,8 @@ class SecondaryButton extends StatelessWidget {
     return _Button(
       onPressed: onPressed,
       text: text,
-      backgroundColor: Colors.white,
-      textColor: const Color(0xff2AAC7A),
+      backgroundColor: AppColors.white,
+      textColor: AppColors.primary,
     );
   }
 }
@@ -62,7 +63,7 @@ class _Button extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
       ),
       child: SizedBox(
         width: double.infinity,

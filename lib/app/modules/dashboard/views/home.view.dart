@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:unidate/app/modules/dashboard/views/drag_widget.dart';
+import 'package:unidate/app/modules/dashboard/widgets/drag_widget.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
-class CardsStackWidget extends StatefulWidget {
-  const CardsStackWidget({Key? key}) : super(key: key);
+class HomeView extends StatefulWidget {
+  const HomeView({Key? key}) : super(key: key);
 
   @override
-  State<CardsStackWidget> createState() => _CardsStackWidgetState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _CardsStackWidgetState extends State<CardsStackWidget>
+class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
   List<Profile> draggableItems = [
     Profile(

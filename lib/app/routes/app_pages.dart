@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
+import 'package:unidate/app/bindings/manager.binding.dart';
 import 'package:unidate/app/modules/auth/views/login.view.dart';
 import 'package:unidate/app/modules/auth/views/register.view.dart';
+import 'package:unidate/app/modules/auth/views/setup_profile.view.dart';
 import 'package:unidate/app/modules/auth/views/welcome.view.dart';
 import 'package:unidate/app/modules/dashboard/views/dashboard.view.dart';
 
-import '../modules/dashboard/bindings/home.binding.dart';
+import '../bindings/dashboard.binding.dart';
 import '../bindings/auth.binding.dart';
 import '../modules/auth/views/waiting.view.dart';
 
@@ -17,25 +19,33 @@ class AppPages {
     GetPage(
       name: AppRoutes.AUTH,
       page: () => const WaitingView(),
-      bindings: [AuthBinding()],
+      binding: ManagerBinding(),
     ),
     //
     GetPage(
       name: AppRoutes.WELCOME,
       page: () => const WelcomeView(),
+      binding: AuthBinding(),
     ),
     GetPage(
       name: AppRoutes.LOGIN,
       page: () => const LoginView(),
+      binding: AuthBinding(),
     ),
     GetPage(
       name: AppRoutes.REGISTER,
       page: () => const RegisterView(),
+      binding: AuthBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SETUP_PROFILE,
+      page: () => const SetupProfileView(),
+      binding: AuthBinding(),
     ),
     GetPage(
       name: AppRoutes.DASHBOARD,
       page: () => const DashBoardView(),
-      bindings: [HomeBinding()],
+      binding: DashBoardBinding(),
     ),
   ];
 }

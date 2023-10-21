@@ -1,67 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unidate/app/routes/app_pages.dart';
+import 'package:unidate/app/modules/auth/controllers/login.controller.dart';
+import 'package:unidate/core/values/app_colors.dart';
+import 'package:unidate/core/values/app_text_styles.dart';
+import 'package:unidate/core/widgets/app_bar.dart';
+import 'package:unidate/core/widgets/app_text_field.dart';
+import 'package:unidate/core/widgets/button.dart';
 
 import 'package:unidate/core/widgets/image.dart';
+import 'package:unidate/core/widgets/spacer.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      backgroundColor: AppColors.bgPaper,
+      resizeToAvoidBottomInset: true,
+      appBar: const AppBarSystem(),
+      body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(
+              height: Get.height * 0.2,
+              child: AppSvgPicture(AppAssets.images.auth.title),
+            ),
             Container(
-              padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                ),
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: AppColors.bg,
+                borderRadius: BorderRadius.circular(16),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
+                  Text(
                     'Login',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppTextStyles.h3,
                   ),
-                  const SizedBox(height: 20),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      border: OutlineInputBorder(),
-                    ),
+                  const VSpacer(24),
+                  const AppInput(
+                    placeHolder: 'phsang@gmail.com',
+                    label: 'Email',
                   ),
-                  const SizedBox(height: 20),
-                  TextFormField(
+                  const VSpacer(12),
+                  const AppInput(
+                    placeHolder: '***',
+                    label: 'Password',
                     obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Password',
-                      border: OutlineInputBorder(),
+                  ),
+                  const VSpacer(12),
+                  PrimaryButton(
+                    onPressed: controller.onLogin,
+                    text: 'Login',
+                  ),
+                  const VSpacer(24),
+                  Material(
+                    color: AppColors.transparent,
+                    child: InkWell(
+                      onTap: controller.onRegister,
+                      borderRadius: BorderRadius.circular(16),
+                      child: const Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                        child: Text(
+                          'Don\'t have an account? Sign up',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () => Get.toNamed(AppRoutes.DASHBOARD),
-                    child: const Text('Login'),
-                  ),
-                  const SizedBox(height: 20),
-                  InkWell(
-                    onTap: () => Get.toNamed(AppRoutes.REGISTER),
-                    child: const Text(
-                      'Don\'t have an account? Sign up',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                  const VSpacer(12),
                 ],
               ),
             ),
