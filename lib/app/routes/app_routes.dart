@@ -9,6 +9,8 @@ abstract class AppRoutes {
   static const LOGIN = "/login";
   static const REGISTER = "/register";
   static const SETUP_PROFILE = "/setup-profile";
+
+  static const PROFILE_DETAIL = "/profile-detail";
   //
   static const DASHBOARD = '/home';
 }

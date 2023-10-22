@@ -30,15 +30,10 @@ class SetupProfileView extends StatelessWidget {
               ],
             ),
             // Sở thích
-            //
-            VSpacer(12),
-            Text('Select trường học có phần search'),
-            VSpacer(12),
-            Text('Giới tính có 2 radio button'),
-            VSpacer(12),
-            Text('Có 1 range slider để chọn độ tuổi muốn khớp'),
-            VSpacer(12),
-            Text('Có 1 range slider để chọn chiều cao muốn khớp'),
+            // Độ tuổi muốn khớp
+            // Chiều cao muốn khớp
+            // Giới tính muốn khớp
+            // Khoảng cách muốn khớp
           ],
         ),
       ),

@@ -2,7 +2,8 @@ import 'package:get/get.dart';
 import 'package:unidate/app/bindings/manager.binding.dart';
 import 'package:unidate/app/modules/auth/views/login.view.dart';
 import 'package:unidate/app/modules/auth/views/register.view.dart';
-import 'package:unidate/app/modules/auth/views/setup_profile.view.dart';
+import 'package:unidate/app/modules/profile/views/profile.view.dart';
+import 'package:unidate/app/modules/profile/views/setup_profile.view.dart';
 import 'package:unidate/app/modules/auth/views/welcome.view.dart';
 import 'package:unidate/app/modules/dashboard/views/dashboard.view.dart';
 
@@ -37,15 +38,21 @@ class AppPages {
       page: () => const RegisterView(),
       binding: AuthBinding(),
     ),
+    //
     GetPage(
       name: AppRoutes.SETUP_PROFILE,
       page: () => const SetupProfileView(),
-      binding: AuthBinding(),
     ),
+    //
     GetPage(
       name: AppRoutes.DASHBOARD,
       page: () => const DashBoardView(),
       binding: DashBoardBinding(),
+    ),
+    //  
+     GetPage(
+      name: AppRoutes.PROFILE_DETAIL,
+      page: () => const ProfileView(),
     ),
   ];
 }
