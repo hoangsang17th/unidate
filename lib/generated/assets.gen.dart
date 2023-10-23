@@ -12,6 +12,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/Sport-mode.svg
+  String get sportMode => 'assets/icons/Sport-mode.svg';
+
   /// File path: assets/icons/add.svg
   String get add => 'assets/icons/add.svg';
 
@@ -19,11 +22,20 @@ class $AssetsIconsGen {
   String get adjustHorizontalSettings =>
       'assets/icons/adjust-horizontal-settings.svg';
 
+  /// File path: assets/icons/award-55.svg
+  String get award55 => 'assets/icons/award-55.svg';
+
   /// File path: assets/icons/chevron.left.svg
   String get chevronLeft => 'assets/icons/chevron.left.svg';
 
   /// File path: assets/icons/dislike.svg
   String get dislike => 'assets/icons/dislike.svg';
+
+  /// File path: assets/icons/energy.svg
+  String get energy => 'assets/icons/energy.svg';
+
+  /// File path: assets/icons/info.svg
+  String get info => 'assets/icons/info.svg';
 
   /// File path: assets/icons/like.svg
   String get like => 'assets/icons/like.svg';
@@ -40,16 +52,28 @@ class $AssetsIconsGen {
   /// File path: assets/icons/notification.svg
   String get notification => 'assets/icons/notification.svg';
 
+  /// File path: assets/icons/shoe-run.svg
+  String get shoeRun => 'assets/icons/shoe-run.svg';
+
+  /// File path: assets/icons/trophy.svg
+  String get trophy => 'assets/icons/trophy.svg';
+
   /// List of all assets
   List<String> get values => [
+        sportMode,
         add,
         adjustHorizontalSettings,
+        award55,
         chevronLeft,
         dislike,
+        energy,
+        info,
         like,
         location,
         logo,
-        notification
+        notification,
+        shoeRun,
+        trophy
       ];
 }
 
@@ -106,6 +130,26 @@ class $AssetsImagesAuthGen {
 class $AssetsImagesUsersGen {
   const $AssetsImagesUsersGen();
 
+  /// File path: assets/images/users/image 105.png
+  AssetGenImage get image105 =>
+      const AssetGenImage('assets/images/users/image 105.png');
+
+  /// File path: assets/images/users/image 110.png
+  AssetGenImage get image110 =>
+      const AssetGenImage('assets/images/users/image 110.png');
+
+  /// File path: assets/images/users/image 111.png
+  AssetGenImage get image111 =>
+      const AssetGenImage('assets/images/users/image 111.png');
+
+  /// File path: assets/images/users/image 112.png
+  AssetGenImage get image112 =>
+      const AssetGenImage('assets/images/users/image 112.png');
+
+  /// File path: assets/images/users/image 96.png
+  AssetGenImage get image96 =>
+      const AssetGenImage('assets/images/users/image 96.png');
+
   /// File path: assets/images/users/user1.jpg
   AssetGenImage get user1 =>
       const AssetGenImage('assets/images/users/user1.jpg');
@@ -127,7 +171,18 @@ class $AssetsImagesUsersGen {
       const AssetGenImage('assets/images/users/user5.jpeg');
 
   /// List of all assets
-  List<AssetGenImage> get values => [user1, user2, user3, user4, user5];
+  List<AssetGenImage> get values => [
+        image105,
+        image110,
+        image111,
+        image112,
+        image96,
+        user1,
+        user2,
+        user3,
+        user4,
+        user5
+      ];
 }
 
 class AppAssets {

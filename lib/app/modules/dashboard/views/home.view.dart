@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unidate/app/modules/dashboard/widgets/drag_widget.dart';
+import 'package:unidate/app/modules/dashboard/widgets/match_card.widget.dart';
+import 'package:unidate/app/routes/app_pages.dart';
 import 'package:unidate/core/values/app_colors.dart';
+import 'package:unidate/core/values/app_text_styles.dart';
+import 'package:unidate/core/widgets/image.dart';
 import 'package:unidate/core/widgets/spacer.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
@@ -232,62 +235,58 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const VSpacer(56),
-          const Row(),
-          Draggable(
-            onDragEnd: (drag) {
-              // Khi kéo xong
-              // Like - dislike - none
-            },
-            childWhenDragging: Container(), // Hiển thị người tiếp theo
-            feedback: const MatchCard(), // Gắn thêm label Like hoặc Dislike
-            child: const MatchCard(), // Hiển thị người hiện tại
-          ),
-        ],
+      appBar: AppBar(
+        backgroundColor: AppColors.bgPaper,
+        elevation: 0,
+        shadowColor: AppColors.divider,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        toolbarHeight: 0,
       ),
-    );
-  }
-}
-
-class MatchCard extends StatelessWidget {
-  const MatchCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: Get.height - 128,
-      width: Get.width * 0.9,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: AppColors.bgNeutral,
-        border: Border.all(
-          color: AppColors.divider,
-          width: 0.5,
-        ),
-      ),
-      child: Material(
-        color: AppColors.transparent,
-        child: InkWell(
-          onTapDown: (_) {
-            print(Get.width / 2 > _.globalPosition.dx ? 'left' : 'right');
-            // Chuyển sang ảnh tiếp theo
-          },
-          onLongPress: () {
-            // Vào xem chi tiết
-          },
-          borderRadius: BorderRadius.circular(16),
-          child: const Column(
-            children: [
-              // Time line hiển thị số ảnh - max 6
-              // Ảnh hiển thị
-              // Tên
-              // Tuổi
-              // Khoảng cách
-            ],
-          ),
+      body: SizedBox(
+        width: double.infinity,
+        height: Get.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            const Row(),
+            Stack(
+              children: [
+                Draggable(
+                  onDragEnd: (drag) {
+                    // Khi kéo xong
+                    // Like - dislike - none
+                  },
+                  onDragStarted: () {
+                    // Khi kéo bắt đầu
+                  },
+                  childWhenDragging:
+                      const Text('Hello'), // Hiển thị người tiếp theo
+                  feedback:
+                      const MatchCard(), // Gắn thêm label Like hoặc Dislike
+                  child: const MatchCard(), // Hiển thị người hiện tại
+                ),
+                Positioned(
+                  child: Row(
+                    children: [
+                      Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.bg,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          padding: const EdgeInsets.all(20),
+                          child: AppSvgPicture(
+                            AppAssets.icons.like,
+                            size: 32,
+                          ))
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
         ),
       ),
     );
