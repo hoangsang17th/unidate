@@ -9,12 +9,6 @@ class DashBoardBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(DashBoardController());
-    Get.put(
-      HomeController(
-        todoRepository: TodoRepository(
-          todoDataSource: TodoDataSource(),
-        ),
-      ),
-    );
+    Get.put(HomeController());
   }
 }

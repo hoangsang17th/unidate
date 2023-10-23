@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unidate/app/modules/dashboard/controllers/home.controller.dart';
 import 'package:unidate/app/routes/app_pages.dart';
 import 'package:unidate/core/values/app_colors.dart';
 import 'package:unidate/core/values/app_text_styles.dart';
@@ -7,62 +10,117 @@ import 'package:unidate/core/widgets/image.dart';
 import 'package:unidate/core/widgets/spacer.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
-class MatchCard extends StatelessWidget {
-  const MatchCard({super.key});
+class MatchCard extends GetView<HomeController> {
+  final AssetGenImage image;
+  const MatchCard(
+    this.image, {
+    super.key,
+  });
 
   double get width => Get.width * 0.9;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: Get.height - 192,
-      width: width,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: AppColors.bgNeutral,
-        border: Border.all(
-          color: AppColors.divider,
-          width: 0.5,
-        ),
-      ),
-      child: Material(
-        color: AppColors.transparent,
-        child: InkWell(
-          onTapDown: (_) {
-            // Lấy vị trí tương đối so với màn hình
-            double widgetSize = Get.width * 0.9;
+    return GetBuilder<HomeController>(
+      builder: (context) {
+        return SizedBox(
+          height: Get.height - 180,
+          width: Get.width * 0.9,
+          child: GestureDetector(
+            onTapDown: (_) {
+              // Lấy vị trí tương đối so với màn hình
+              double widgetSize = Get.width * 0.9;
 
-            double flexSize = widgetSize / 4;
-            double prevSize = flexSize;
-            double nextSize = flexSize * 3;
-            double dxOnTap = _.globalPosition.dx;
+              double flexSize = widgetSize / 4;
+              double prevSize = flexSize;
+              double nextSize = flexSize * 3;
+              double dxOnTap = _.globalPosition.dx;
 
-            if (dxOnTap < prevSize) {
-              // && Có prev
-              // Chuyển sang ảnh trước
-            } else if (dxOnTap > nextSize) {
-              // && Có next
-              // Chuyển sang ảnh tiếp theo
-            }
-          },
-          borderRadius: BorderRadius.circular(16),
-          child: Stack(
-            children: [
-// Time line hiển thị số ảnh - max 6
-              Positioned.fill(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: AppAssets.images.users.user2.image(
-                    fit: BoxFit.fitHeight,
+              if (dxOnTap < prevSize) {
+                // && Có prev
+                // Chuyển sang ảnh trước
+              } else if (dxOnTap > nextSize) {
+                // && Có next
+                // Chuyển sang ảnh tiếp theo
+              }
+            },
+            onPanStart: controller.onDragStart,
+            onPanEnd: controller.onDragEnd,
+            onPanUpdate: controller.onDragUpdate,
+            child: Obx(
+              () {
+                final offset = controller.offset;
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    final center = constraints.smallest.center(Offset.zero);
+                    return AnimatedContainer(
+                      curve: Curves.easeInOut,
+                      duration: Duration(
+                          milliseconds: controller.isDragging ? 0 : 250),
+                      transform: Matrix4.identity()
+                        ..translate(center.dx, center.dy)
+                        ..rotateZ(controller.angle)
+                        ..translate(-center.dx, -center.dy)
+                        ..translate(offset.dx, offset.dy),
+                      child: Stack(
+                        children: [
+                          // Time line hiển thị số ảnh - max 6
+                          Positioned.fill(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: image.image(
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          _buildLabel(center),
+                          _buildDistance(),
+                          _buildInfo()
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildLabel(Offset position) {
+    bool isSwipeLeft = controller.swipeStatus == Swipe.left;
+    Color color = isSwipeLeft ? AppColors.errorDark : AppColors.primary;
+
+    return Obx(
+      () => controller.swipeStatus != Swipe.none
+          ? Positioned(
+              top: position.dx + 48,
+              left: !isSwipeLeft ? 24 : null,
+              right: isSwipeLeft ? 24 : null,
+              child: Transform.rotate(
+                angle: (isSwipeLeft ? 30 : -30) * pi / 180,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      side: BorderSide(
+                        color: color,
+                        width: 4,
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    isSwipeLeft ? 'DISLIKE' : 'LIKE',
+                    style: AppTextStyles.h2.copyWith(color: color),
                   ),
                 ),
               ),
-              _buildDistance(),
-              _buildInfo()
-            ],
-          ),
-        ),
-      ),
+            )
+          : const SizedBox.shrink(),
     );
   }
 
@@ -166,6 +224,7 @@ class MatchCard extends StatelessWidget {
                 color: AppColors.textContrast,
               ),
             ),
+            const VSpacer(48)
           ],
         ),
       ),
