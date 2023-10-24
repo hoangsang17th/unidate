@@ -49,10 +49,10 @@ class AppPages {
       page: () => const DashBoardView(),
       binding: DashBoardBinding(),
     ),
-    //  
-     GetPage(
+    //
+    GetPage(
       name: AppRoutes.PROFILE_DETAIL,
-      page: () => const ProfileView(),
+      page: () => ProfileView(),
     ),
   ];
 }

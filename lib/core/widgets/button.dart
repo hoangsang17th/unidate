@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:unidate/core/values/app_colors.dart';
 
 class PrimaryButton extends StatelessWidget {

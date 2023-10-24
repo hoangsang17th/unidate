@@ -1,8 +1,6 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:unidate/core/values/app_colors.dart';
 import 'package:unidate/core/widgets/image.dart';
 import 'package:unidate/generated/assets.gen.dart';
