@@ -5,9 +5,12 @@ part of 'app_pages.dart';
 abstract class AppRoutes {
   static const AUTH = "/auth";
   //
-  static const LOGIC = "/login";
+  static const WELCOME = "/welcome";
+  static const LOGIN = "/login";
   static const REGISTER = "/register";
+  static const SETUP_PROFILE = "/setup-profile";
+
+  static const PROFILE_DETAIL = "/profile-detail";
   //
-  static const HOME = '/home';
-  
+  static const DASHBOARD = '/home';
 }

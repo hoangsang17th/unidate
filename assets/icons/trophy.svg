@@ -1,0 +1,9 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="trophy">
+<path id="Path" d="M6.63636 9.27273H5.72727C4.22104 9.27273 3 8.05169 3 6.54545V2H6.63636" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Path_2" d="M17.5454 9.27273H18.4545C19.9607 9.27273 21.1818 8.05169 21.1818 6.54545V2H17.5454" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Path_3" d="M12.091 18.3637V14.7273" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Path_4" fill-rule="evenodd" clip-rule="evenodd" d="M12.091 14.7273V14.7273C9.07856 14.7273 6.63647 12.2852 6.63647 9.27273V2H17.5456V9.27273C17.5456 12.2852 15.1035 14.7273 12.091 14.7273Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Path_5" fill-rule="evenodd" clip-rule="evenodd" d="M17.5456 22H6.63647C6.63647 19.9917 8.26453 18.3636 10.2728 18.3636H13.9092C15.9175 18.3636 17.5456 19.9917 17.5456 22Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

@@ -1,58 +1,88 @@
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
+import 'dart:math';
 
-import '../../../data/models/todo.model.dart';
-import '../../../data/repositories/todo.repository.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:unidate/app/modules/dashboard/widgets/profile.view.dart';
+import 'package:unidate/generated/assets.gen.dart';
+import 'package:unidate/app/modules/dashboard/enums.dart';
 
 class HomeController extends GetxController {
-  final TodoRepository todoRepository;
-  HomeController({
-    required this.todoRepository,
-  });
+  final RxBool _isDragging = false.obs;
+  bool get isDragging => _isDragging.value;
 
-  RxList<TodoModel> todos = <TodoModel>[].obs;
-  RxBool isSave = false.obs;
-  TextEditingController todoNameController = TextEditingController();
-  @override
-  void onInit() {
-    getTodos();
-    super.onInit();
+  final Rx<Offset> _offset = Offset.zero.obs;
+  Offset get offset => _offset.value;
+
+  final RxDouble _angle = 0.0.obs;
+  double get angle => _angle.value;
+  set angle(double value) => _angle.value = value;
+
+  final Rx<MatchCardStatus> _swipeStatus = MatchCardStatus.none.obs;
+  MatchCardStatus get swipeStatus => _swipeStatus.value;
+
+  RxList<Profile> draggableItems = [
+    Profile(
+        name: 'Rohini',
+        distance: '10 miles away',
+        imageAsset: AppAssets.images.users.user1),
+    Profile(
+        name: 'Rohini',
+        distance: '10 miles away',
+        imageAsset: AppAssets.images.users.user2),
+    Profile(
+        name: 'Rohini',
+        distance: '10 miles away',
+        imageAsset: AppAssets.images.users.user3),
+    Profile(
+        name: 'Rohini',
+        distance: '10 miles away',
+        imageAsset: AppAssets.images.users.user4),
+    Profile(
+        name: 'Rohini',
+        distance: '10 miles away',
+        imageAsset: AppAssets.images.users.user5),
+  ].obs;
+  void onDragStart(DragStartDetails details) {
+    _isDragging(true);
+    // _offset.value = details.globalPosition;
   }
 
-  Future<void> getTodos() async {
-    todos.value = await todoRepository.getTodos();
-    // I used refresh() function for UI update
-    todos.refresh();
-  }
+  void onDragUpdate(DragUpdateDetails details) {
+    _offset.value += details.delta;
+    final dx = offset.dx;
+    const position = 50;
 
-  Future<void> onComplete(int id) async {
-    await todoRepository.completeTodo(id);
-    getTodos();
-  }
-
-  void onUpdate(int id) async {
-    await todoRepository.updateTodo(id, todoNameController.text);
-    getTodos();
-    Get.back();
-  }
-
-  void onChangeTextField(String value) {
-    if (value != "") {
-      isSave.value = true;
+    if (dx >= position) {
+      _swipeStatus(MatchCardStatus.like);
+    } else if (dx <= -position) {
+      _swipeStatus(MatchCardStatus.dislike);
     } else {
-      isSave.value = false;
+      _swipeStatus(MatchCardStatus.none);
     }
+
+    angle = (45 * dx / Get.width) * pi / 180;
   }
 
-  Future<void> onCreate() async {
-    await todoRepository.createTodo(
-      TodoModel(
-        name: todoNameController.text,
-        isCompleted: false,
-        creatAt: DateTime.now(),
-      ),
-    );
-    getTodos();
-    Get.back();
+  void onLiked() {
+    _angle(20);
+    _offset.value += Offset(Get.width * 2, 0);
+    draggableItems.removeLast();
+  }
+
+  void onDragEnd(DragEndDetails details) {
+    switch (swipeStatus) {
+      case MatchCardStatus.like:
+        onLiked();
+        break;
+      default:
+    }
+    _resetOffset();
+  }
+
+  void _resetOffset() {
+    _swipeStatus(MatchCardStatus.none);
+    _isDragging(false);
+    angle = 0;
+    _offset.value = Offset.zero;
   }
 }

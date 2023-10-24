@@ -1,9 +1,14 @@
 import '../datasources/todo.datasource.dart';
 import '../models/todo.model.dart';
 
+import 'package:injectable/injectable.dart';
+
+@injectable
 class TodoRepository {
   final TodoDataSource todoDataSource;
   // If you get data from an API you must use Provider
+
+
   TodoRepository({
     required this.todoDataSource,
   });
