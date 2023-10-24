@@ -49,13 +49,14 @@ class HomeView extends GetView<HomeController> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         _buildActionButton(
-                          AppAssets.icons.dislike,
-                          controller.swipeStatus == MatchCardStatus.dislike,
-                        ),
+                            AppAssets.icons.dislike,
+                            controller.swipeStatus == MatchCardStatus.dislike,
+                            () {}),
                         const HSpacer(60),
                         _buildActionButton(
                           AppAssets.icons.like,
                           controller.swipeStatus == MatchCardStatus.like,
+                          controller.onLiked,
                         ),
                       ],
                     );
@@ -69,7 +70,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _buildActionButton(String icon, bool isActive) {
+  Widget _buildActionButton(String icon, bool isActive, Function() onTap) {
     return AnimatedScale(
       scale: isActive ? 1.2 : 1,
       duration: const Duration(milliseconds: 250),
@@ -89,7 +90,7 @@ class HomeView extends GetView<HomeController> {
           color: Colors.transparent,
           child: InkWell(
             borderRadius: BorderRadius.circular(100),
-            onTap: () {},
+            onTap: onTap,
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: AppSvgPicture(
