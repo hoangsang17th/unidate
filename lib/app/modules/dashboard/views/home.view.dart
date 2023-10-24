@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/modules/dashboard/controllers/home.controller.dart';
+import 'package:unidate/app/modules/dashboard/enums.dart';
 import 'package:unidate/app/modules/dashboard/widgets/profile.view.dart';
 import 'package:unidate/app/modules/dashboard/widgets/match_card.widget.dart';
 import 'package:unidate/app/routes/app_pages.dart';
@@ -34,12 +35,11 @@ class HomeView extends GetView<HomeController> {
                 Stack(
                   alignment: Alignment.center,
                   children: controller.draggableItems
-                      .map(
-                        (e) => MatchCard(
+                      .map((e) => MatchCard(
                             e.imageAsset,
-                          
-                        ),
-                      )
+                            canSwipe: e.imageAsset.path ==
+                                controller.draggableItems.last.imageAsset.path,
+                          ))
                       .toList(),
                 ),
                 Positioned(
@@ -50,12 +50,12 @@ class HomeView extends GetView<HomeController> {
                       children: [
                         _buildActionButton(
                           AppAssets.icons.dislike,
-                          controller.swipeStatus == Swipe.left,
+                          controller.swipeStatus == MatchCardStatus.dislike,
                         ),
                         const HSpacer(60),
                         _buildActionButton(
                           AppAssets.icons.like,
-                          controller.swipeStatus == Swipe.right,
+                          controller.swipeStatus == MatchCardStatus.like,
                         ),
                       ],
                     );

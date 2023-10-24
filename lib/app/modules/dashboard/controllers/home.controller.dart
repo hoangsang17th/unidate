@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/modules/dashboard/widgets/profile.view.dart';
 import 'package:unidate/generated/assets.gen.dart';
+import 'package:unidate/app/modules/dashboard/enums.dart';
 
-enum Swipe { left, right, none }
 class HomeController extends GetxController {
   final RxBool _isDragging = false.obs;
   bool get isDragging => _isDragging.value;
@@ -17,8 +17,8 @@ class HomeController extends GetxController {
   double get angle => _angle.value;
   set angle(double value) => _angle.value = value;
 
-  final Rx<Swipe> _swipeStatus = Swipe.none.obs;
-  Swipe get swipeStatus => _swipeStatus.value;
+  final Rx<MatchCardStatus> _swipeStatus = MatchCardStatus.none.obs;
+  MatchCardStatus get swipeStatus => _swipeStatus.value;
 
   RxList<Profile> draggableItems = [
     Profile(
@@ -50,24 +50,37 @@ class HomeController extends GetxController {
   void onDragUpdate(DragUpdateDetails details) {
     _offset.value += details.delta;
     final dx = offset.dx;
-    final globalPosition = details.globalPosition;
-    if (dx > 0 && globalPosition.dx > Get.width / 3) {
-      _swipeStatus(Swipe.right);
-    } else if (dx < 0 && globalPosition.dx < Get.width / 3) {
-      _swipeStatus(Swipe.left);
+    const position = 50;
+
+    if (dx >= position) {
+      _swipeStatus(MatchCardStatus.like);
+    } else if (dx <= -position) {
+      _swipeStatus(MatchCardStatus.dislike);
     } else {
-      _swipeStatus(Swipe.none);
+      _swipeStatus(MatchCardStatus.none);
     }
 
     angle = (45 * dx / Get.width) * pi / 180;
   }
 
+  void onLiked() {
+    _angle(20);
+    _offset.value += Offset(Get.width * 2, 0);
+    draggableItems.removeLast();
+  }
+
   void onDragEnd(DragEndDetails details) {
+    switch (swipeStatus) {
+      case MatchCardStatus.like:
+        onLiked();
+        break;
+      default:
+    }
     _resetOffset();
   }
 
   void _resetOffset() {
-    _swipeStatus(Swipe.none);
+    _swipeStatus(MatchCardStatus.none);
     _isDragging(false);
     angle = 0;
     _offset.value = Offset.zero;

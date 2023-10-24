@@ -9,11 +9,14 @@ import 'package:unidate/core/values/app_text_styles.dart';
 import 'package:unidate/core/widgets/image.dart';
 import 'package:unidate/core/widgets/spacer.dart';
 import 'package:unidate/generated/assets.gen.dart';
+import 'package:unidate/app/modules/dashboard/enums.dart';
 
 class MatchCard extends GetView<HomeController> {
   final AssetGenImage image;
+  final bool canSwipe;
   const MatchCard(
     this.image, {
+    this.canSwipe = true,
     super.key,
   });
 
@@ -26,75 +29,83 @@ class MatchCard extends GetView<HomeController> {
         return SizedBox(
           height: Get.height - 180,
           width: Get.width * 0.9,
-          child: GestureDetector(
-            onTapDown: (_) {
-              // Lấy vị trí tương đối so với màn hình
-              double widgetSize = Get.width * 0.9;
-
-              double flexSize = widgetSize / 4;
-              double prevSize = flexSize;
-              double nextSize = flexSize * 3;
-              double dxOnTap = _.globalPosition.dx;
-
-              if (dxOnTap < prevSize) {
-                // && Có prev
-                // Chuyển sang ảnh trước
-              } else if (dxOnTap > nextSize) {
-                // && Có next
-                // Chuyển sang ảnh tiếp theo
-              }
-            },
-            onPanStart: controller.onDragStart,
-            onPanEnd: controller.onDragEnd,
-            onPanUpdate: controller.onDragUpdate,
-            child: Obx(
-              () {
-                final offset = controller.offset;
-                return LayoutBuilder(
-                  builder: (context, constraints) {
-                    final center = constraints.smallest.center(Offset.zero);
-                    return AnimatedContainer(
-                      curve: Curves.easeInOut,
-                      duration: Duration(
-                          milliseconds: controller.isDragging ? 0 : 250),
-                      transform: Matrix4.identity()
-                        ..translate(center.dx, center.dy)
-                        ..rotateZ(controller.angle)
-                        ..translate(-center.dx, -center.dy)
-                        ..translate(offset.dx, offset.dy),
-                      child: Stack(
-                        children: [
-                          // Time line hiển thị số ảnh - max 6
-                          Positioned.fill(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: image.image(
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          _buildLabel(center),
-                          _buildDistance(),
-                          _buildInfo()
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
+          child: canSwipe ? _buildSwipeCard() : _buildCard(null),
         );
       },
     );
   }
 
+  Widget _buildSwipeCard() {
+    return GestureDetector(
+      onTapDown: (_) {
+        // Lấy vị trí tương đối so với màn hình
+        double widgetSize = Get.width * 0.9;
+
+        double flexSize = widgetSize / 4;
+        double prevSize = flexSize;
+        double nextSize = flexSize * 3;
+        double dxOnTap = _.globalPosition.dx;
+
+        if (dxOnTap < prevSize) {
+          // && Có prev
+          // Chuyển sang ảnh trước
+        } else if (dxOnTap > nextSize) {
+          // && Có next
+          // Chuyển sang ảnh tiếp theo
+        }
+      },
+      onPanStart: controller.onDragStart,
+      onPanEnd: controller.onDragEnd,
+      onPanUpdate: controller.onDragUpdate,
+      child: Obx(
+        () {
+          final offset = controller.offset;
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              final center = constraints.smallest.center(Offset.zero);
+              return AnimatedContainer(
+                curve: Curves.easeInOut,
+                duration:
+                    Duration(milliseconds: controller.isDragging ? 0 : 250),
+                transform: Matrix4.identity()
+                  ..translate(center.dx, center.dy)
+                  ..rotateZ(controller.angle)
+                  ..translate(-center.dx, -center.dy)
+                  ..translate(offset.dx, offset.dy),
+                child: _buildCard(center),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildCard(Offset? center) {
+    return Stack(
+      children: [
+        // Time line hiển thị số ảnh - max 6
+        Positioned.fill(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: image.image(
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        if (center != null) _buildLabel(center),
+        _buildDistance(),
+        _buildInfo()
+      ],
+    );
+  }
+
   Widget _buildLabel(Offset position) {
-    bool isSwipeLeft = controller.swipeStatus == Swipe.left;
+    bool isSwipeLeft = controller.swipeStatus == MatchCardStatus.dislike;
     Color color = isSwipeLeft ? AppColors.errorDark : AppColors.primary;
 
     return Obx(
-      () => controller.swipeStatus != Swipe.none
+      () => controller.swipeStatus != MatchCardStatus.none
           ? Positioned(
               top: position.dx + 48,
               left: !isSwipeLeft ? 24 : null,
