@@ -1,7 +1,10 @@
-
 import 'package:flutter/material.dart';
+import 'package:unidate/app/core/widgets/spacer.dart';
+import 'package:unidate/app/modules/profile/views/setup/setup_profile.view.dart';
 
 class AddPicturesView extends StatefulWidget {
+  const AddPicturesView({super.key});
+
   @override
   _AddPicturesViewState createState() => _AddPicturesViewState();
 }
@@ -12,20 +15,20 @@ class _AddPicturesViewState extends State<AddPicturesView> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text('Add Pictures'),
+        title: const Text('Add Pictures'),
       ),
       body: Column(
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Container(
             width: 150,
             height: 150,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
                 image: AssetImage('assets/images/profile_picture.png'),
@@ -33,24 +36,24 @@ class _AddPicturesViewState extends State<AddPicturesView> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               // TODO: Implement upload profile picture functionality.
             },
-            child: Text('Upload Profile Picture'),
+            child: const Text('Upload Profile Picture'),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Expanded(
             child: GridView.count(
               crossAxisCount: 3,
               children: List.generate(
                 6,
                 (index) => Container(
-                  margin: EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
+                    image: const DecorationImage(
                       image: AssetImage('assets/images/additional_picture.png'),
                       fit: BoxFit.cover,
                     ),
@@ -59,21 +62,30 @@ class _AddPicturesViewState extends State<AddPicturesView> {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               // TODO: Implement upload additional picture functionality.
             },
-            child: Text('Upload Additional Picture'),
+            child: const Text('Upload Additional Picture'),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               // TODO: Implement save changes functionality.
             },
-            child: Text('Save Changes'),
+            child: const Text('Save Changes'),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
+          const Row(
+            children: [
+              Expanded(child: AvatarPicker()),
+              HSpacer(12),
+              Expanded(child: AvatarPicker()),
+              HSpacer(12),
+              Expanded(child: AvatarPicker()),
+            ],
+          ),
         ],
       ),
     );

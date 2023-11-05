@@ -41,3 +41,25 @@ enum UserStepSetup {
     }
   }
 }
+
+
+
+@JsonEnum()
+enum GenderEnum {
+  Man,
+  Woman,
+  Other
+}
+
+
+@JsonEnum()
+enum AcademicLevelEnum {
+  BachelorDegree,
+  AtUni,
+  HighSchool,
+  PhD,
+  OnAGraduateCourse,
+  MasterDegree,
+  TradeSchool,
+  Other,
+}

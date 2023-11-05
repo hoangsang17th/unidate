@@ -1,10 +1,13 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/core/values/app_colors.dart';
 import 'package:unidate/app/core/widgets/app_bar.dart';
+import 'package:unidate/app/core/widgets/app_text_field.dart';
 import 'package:unidate/app/core/widgets/image.dart';
 import 'package:unidate/app/core/widgets/spacer.dart';
+import 'package:unidate/app/routes/app_pages.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
 class SetupProfileView extends StatelessWidget {
@@ -12,23 +15,26 @@ class SetupProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: AppBarSystem(),
-      body: Padding(
+    return Scaffold(
+      appBar: AppBarSystem(
+        title: 'Setup Profile',
+        actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(AppRoutes.SETUP_PICTURES),
+            icon: Icon(
+              CupertinoIcons.checkmark_circle,
+              color: AppColors.textPrimary,
+            ),
+          )
+        ],
+      ),
+      body: const Padding(
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            Text('SetupProfileView'),
+            AppInput(placeHolder: 'Enter your name', label: 'Name'),
             VSpacer(12),
-            Row(
-              children: [
-                Expanded(child: AvatarPicker()),
-                HSpacer(12),
-                Expanded(child: AvatarPicker()),
-                HSpacer(12),
-                Expanded(child: AvatarPicker()),
-              ],
-            ),
+
             // Sở thích
             // Độ tuổi muốn khớp
             // Chiều cao muốn khớp

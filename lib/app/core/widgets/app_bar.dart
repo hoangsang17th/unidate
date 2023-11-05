@@ -7,9 +7,11 @@ import 'package:unidate/generated/assets.gen.dart';
 
 class AppBarSystem extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
+  final List<Widget>? actions;
   const AppBarSystem({
     super.key,
     this.title,
+    this.actions,
   });
 
   @override
@@ -18,17 +20,21 @@ class AppBarSystem extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: AppColors.bgPaper,
       elevation: 0,
       shadowColor: AppColors.divider,
-      leading: IconButton(
-        onPressed: Get.back,
-        icon: AppSvgPicture(
-          AppAssets.icons.chevronLeft,
-          size: 24,
-        ),
-      ),
+      automaticallyImplyLeading: false,
+      leading: Get.previousRoute.isEmpty
+          ? null
+          : IconButton(
+              onPressed: Get.back,
+              icon: AppSvgPicture(
+                AppAssets.icons.chevronLeft,
+                size: 24,
+              ),
+            ),
       title: Text(
         title ?? "",
         style: AppTextStyles.h5,
       ),
+      actions: actions,
     );
   }
 

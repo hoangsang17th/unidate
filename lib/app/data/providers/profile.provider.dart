@@ -1,28 +1,30 @@
 import 'package:unidate/app/core/http/helper.http.dart';
 import 'package:unidate/app/data/entities/user.entity.dart';
 
-class UserProviders {
-  UserProviders();
+class ProfileProviders {
+  ProfileProviders();
 
-  Future<LoginResponseEntity> register(RegisterEntity data) async {
+  Future<NextStepEntity> updateBio(String bio) async {
     try {
       final response = await AppHttpHelper.instance.post(
         'auth/register',
-        formData: data.toJson(),
+        data: {
+          'biography': bio,
+        },
       );
-      return LoginResponseEntity.fromJson(response.data);
+      return NextStepEntity.fromJson(response.data);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<LoginResponseEntity> login(LoginEntity data) async {
+  Future<NextStepEntity> updateProfile(UpdateProfileEntity data) async {
     try {
       final response = await AppHttpHelper.instance.post(
         'auth/login',
         data: data.toJson(),
       );
-      return LoginResponseEntity.fromJson(response.data);
+      return NextStepEntity.fromJson(response.data);
     } catch (e) {
       rethrow;
     }
