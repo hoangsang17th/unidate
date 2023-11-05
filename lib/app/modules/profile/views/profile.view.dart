@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:unidate/core/values/app_colors.dart';
+import 'package:unidate/app/core/values/app_colors.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
 class ProfileView extends StatelessWidget {

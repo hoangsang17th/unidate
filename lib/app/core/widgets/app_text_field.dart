@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:unidate/core/values/app_colors.dart';
-import 'package:unidate/core/values/app_text_styles.dart';
+import 'package:unidate/app/core/values/app_colors.dart';
+import 'package:unidate/app/core/values/app_text_styles.dart';
 
 class AppInput extends StatefulWidget {
   final String? initialValue;

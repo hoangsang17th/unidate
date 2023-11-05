@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/modules/dashboard/controllers/home.controller.dart';
 import 'package:unidate/app/routes/app_pages.dart';
-import 'package:unidate/core/values/app_colors.dart';
-import 'package:unidate/core/values/app_text_styles.dart';
-import 'package:unidate/core/widgets/image.dart';
-import 'package:unidate/core/widgets/spacer.dart';
+import 'package:unidate/app/core/values/app_colors.dart';
+import 'package:unidate/app/core/values/app_text_styles.dart';
+import 'package:unidate/app/core/widgets/image.dart';
+import 'package:unidate/app/core/widgets/spacer.dart';
 import 'package:unidate/generated/assets.gen.dart';
 import 'package:unidate/app/modules/dashboard/enums.dart';
 

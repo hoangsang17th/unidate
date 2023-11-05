@@ -1,64 +1,91 @@
 import 'package:flutter/material.dart';
-import 'package:unidate/core/values/app_colors.dart';
-import 'package:unidate/core/values/app_text_styles.dart';
-import 'package:unidate/core/widgets/image.dart';
-import 'package:unidate/core/widgets/spacer.dart';
+import 'package:get/get.dart';
+import 'package:unidate/app/core/values/app_colors.dart';
+import 'package:unidate/app/core/values/app_text_styles.dart';
+import 'package:unidate/app/core/widgets/image.dart';
+import 'package:unidate/app/core/widgets/spacer.dart';
+import 'package:unidate/app/modules/dashboard/controllers/profile.controller.dart';
 import 'package:unidate/generated/assets.gen.dart';
+import 'package:shimmer/shimmer.dart';
 
-class SettingsView extends StatelessWidget {
+class SettingsView extends GetView<ProfileController> {
   const SettingsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: AppColors.bgPaper,
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              const VSpacer(72),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: SizedBox(
-                  height: 72,
-                  width: 72,
-                  child: AppAssets.images.users.user4.image(
-                    fit: BoxFit.cover,
+    return GetX<ProfileController>(
+      builder: (context) {
+        return Scaffold(
+          backgroundColor: AppColors.bgPaper,
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                const VSpacer(72),
+                if (controller.isLoading.isTrue) ...[
+                  const AppShimmer(
+                    height: 72,
+                    width: 72,
+                    radius: 100,
                   ),
-                ),
-              ),
-              const VSpacer(16),
-              Text(
-                'John Doe',
-                style: AppTextStyles.h5,
-              ),
-              const VSpacer(8),
-              Text(
-                'phsang@gmail.com',
-                style: AppTextStyles.body2,
-              ),
-              const VSpacer(24),
-              Row(
-                children: [
-                  _buildQuickView(AppAssets.icons.like, '12'),
-                  const HSpacer(12),
-                  _buildQuickView(AppAssets.icons.like, '12'),
-                  const HSpacer(12),
-                  _buildQuickView(AppAssets.icons.like, '12'),
-                  // Lượt thích
-                  // Lượt ghé thăm
-                  // Lượt kết nối
+                  const VSpacer(16),
+                  const AppShimmer(
+                    height: 20,
+                    width: 72,
+                  ),
+                  const VSpacer(8),
+                  const AppShimmer(
+                    height: 20,
+                    width: 120,
+                  ),
+                ] else ...[
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: SizedBox(
+                      height: 72,
+                      width: 72,
+                      child: AppNetworkPicture(
+                        controller.user!.avatar,
+                        height: 72,
+                      ),
+                    ),
+                  ),
+                  const VSpacer(16),
+                  Text(
+                    controller.user?.fullname ?? 'FinFree',
+                    style: AppTextStyles.h5,
+                  ),
+                  const VSpacer(8),
+                  Text(
+                    controller.user?.email ?? 'dev@finfree.com',
+                    style: AppTextStyles.body2,
+                  ),
                 ],
-              ),
-              const VSpacer(32),
-              _buildButton(Icons.edit, 'Update Profile'),
-              _buildButton(Icons.photo, 'My Photos'),
-              _buildButton(Icons.notifications, 'Notifications'),
-              _buildButton(Icons.logout, 'Logout'),
-              const VSpacer(48)
-            ],
+                const VSpacer(24),
+                Row(
+                  children: [
+                    _buildQuickView(AppAssets.icons.like, '12'),
+                    const HSpacer(12),
+                    _buildQuickView(AppAssets.icons.like, '12'),
+                    const HSpacer(12),
+                    _buildQuickView(AppAssets.icons.like, '12'),
+                    // Lượt thích
+                    // Lượt ghé thăm
+                    // Lượt kết nối
+                  ],
+                ),
+                const VSpacer(32),
+                _buildButton(Icons.edit, 'Update Profile'),
+                _buildButton(Icons.photo, 'My Photos'),
+                _buildButton(Icons.notifications, 'Notifications'),
+                _buildButton(Icons.logout, 'Logout', controller.logout),
+                const VSpacer(48)
+              ],
+            ),
           ),
-        ));
+        );
+      },
+    );
   }
 
   Widget _buildQuickView(String icon, String value) {
@@ -102,7 +129,7 @@ class SettingsView extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(IconData icon, String text) {
+  Widget _buildButton(IconData icon, String text, [Function()? onTap]) {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.bgNeutral,
@@ -113,7 +140,7 @@ class SettingsView extends StatelessWidget {
         color: AppColors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          onTap: () {},
+          onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 16,
@@ -130,6 +157,40 @@ class SettingsView extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class AppShimmer extends StatelessWidget {
+  final double height;
+  final double width;
+  final double radius;
+  final Widget? child;
+  const AppShimmer({
+    super.key,
+    required this.height,
+    required this.width,
+    this.radius = 8,
+    this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
+      child: SizedBox(
+        height: height,
+        width: width,
+        child: Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: child ??
+              SizedBox(
+                height: height,
+                width: width,
+              ),
         ),
       ),
     );

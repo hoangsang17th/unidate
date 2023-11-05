@@ -1,11 +1,14 @@
 import 'package:get/get.dart';
-import 'package:unidate/app/bindings/manager.binding.dart';
-import 'package:unidate/app/modules/auth/views/login.view.dart';
-import 'package:unidate/app/modules/auth/views/register.view.dart';
-import 'package:unidate/app/modules/profile/views/profile.view.dart';
-import 'package:unidate/app/modules/profile/views/setup_profile.view.dart';
-import 'package:unidate/app/modules/auth/views/welcome.view.dart';
-import 'package:unidate/app/modules/dashboard/views/dashboard.view.dart';
+import '../bindings/manager.binding.dart';
+import '../modules/auth/views/login.view.dart';
+import '../modules/auth/views/register.view.dart';
+import '../modules/profile/views/profile.view.dart';
+import '../modules/profile/views/setup/add_words_into.view.dart';
+import '../modules/profile/views/setup/location.view.dart';
+import '../modules/profile/views/setup/setup_profile.view.dart';
+import '../modules/auth/views/welcome.view.dart';
+import '../modules/dashboard/views/dashboard.view.dart';
+import '../modules/profile/views/setup/update_bio.view.dart';
 
 import '../bindings/dashboard.binding.dart';
 import '../bindings/auth.binding.dart';
@@ -40,9 +43,26 @@ class AppPages {
     ),
     //
     GetPage(
+      name: AppRoutes.SETUP_BIO,
+      page: () => UpdateBioScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.SETUP_PICTURES,
+      page: () => const SetupProfileView(),
+    ),
+    GetPage(
+      name: AppRoutes.SETUP_LOCATION,
+      page: () => const RequestLocationView(),
+    ),
+    GetPage(
       name: AppRoutes.SETUP_PROFILE,
       page: () => const SetupProfileView(),
     ),
+    GetPage(
+      name: AppRoutes.SETUP_WORDSINTO,
+      page: () => AddWordsIntoView(),
+    ),
+
     //
     GetPage(
       name: AppRoutes.DASHBOARD,

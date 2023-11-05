@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:unidate/core/configure/setup.configure.dart';
-import 'package:unidate/core/values/app_scroll_behavior.dart';
+import 'package:unidate/app/core/values/app_scroll_behavior.dart';
 import './app/routes/app_pages.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() {
-  configureSetup();
   runApp(const MyApp());
 }
 
@@ -26,6 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
+      builder: EasyLoading.init(),
     );
   }
 }

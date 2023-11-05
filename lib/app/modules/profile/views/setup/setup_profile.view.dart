@@ -1,10 +1,10 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unidate/core/values/app_colors.dart';
-import 'package:unidate/core/widgets/app_bar.dart';
-import 'package:unidate/core/widgets/image.dart';
-import 'package:unidate/core/widgets/spacer.dart';
+import 'package:unidate/app/core/values/app_colors.dart';
+import 'package:unidate/app/core/widgets/app_bar.dart';
+import 'package:unidate/app/core/widgets/image.dart';
+import 'package:unidate/app/core/widgets/spacer.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
 class SetupProfileView extends StatelessWidget {

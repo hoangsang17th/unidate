@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/modules/dashboard/widgets/app_grid_view.dart';
-import 'package:unidate/core/values/app_colors.dart';
-import 'package:unidate/core/values/app_text_styles.dart';
-import 'package:unidate/core/widgets/spacer.dart';
+import 'package:unidate/app/core/values/app_colors.dart';
+import 'package:unidate/app/core/values/app_text_styles.dart';
+import 'package:unidate/app/core/widgets/spacer.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
 class MatchesView extends StatelessWidget {

@@ -5,9 +5,9 @@ import 'package:unidate/app/modules/dashboard/views/chat.view.dart';
 import 'package:unidate/app/modules/dashboard/views/matches.view.dart';
 import 'package:unidate/app/modules/dashboard/views/home.view.dart';
 import 'package:unidate/app/modules/dashboard/views/settings.view.dart';
-import 'package:unidate/core/values/app_colors.dart';
-import 'package:unidate/core/widgets/animated_index_stack.dart';
-import 'package:unidate/core/widgets/image.dart';
+import 'package:unidate/app/core/values/app_colors.dart';
+import 'package:unidate/app/core/widgets/animated_index_stack.dart';
+import 'package:unidate/app/core/widgets/image.dart';
 
 class DashBoardView extends GetView<DashBoardController> {
   const DashBoardView({super.key});

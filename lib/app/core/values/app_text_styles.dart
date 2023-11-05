@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // 📦 Package imports:
 import 'package:google_fonts/google_fonts.dart';
-import 'package:unidate/core/values/app_colors.dart';
+import 'package:unidate/app/core/values/app_colors.dart';
 
 class AppTextStyles {
   AppTextStyles._();

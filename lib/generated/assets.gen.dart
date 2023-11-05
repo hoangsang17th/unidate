@@ -40,9 +40,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/like.svg
   String get like => 'assets/icons/like.svg';
 
-  /// File path: assets/icons/location.svg
-  String get location => 'assets/icons/location.svg';
-
   /// File path: assets/icons/logo.svg
   String get logo => 'assets/icons/logo.svg';
 
@@ -69,7 +66,6 @@ class $AssetsIconsGen {
         energy,
         info,
         like,
-        location,
         logo,
         notification,
         shoeRun,
@@ -83,7 +79,10 @@ class $AssetsImagesGen {
   $AssetsImagesAuthGen get auth => const $AssetsImagesAuthGen();
 
   /// File path: assets/images/logo.png
-  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+  AssetGenImage get logoPng => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/logo.svg
+  String get logoSvg => 'assets/images/logo.svg';
 
   /// File path: assets/images/native_splash.png
   AssetGenImage get nativeSplash =>
@@ -92,7 +91,7 @@ class $AssetsImagesGen {
   $AssetsImagesUsersGen get users => const $AssetsImagesUsersGen();
 
   /// List of all assets
-  List<AssetGenImage> get values => [logo, nativeSplash];
+  List<dynamic> get values => [logoPng, logoSvg, nativeSplash];
 }
 
 class $AssetsIconsNavigationBarGen {
@@ -129,6 +128,10 @@ class $AssetsImagesAuthGen {
 
 class $AssetsImagesUsersGen {
   const $AssetsImagesUsersGen();
+
+  /// File path: assets/images/users/defaultUser.jpg
+  AssetGenImage get defaultUser =>
+      const AssetGenImage('assets/images/users/defaultUser.jpg');
 
   /// File path: assets/images/users/image 105.png
   AssetGenImage get image105 =>
@@ -172,6 +175,7 @@ class $AssetsImagesUsersGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        defaultUser,
         image105,
         image110,
         image111,

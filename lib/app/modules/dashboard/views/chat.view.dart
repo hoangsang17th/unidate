@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:unidate/core/values/app_colors.dart';
-import 'package:unidate/core/values/app_text_styles.dart';
-import 'package:unidate/core/widgets/app_text_field.dart';
-import 'package:unidate/core/widgets/image.dart';
-import 'package:unidate/core/widgets/spacer.dart';
+import 'package:unidate/app/core/values/app_colors.dart';
+import 'package:unidate/app/core/values/app_text_styles.dart';
+import 'package:unidate/app/core/widgets/app_text_field.dart';
+import 'package:unidate/app/core/widgets/image.dart';
+import 'package:unidate/app/core/widgets/spacer.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
 class ChatView extends StatelessWidget {
