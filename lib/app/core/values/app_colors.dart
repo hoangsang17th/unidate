@@ -40,14 +40,8 @@ class AppColors {
   static final bgNeutral = AppColorPalettes.grey[200]!;
   static final bgContrast = AppColorPalettes.grey[900]!;
 
-  static final fillFocus = AppColorPalettes.withOpacity(
-    AppColorPalettes.grey,
-    AppTransparentOpacity.twelve,
-  );
-  static final fillUnfocused = AppColorPalettes.withOpacity(
-    AppColorPalettes.grey,
-    AppTransparentOpacity.eight,
-  );
+  static const fillFocus = Color(0xFFF6F7F8);
+  static const fillUnfocused = Color(0xFFF2F3F5);
   static final fillDisabled = AppColorPalettes.withOpacity(
     AppColorPalettes.grey,
     AppTransparentOpacity.sixteen,

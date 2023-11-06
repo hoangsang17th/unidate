@@ -27,6 +27,7 @@ class AppInput extends StatefulWidget {
   // This field is used to check if the input is required or not
   final bool isRequired;
   final Color? textColor;
+  final Function()? onTap;
 
   const AppInput({
     this.initialValue,
@@ -50,6 +51,7 @@ class AppInput extends StatefulWidget {
     this.helperText,
     this.isRequired = false,
     this.textColor,
+    this.onTap,
     super.key,
   });
 
@@ -69,11 +71,7 @@ class _AppInputState extends State<AppInput> {
 
   Color get fillColor =>
       widget.fillColor ??
-      (!enabled
-          ? AppColors.fillDisabled
-          : _isHasFocus
-              ? AppColors.fillFocus
-              : AppColors.fillUnfocused);
+      (_isHasFocus ? AppColors.fillFocus : AppColors.fillUnfocused);
 
   bool get enabled => widget.enabled;
 
@@ -123,52 +121,55 @@ class _AppInputState extends State<AppInput> {
   }
 
   Widget _buildTextFormField() {
-    return TextFormField(
-      textAlign: widget.textAlign,
-      controller: widget.initialValue == null ? _controller : null,
-      focusNode: _focusNode,
-      initialValue: widget.initialValue,
-      minLines: widget.expands ? null : widget.minLines,
-      maxLines: widget.expands ? null : widget.maxLines,
-      maxLength: widget.maxLength,
-      expands: widget.expands,
-      enabled: widget.enabled,
-      obscureText: widget.obscureText,
-      onEditingComplete: () => TextInput.finishAutofillContext(),
-      onChanged: (value) {
-        widget.onChanged?.call(value);
-      },
-      style: textStyle,
-      textAlignVertical: TextAlignVertical.center,
-      textCapitalization: TextCapitalization.none,
-      decoration: InputDecoration(
-        isDense: true,
-        counter: const Offstage(),
-        focusedBorder: outlineInputBorder(),
-        border: outlineInputBorder(),
-        enabledBorder: outlineInputBorder(),
-        helperText: widget.helperText,
-        contentPadding: widget.contentPadding ?? const EdgeInsets.all(12),
-        errorText: widget.errorText,
-        errorMaxLines: 1,
-        hintText: widget.obscureText
-            ? widget.placeHolder.replaceAll(RegExp(r'.?'), '*')
-            : widget.placeHolder,
-        errorStyle: AppTextStyles.caption.copyWith(
-          color: AppColors.error,
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: TextFormField(
+        textAlign: widget.textAlign,
+        controller: widget.initialValue == null ? _controller : null,
+        focusNode: _focusNode,
+        initialValue: widget.initialValue,
+        minLines: widget.expands ? null : widget.minLines,
+        maxLines: widget.expands ? null : widget.maxLines,
+        maxLength: widget.maxLength,
+        expands: widget.expands,
+        enabled: widget.enabled,
+        obscureText: widget.obscureText,
+        onEditingComplete: () => TextInput.finishAutofillContext(),
+        onChanged: (value) {
+          widget.onChanged?.call(value);
+        },
+        style: textStyle,
+        textAlignVertical: TextAlignVertical.center,
+        textCapitalization: TextCapitalization.none,
+        decoration: InputDecoration(
+          isDense: true,
+          counter: const Offstage(),
+          focusedBorder: outlineInputBorder(),
+          border: outlineInputBorder(),
+          enabledBorder: outlineInputBorder(),
+          helperText: widget.helperText,
+          contentPadding: widget.contentPadding ?? const EdgeInsets.all(12),
+          errorText: widget.errorText,
+          errorMaxLines: 1,
+          hintText: widget.obscureText
+              ? widget.placeHolder.replaceAll(RegExp(r'.?'), '*')
+              : widget.placeHolder,
+          errorStyle: AppTextStyles.caption.copyWith(
+            color: AppColors.error,
+          ),
+          errorBorder: outlineInputBorder().copyWith(
+            borderSide: const BorderSide(color: AppColors.error),
+          ),
+          isCollapsed: true,
+          suffixStyle: textStyle,
+          hintStyle: AppTextStyles.body1.copyWith(color: AppColors.textHint),
+          hintMaxLines: widget.maxLines,
+          fillColor: fillColor,
+          filled: true,
         ),
-        errorBorder: outlineInputBorder().copyWith(
-          borderSide: const BorderSide(color: AppColors.error),
-        ),
-        isCollapsed: true,
-        suffixStyle: textStyle,
-        hintStyle: AppTextStyles.body1.copyWith(color: AppColors.textHint),
-        hintMaxLines: widget.maxLines,
-        fillColor: fillColor,
-        filled: true,
+        obscuringCharacter: '*',
+        inputFormatters: inputFormatters,
       ),
-      obscuringCharacter: '*',
-      inputFormatters: inputFormatters,
     );
   }
 

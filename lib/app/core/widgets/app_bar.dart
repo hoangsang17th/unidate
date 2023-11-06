@@ -16,12 +16,18 @@ class AppBarSystem extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ScaffoldState? scaffold = Scaffold.maybeOf(context);
+    final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
+    final bool hasEndDrawer = scaffold?.hasEndDrawer ?? false;
+    final bool canPop = parentRoute?.canPop ?? false;
+    final bool autoShowBack = (!hasEndDrawer && canPop) ||
+        (parentRoute?.impliesAppBarDismissal ?? false);
     return AppBar(
       backgroundColor: AppColors.bgPaper,
       elevation: 0,
       shadowColor: AppColors.divider,
       automaticallyImplyLeading: false,
-      leading: Get.previousRoute.isEmpty
+      leading: !autoShowBack
           ? null
           : IconButton(
               onPressed: Get.back,

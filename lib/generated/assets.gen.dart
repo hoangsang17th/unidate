@@ -88,6 +88,7 @@ class $AssetsImagesGen {
   AssetGenImage get nativeSplash =>
       const AssetGenImage('assets/images/native_splash.png');
 
+  $AssetsImagesSetupGen get setup => const $AssetsImagesSetupGen();
   $AssetsImagesUsersGen get users => const $AssetsImagesUsersGen();
 
   /// List of all assets
@@ -124,6 +125,28 @@ class $AssetsImagesAuthGen {
 
   /// List of all assets
   List<String> get values => [member, title];
+}
+
+class $AssetsImagesSetupGen {
+  const $AssetsImagesSetupGen();
+
+  /// File path: assets/images/setup/bio.svg
+  String get bio => 'assets/images/setup/bio.svg';
+
+  /// File path: assets/images/setup/location.svg
+  String get location => 'assets/images/setup/location.svg';
+
+  /// File path: assets/images/setup/pictures.svg
+  String get pictures => 'assets/images/setup/pictures.svg';
+
+  /// File path: assets/images/setup/profile.svg
+  String get profile => 'assets/images/setup/profile.svg';
+
+  /// File path: assets/images/setup/words_into.svg
+  String get wordsInto => 'assets/images/setup/words_into.svg';
+
+  /// List of all assets
+  List<String> get values => [bio, location, pictures, profile, wordsInto];
 }
 
 class $AssetsImagesUsersGen {

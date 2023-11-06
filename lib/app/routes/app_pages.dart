@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:unidate/app/modules/profile/views/setup/add_pictures.view.dart';
 import '../bindings/manager.binding.dart';
 import '../modules/auth/views/login.view.dart';
 import '../modules/auth/views/register.view.dart';
@@ -44,11 +45,11 @@ class AppPages {
     //
     GetPage(
       name: AppRoutes.SETUP_BIO,
-      page: () => UpdateBioScreen(),
+      page: () => const UpdateBioScreen(),
     ),
     GetPage(
       name: AppRoutes.SETUP_PICTURES,
-      page: () => const SetupProfileView(),
+      page: () => const AddPicturesView(),
     ),
     GetPage(
       name: AppRoutes.SETUP_LOCATION,
@@ -60,7 +61,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.SETUP_WORDSINTO,
-      page: () => AddWordsIntoView(),
+      page: () => const AddWordsIntoView(),
     ),
 
     //

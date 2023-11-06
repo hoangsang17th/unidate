@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unidate/app/core/values/app_colors.dart';
-import 'package:unidate/app/core/values/app_text_styles.dart';
-import 'package:unidate/app/core/widgets/app_bar.dart';
-import 'package:unidate/app/core/widgets/app_text_field.dart';
-import 'package:unidate/app/core/widgets/spacer.dart';
-import 'package:unidate/app/routes/app_pages.dart';
+import '../../../../core/values/app_colors.dart';
+import '../../../../core/values/app_text_styles.dart';
+import '../../../../core/widgets/app_text_field.dart';
+import '../../../../core/widgets/button.dart';
+import '../../../../core/widgets/image.dart';
+import '../../../../core/widgets/spacer.dart';
+import '../../../../routes/app_pages.dart';
+import '../../../../../generated/assets.gen.dart';
 
 class UpdateBioScreen extends StatefulWidget {
   const UpdateBioScreen({super.key});
@@ -20,42 +21,81 @@ class _UpdateBioScreenState extends State<UpdateBioScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarSystem(
-        title: 'Update Bio',
-        actions: [
-          IconButton(
-            onPressed: () => Get.toNamed(AppRoutes.SETUP_PROFILE),
-            icon: Icon(
-              CupertinoIcons.checkmark_circle,
-              color: AppColors.textPrimary,
-            ),
-          )
-        ],
-      ),
+      backgroundColor: const Color(0xFFD9CCE5),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const VSpacer(25),
+                    const SetepNumber(1),
+                    const VSpacer(56),
+                    AppSvgPicture(AppAssets.images.setup.bio),
+                    const VSpacer(24),
+                    AppInput(
+                      label: 'Bio',
+                      placeHolder: 'Enter your bio',
+                      onChanged: (value) => _newBio = value,
+                      minLines: 15,
+                      maxLines: 20,
+                      maxLength: 1000,
+                    ),
+                    const VSpacer(4),
+                    Text(
+                      '1000 characters left',
+                      style: AppTextStyles.body2.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const VSpacer(16),
+            PrimaryButton(
+              onPressed: () => Get.toNamed(AppRoutes.SETUP_PROFILE),
+              text: 'Next step',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SetepNumber extends StatelessWidget {
+  const SetepNumber(
+    this.stepNumber, {
+    super.key,
+  });
+
+  final int stepNumber;
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.white.withOpacity(0.8),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Please introduce yourself to other users.',
-              style: AppTextStyles.h3,
+              '$stepNumber',
+              style: AppTextStyles.subtitle1
+                  .copyWith(color: AppColors.textPrimary),
             ),
-            const VSpacer(12),
-            AppInput(
-              label: 'Bio',
-              placeHolder: 'Enter your bio',
-              onChanged: (value) => _newBio = value,
-              minLines: 10,
-              maxLines: 20,
-              maxLength: 1000,
-            ),
-            const VSpacer(4),
             Text(
-              '1000 characters left',
-              style: AppTextStyles.body2.copyWith(
-                color: AppColors.textSecondary,
-              ),
+              ' /5',
+              style: AppTextStyles.overline
+                  .copyWith(color: AppColors.textSecondary),
             ),
           ],
         ),

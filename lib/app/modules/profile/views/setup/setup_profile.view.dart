@@ -1,12 +1,12 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/core/values/app_colors.dart';
-import 'package:unidate/app/core/widgets/app_bar.dart';
 import 'package:unidate/app/core/widgets/app_text_field.dart';
+import 'package:unidate/app/core/widgets/button.dart';
 import 'package:unidate/app/core/widgets/image.dart';
 import 'package:unidate/app/core/widgets/spacer.dart';
+import 'package:unidate/app/modules/profile/views/setup/update_bio.view.dart';
 import 'package:unidate/app/routes/app_pages.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
@@ -16,30 +16,63 @@ class SetupProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarSystem(
-        title: 'Setup Profile',
-        actions: [
-          IconButton(
-            onPressed: () => Get.toNamed(AppRoutes.SETUP_PICTURES),
-            icon: Icon(
-              CupertinoIcons.checkmark_circle,
-              color: AppColors.textPrimary,
-            ),
-          )
-        ],
-      ),
-      body: const Padding(
-        padding: EdgeInsets.all(16),
+      backgroundColor: const Color(0xFF99C4C2),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            AppInput(placeHolder: 'Enter your name', label: 'Name'),
-            VSpacer(12),
-
-            // Sở thích
-            // Độ tuổi muốn khớp
-            // Chiều cao muốn khớp
-            // Giới tính muốn khớp
-            // Khoảng cách muốn khớp
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const VSpacer(25),
+                    const SetepNumber(2),
+                    const VSpacer(56),
+                    AppSvgPicture(AppAssets.images.setup.profile),
+                    const VSpacer(24),
+                    // Date Picker
+                    AppInput(
+                      placeHolder: '20/09/2001 ',
+                      label: 'When\'s your Birthday',
+                      enabled: false,
+                      onTap: () {
+                        showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                        );
+                      },
+                    ),
+                    // Dropdown
+                    AppInput(
+                      placeHolder: 'Enter ',
+                      label: 'Your gender',
+                      enabled: false,
+                      onTap: () {},
+                    ),
+                    // Dropdown button multiple
+                    const AppInput(
+                        placeHolder: 'Enter ',
+                        label: 'When\'s your hoping to find'),
+                    // Slider
+                    const AppInput(
+                        placeHolder: 'Enter your name', label: 'Your height'),
+                    // Sllider
+                    const AppInput(
+                        placeHolder: 'Enter your name', label: 'Your weight'),
+                    // Bottómheet
+                    const AppInput(
+                        placeHolder: 'Enter your name', label: 'Education'),
+                  ],
+                ),
+              ),
+            ),
+            const VSpacer(16),
+            PrimaryButton(
+              onPressed: () => Get.toNamed(AppRoutes.SETUP_WORDSINTO),
+              text: 'Next step',
+            ),
           ],
         ),
       ),
@@ -67,7 +100,12 @@ class AvatarPicker extends StatelessWidget {
               onTap: () {},
               child: Container(
                 width: double.infinity,
-                height: Get.width / 3,
+                height: 140,
+                margin: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.bgPaper,
+                ),
                 padding: const EdgeInsets.all(12),
               ),
             ),
