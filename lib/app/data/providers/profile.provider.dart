@@ -6,8 +6,8 @@ class ProfileProviders {
 
   Future<NextStepEntity> updateBio(String bio) async {
     try {
-      final response = await AppHttpHelper.instance.post(
-        'auth/register',
+      final response = await AppHttpHelper.instance.put(
+        'users/bio',
         data: {
           'biography': bio,
         },
@@ -20,8 +20,8 @@ class ProfileProviders {
 
   Future<NextStepEntity> updateProfile(UpdateProfileEntity data) async {
     try {
-      final response = await AppHttpHelper.instance.post(
-        'auth/login',
+      final response = await AppHttpHelper.instance.put(
+        'users/profile',
         data: data.toJson(),
       );
       return NextStepEntity.fromJson(response.data);

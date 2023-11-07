@@ -42,15 +42,8 @@ enum UserStepSetup {
   }
 }
 
-
-
 @JsonEnum()
-enum GenderEnum {
-  Man,
-  Woman,
-  Other
-}
-
+enum GenderEnum { Man, Woman, Other }
 
 @JsonEnum()
 enum AcademicLevelEnum {
@@ -61,5 +54,27 @@ enum AcademicLevelEnum {
   OnAGraduateCourse,
   MasterDegree,
   TradeSchool,
-  Other,
+  Other;
+
+  String get name {
+    switch (this) {
+      case BachelorDegree:
+        return 'Bachelor\'s degree';
+      case AtUni:
+        return 'At university';
+      case HighSchool:
+        return 'High school';
+      case PhD:
+        return 'PhD';
+      case OnAGraduateCourse:
+        return 'On a graduate course';
+      case MasterDegree:
+        return 'Master\'s degree';
+      case TradeSchool:
+        return 'Trade school';
+
+      default:
+        return 'Other';
+    }
+  }
 }

@@ -58,12 +58,13 @@ Map<String, dynamic> _$UpdateProfileEntityToJson(
     <String, dynamic>{
       'birthday': _$JsonConverterToJson<String, DateTime>(
           instance.birthday, const JsonSerializableDateTime().toJson),
-      'gender': _$GenderEnumEnumMap[instance.gender]!,
+      'gender': _$GenderEnumEnumMap[instance.gender],
       'whoWantToDate':
           instance.whoWantToDate.map((e) => _$GenderEnumEnumMap[e]!).toList(),
       'education': _$AcademicLevelEnumEnumMap[instance.education]!,
       'tall': instance.tall,
       'weight': instance.weight,
+      'isValid': instance.isValid,
     };
 
 Json? _$JsonConverterToJson<Json, Value>(

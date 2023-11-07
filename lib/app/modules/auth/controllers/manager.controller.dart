@@ -42,9 +42,14 @@ class ManagerController extends GetxController {
         AppGetKey.accessToken,
       );
       if (accessToken != null) {
-        final res = await userProviders.currentUser();
+        try {
+          debugPrint('accessToken: $accessToken');
+          final res = await userProviders.currentUser();
 
-        res.nextStep.navigation();
+          res.nextStep.navigation();
+        } catch (e) {
+          Get.offAndToNamed(AppRoutes.WELCOME);
+        }
       } else {
         Get.offAndToNamed(AppRoutes.WELCOME);
       }

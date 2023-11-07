@@ -5,9 +5,8 @@ import 'dart:io';
 // 📦 Package imports:
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-import 'package:unidate/app/modules/dashboard/controllers/dashboard.controller.dart';
 import 'package:unidate/app/core/utils/get.storage.dart';
+
 import 'special_urls.http.dart';
 
 class AppHttpInterceptor extends QueuedInterceptor {

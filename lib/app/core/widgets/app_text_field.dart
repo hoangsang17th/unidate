@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:unidate/app/core/values/app_colors.dart';
@@ -28,6 +30,7 @@ class AppInput extends StatefulWidget {
   final bool isRequired;
   final Color? textColor;
   final Function()? onTap;
+  final TextInputType keyboardType;
 
   const AppInput({
     this.initialValue,
@@ -52,6 +55,7 @@ class AppInput extends StatefulWidget {
     this.isRequired = false,
     this.textColor,
     this.onTap,
+    this.keyboardType = TextInputType.text,
     super.key,
   });
 
@@ -77,8 +81,26 @@ class _AppInputState extends State<AppInput> {
 
   TextStyle get textStyle => AppTextStyles.body1.copyWith(
         color: widget.textColor ??
-            (enabled ? AppColors.textPrimary : AppColors.textSecondary),
+            (!enabled && widget.onTap == null
+                ? AppColors.textSecondary
+                : AppColors.textPrimary),
       );
+
+  String? oldText;
+  Timer? searchOnStoppedTyping;
+
+  void _onChangeHandler() {
+    oldText = _controller.text;
+    if (searchOnStoppedTyping != null) {
+      searchOnStoppedTyping!.cancel(); // clear timer
+    }
+    searchOnStoppedTyping = Timer(
+      const Duration(milliseconds: 500),
+      () => widget.onChanged?.call(
+        _controller.text.trim(),
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -94,12 +116,20 @@ class _AppInputState extends State<AppInput> {
         _isHasFocus = _focusNode.hasFocus;
       });
     });
+
+    _controller.addListener(() {
+      if (oldText == _controller.text) return;
+      _onChangeHandler();
+      if (mounted) setState(() {});
+    });
   }
 
   @override
   void dispose() {
     super.dispose();
     _focusNode.dispose();
+    _controller.dispose();
+    searchOnStoppedTyping?.cancel();
   }
 
   @override
@@ -128,6 +158,7 @@ class _AppInputState extends State<AppInput> {
         controller: widget.initialValue == null ? _controller : null,
         focusNode: _focusNode,
         initialValue: widget.initialValue,
+        keyboardType: widget.keyboardType,
         minLines: widget.expands ? null : widget.minLines,
         maxLines: widget.expands ? null : widget.maxLines,
         maxLength: widget.maxLength,
@@ -136,7 +167,7 @@ class _AppInputState extends State<AppInput> {
         obscureText: widget.obscureText,
         onEditingComplete: () => TextInput.finishAutofillContext(),
         onChanged: (value) {
-          widget.onChanged?.call(value);
+          _onChangeHandler();
         },
         style: textStyle,
         textAlignVertical: TextAlignVertical.center,

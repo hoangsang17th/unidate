@@ -1,13 +1,17 @@
+import 'package:dotted_border/dotted_border.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unidate/app/core/values/app_text_styles.dart';
-import 'package:unidate/app/core/widgets/button.dart';
-import 'package:unidate/app/core/widgets/image.dart';
-import 'package:unidate/app/core/widgets/spacer.dart';
-import 'package:unidate/app/modules/profile/views/setup/setup_profile.view.dart';
-import 'package:unidate/app/modules/profile/views/setup/update_bio.view.dart';
-import 'package:unidate/app/routes/app_pages.dart';
-import 'package:unidate/generated/assets.gen.dart';
+
+import '../../../../../generated/assets.gen.dart';
+import '../../../../core/values/app_colors.dart';
+import '../../../../core/values/app_text_styles.dart';
+import '../../../../core/widgets/button.dart';
+import '../../../../core/widgets/image.dart';
+import '../../../../core/widgets/spacer.dart';
+import '../../../../routes/app_pages.dart';
+
+import 'update_bio.view.dart';
 
 class AddPicturesView extends StatefulWidget {
   const AddPicturesView({super.key});
@@ -70,6 +74,68 @@ class _AddPicturesViewState extends State<AddPicturesView> {
           ],
         ),
       ),
+    );
+  }
+}
+
+
+class AvatarPicker extends StatelessWidget {
+  final Function()? onTap;
+  const AvatarPicker({
+    super.key,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        DottedBorder(
+          borderType: BorderType.RRect,
+          radius: const Radius.circular(12),
+          color: AppColors.divider,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(12),
+              onTap: () async {
+                FilePickerResult? result = await FilePicker.platform.pickFiles(
+      allowMultiple: false,
+      type: FileType.image,
+    );  
+    
+    
+              },
+              child: Container(
+                width: double.infinity,
+                height: 140,
+                margin: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.bgPaper,
+                ),
+                padding: const EdgeInsets.all(12),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.primaryLight,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            padding: const EdgeInsets.all(2),
+            child: AppSvgPicture(
+              AppAssets.icons.add,
+              size: 20,
+              color: AppColors.white,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

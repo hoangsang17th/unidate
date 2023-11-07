@@ -1,68 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controllers/update_bio.controller.dart';
 import '../../../../core/values/app_colors.dart';
 import '../../../../core/values/app_text_styles.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/widgets/button.dart';
 import '../../../../core/widgets/image.dart';
 import '../../../../core/widgets/spacer.dart';
-import '../../../../routes/app_pages.dart';
 import '../../../../../generated/assets.gen.dart';
 
-class UpdateBioScreen extends StatefulWidget {
+class UpdateBioScreen extends GetView<UpdateBioController> {
   const UpdateBioScreen({super.key});
 
   @override
-  _UpdateBioScreenState createState() => _UpdateBioScreenState();
-}
-
-class _UpdateBioScreenState extends State<UpdateBioScreen> {
-  String _newBio = '';
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFD9CCE5),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const VSpacer(25),
-                    const SetepNumber(1),
-                    const VSpacer(56),
-                    AppSvgPicture(AppAssets.images.setup.bio),
-                    const VSpacer(24),
-                    AppInput(
-                      label: 'Bio',
-                      placeHolder: 'Enter your bio',
-                      onChanged: (value) => _newBio = value,
-                      minLines: 15,
-                      maxLines: 20,
-                      maxLength: 1000,
+    return GetBuilder<UpdateBioController>(
+      builder: (UpdateBioController controller) {
+        return Scaffold(
+          backgroundColor: const Color(0xFFD9CCE5),
+          body: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const VSpacer(25),
+                        const SetepNumber(1),
+                        const VSpacer(56),
+                        AppSvgPicture(AppAssets.images.setup.bio),
+                        const VSpacer(24),
+                        AppInput(
+                          label: 'Bio',
+                          placeHolder: 'Enter your bio',
+                          minLines: 15,
+                          maxLines: 20,
+                          maxLength: 1000,
+                          onChanged: (_) => controller.setNewBio(_),
+                        ),
+                        const VSpacer(4),
+                        Text(
+                          '1000 characters left',
+                          style: AppTextStyles.body2.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                      ],
                     ),
-                    const VSpacer(4),
-                    Text(
-                      '1000 characters left',
-                      style: AppTextStyles.body2.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                const VSpacer(16),
+                PrimaryButton(
+                  onPressed: controller.onUpdateBio,
+                  text: 'Next step',
+                ),
+              ],
             ),
-            const VSpacer(16),
-            PrimaryButton(
-              onPressed: () => Get.toNamed(AppRoutes.SETUP_PROFILE),
-              text: 'Next step',
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

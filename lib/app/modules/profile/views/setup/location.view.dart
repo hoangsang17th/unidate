@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:unidate/app/core/values/app_text_styles.dart';
-import 'package:unidate/app/core/widgets/button.dart';
-import 'package:unidate/app/core/widgets/image.dart';
-import 'package:unidate/app/core/widgets/spacer.dart';
-import 'package:unidate/app/modules/profile/views/setup/update_bio.view.dart';
-import 'package:unidate/app/routes/app_pages.dart';
-import 'package:unidate/generated/assets.gen.dart';
+
+import '../../../../../generated/assets.gen.dart';
+import '../../../../core/values/app_text_styles.dart';
+import '../../../../core/widgets/button.dart';
+import '../../../../core/widgets/image.dart';
+import '../../../../core/widgets/spacer.dart';
+import '../../../../routes/app_pages.dart';
+import 'update_bio.view.dart';
 
 class RequestLocationView extends StatelessWidget {
   const RequestLocationView({super.key});
