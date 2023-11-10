@@ -30,10 +30,13 @@ class ProfileProviders {
     }
   }
 
-  Future<CurrentUserEntity> currentUser() async {
+  Future<NextStepEntity> addPictures(PicturesEntity data) async {
     try {
-      final response = await AppHttpHelper.instance.get('users/current');
-      return CurrentUserEntity.fromJson(response.data);
+      final response = await AppHttpHelper.instance.post(
+        'users/add-pictures',
+        formData: data.toJson(),
+      );
+      return NextStepEntity.fromJson(response.data);
     } catch (e) {
       rethrow;
     }

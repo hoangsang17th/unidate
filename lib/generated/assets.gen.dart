@@ -49,6 +49,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/notification.svg
   String get notification => 'assets/icons/notification.svg';
 
+  /// File path: assets/icons/remove.svg
+  String get remove => 'assets/icons/remove.svg';
+
   /// File path: assets/icons/shoe-run.svg
   String get shoeRun => 'assets/icons/shoe-run.svg';
 
@@ -68,6 +71,7 @@ class $AssetsIconsGen {
         like,
         logo,
         notification,
+        remove,
         shoeRun,
         trophy
       ];

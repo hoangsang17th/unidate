@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mime/mime.dart';
 import 'package:unidate/app/core/utils/datetime.util.dart';
 import 'package:unidate/app/modules/profile/enums.dart';
 
@@ -124,4 +127,42 @@ class UpdateProfileEntity {
       weight != 0;
 
   Map<String, dynamic> toJson() => _$UpdateProfileEntityToJson(this);
+}
+
+@JsonSerializable(createFactory: false)
+class PicturesEntity {
+  List<dynamic> pictures;
+  @JsonKey(includeToJson: false)
+  List<PictureIndex> picturesFile;
+
+  PicturesEntity({
+    required this.pictures,
+    required this.picturesFile,
+  });
+
+  bool get isValid => picturesFile.length < 2;
+
+  Future<void> convertFile() async {
+    for (var pic in picturesFile) {
+      final file = await MultipartFile.fromFile(
+        pic.file.path,
+        contentType: MediaType.parse(
+          lookupMimeType(pic.file.path).toString(),
+        ),
+      );
+      pictures.add(file);
+    }
+  }
+
+  Map<String, dynamic> toJson() => _$PicturesEntityToJson(this);
+}
+
+class PictureIndex {
+  final int index;
+  final File file;
+
+  PictureIndex({
+    required this.index,
+    required this.file,
+  });
 }

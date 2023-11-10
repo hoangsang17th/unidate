@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unidate/app/core/values/app_colors.dart';
+import '../../../../core/values/app_colors.dart';
 
 import '../../../../../generated/assets.gen.dart';
 import '../../../../core/values/app_text_styles.dart';
@@ -8,7 +8,6 @@ import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/widgets/button.dart';
 import '../../../../core/widgets/image.dart';
 import '../../../../core/widgets/spacer.dart';
-import '../../../../routes/app_pages.dart';
 import '../../controllers/update_profile.controller.dart';
 import '../../enums.dart';
 import 'update_bio.view.dart';

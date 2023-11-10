@@ -89,3 +89,9 @@ const _$AcademicLevelEnumEnumMap = {
   AcademicLevelEnum.TradeSchool: 'TradeSchool',
   AcademicLevelEnum.Other: 'Other',
 };
+
+Map<String, dynamic> _$PicturesEntityToJson(PicturesEntity instance) =>
+    <String, dynamic>{
+      'pictures': instance.pictures,
+      'isValid': instance.isValid,
+    };
