@@ -41,4 +41,28 @@ class ProfileProviders {
       rethrow;
     }
   }
+
+  Future<NextStepEntity> addWordsInto(WordIntoEntity data) async {
+    try {
+      final response = await AppHttpHelper.instance.put(
+        'users/add-words-into',
+        data: data.toJson(),
+      );
+      return NextStepEntity.fromJson(response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<NextStepEntity> updateLocation(UpdateLocationEntity data) async {
+    try {
+      final response = await AppHttpHelper.instance.post(
+        'users/location',
+        data: data.toJson(),
+      );
+      return NextStepEntity.fromJson(response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

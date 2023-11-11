@@ -78,3 +78,50 @@ enum AcademicLevelEnum {
     }
   }
 }
+
+@JsonEnum()
+enum WordInto {
+  Sport,
+  Music,
+  Movie,
+  Book,
+  Game,
+  Travel,
+  Food,
+  Art,
+  Science,
+  Technology,
+  Business,
+  Politics,
+  Fashion,
+  Beauty,
+  Health,
+  Fitness,
+  Lifestyle,
+  Relationship,
+  Family,
+  Education,
+  Career,
+  Money,
+  Home,
+  Garden,
+  Pet,
+  Car,
+  Motorcycle,
+  SportCar,
+  Other;
+
+  String get newName {
+    switch (this) {
+      case Relationship:
+        return 'Relationships';
+      case Motorcycle:
+        return 'Motorcycles';
+      case SportCar:
+        return 'Sport cars';
+
+      default:
+        return name;
+    }
+  }
+}

@@ -166,3 +166,32 @@ class PictureIndex {
     required this.file,
   });
 }
+
+@JsonSerializable(createFactory: false)
+class WordIntoEntity {
+  List<WordInto> words;
+
+  WordIntoEntity({
+    this.words = const [],
+  });
+
+  bool get isValid => words.length >= 5;
+
+  Map<String, dynamic> toJson() => _$WordIntoEntityToJson(this);
+}
+
+
+@JsonSerializable(createFactory: false)
+class UpdateLocationEntity {
+  int? lat;
+  int? long;
+  UpdateLocationEntity({
+    this.lat,
+    this.long,
+  });
+
+  bool get isValid =>
+lat!= null && long != null;
+
+  Map<String, dynamic> toJson() => _$UpdateLocationEntityToJson(this);
+}

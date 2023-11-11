@@ -1,7 +1,48 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:unidate/app/data/entities/user.entity.dart';
+import 'package:unidate/app/data/providers/profile.provider.dart';
+import 'package:unidate/app/modules/profile/enums.dart';
 
 class AddWordsIntoController extends GetxController {
-  void addWords() {
-    
+  final ProfileProviders _profileProviders = ProfileProviders();
+
+  Rx<List<WordInto>> words = Rx<List<WordInto>>([]);
+
+  bool isSubmitted = false;
+
+  void onTapedWord(WordInto _) {
+    if (words.value.contains(_)) {
+      words.value.remove(_);
+    } else {
+      words.value.add(_);
+    }
+    words.refresh();
+  }
+
+  bool isWordSelected(WordInto _) {
+    return words.value.contains(_);
+  }
+
+  Future<void> onSubmitted() async {
+    if (words.value.length <= 5) {
+      Get.snackbar('Miximun', 'Tối thiểu phải chọn 5 từ khoá');
+      return;
+    }
+    if (isSubmitted) return;
+    isSubmitted = true;
+
+    try {
+      EasyLoading.show(status: 'Loading...');
+      final res = await _profileProviders.addWordsInto(WordIntoEntity(
+        words: words.value,
+      ));
+      res.nextStep.navigation();
+    } catch (e) {
+      Get.snackbar('Error', e.toString());
+    } finally {
+      EasyLoading.dismiss();
+      isSubmitted = false;
+    }
   }
 }

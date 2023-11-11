@@ -1,41 +1,101 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unidate/app/core/widgets/button.dart';
-import 'package:unidate/app/core/widgets/image.dart';
-import 'package:unidate/app/core/widgets/spacer.dart';
-import 'package:unidate/app/modules/profile/views/setup/update_bio.view.dart';
-import 'package:unidate/app/routes/app_pages.dart';
-import 'package:unidate/generated/assets.gen.dart';
+import '../../../../core/values/app_colors.dart';
+import '../../../../core/values/app_text_styles.dart';
+import '../../../../core/widgets/button.dart';
+import '../../../../core/widgets/image.dart';
+import '../../../../core/widgets/spacer.dart';
+import '../../controllers/add_words_into.controller.dart';
+import '../../enums.dart';
+import 'update_bio.view.dart';
+import '../../../../../generated/assets.gen.dart';
 
-class AddWordsIntoView extends StatelessWidget {
+class AddWordsIntoView extends GetView<AddWordsIntoController> {
   const AddWordsIntoView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFFFDCD0),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const VSpacer(25),
-                    const SetepNumber(3),
-                    const VSpacer(56),
-                    AppSvgPicture(AppAssets.images.setup.wordsInto),
-                    const VSpacer(24),
-                  ],
+    return GetX<AddWordsIntoController>(builder: (context) {
+      return Scaffold(
+        backgroundColor: const Color(0xFFFFDCD0),
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const VSpacer(25),
+                      const SetepNumber(3),
+                      const VSpacer(56),
+                      AppSvgPicture(AppAssets.images.setup.wordsInto),
+                      const VSpacer(24),
+                      Text(
+                        'Add some words into your profile',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.subtitle2,
+                      ),
+                      const VSpacer(12),
+                      Text(
+                        'This will help us find you better matches',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.body2,
+                      ),
+                      const VSpacer(16),
+                      Wrap(
+                        children: List.generate(
+                          WordInto.values.length,
+                          (index) => _buildWord(index),
+                        ),
+                      ),
+                      const VSpacer(16),
+                    ],
+                  ),
                 ),
               ),
+              PrimaryButton(
+                onPressed: controller.onSubmitted,
+                text: 'Next step',
+              ),
+            ],
+          ),
+        ),
+      );
+    });
+  }
+
+  Widget _buildWord(int index) {
+    final word = WordInto.values[index];
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.bgPaper,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: controller.isWordSelected(word)
+              ? AppColors.info
+              : AppColors.transparent,
+        ),
+      ),
+      margin: const EdgeInsets.only(
+        bottom: 8,
+        right: 8,
+      ),
+      child: Material(
+        color: AppColors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(8),
+          onTap: () => controller.onTapedWord(word),
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 6,
             ),
-            PrimaryButton(
-              onPressed: () => Get.toNamed(AppRoutes.SETUP_PICTURES),
-              text: 'Next step',
+            child: Text(
+              word.newName,
+              style: AppTextStyles.subtitle1,
             ),
-          ],
+          ),
         ),
       ),
     );

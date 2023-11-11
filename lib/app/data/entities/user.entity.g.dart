@@ -95,3 +95,49 @@ Map<String, dynamic> _$PicturesEntityToJson(PicturesEntity instance) =>
       'pictures': instance.pictures,
       'isValid': instance.isValid,
     };
+
+Map<String, dynamic> _$WordIntoEntityToJson(WordIntoEntity instance) =>
+    <String, dynamic>{
+      'words': instance.words.map((e) => _$WordIntoEnumMap[e]!).toList(),
+      'isValid': instance.isValid,
+    };
+
+const _$WordIntoEnumMap = {
+  WordInto.Sport: 'Sport',
+  WordInto.Music: 'Music',
+  WordInto.Movie: 'Movie',
+  WordInto.Book: 'Book',
+  WordInto.Game: 'Game',
+  WordInto.Travel: 'Travel',
+  WordInto.Food: 'Food',
+  WordInto.Art: 'Art',
+  WordInto.Science: 'Science',
+  WordInto.Technology: 'Technology',
+  WordInto.Business: 'Business',
+  WordInto.Politics: 'Politics',
+  WordInto.Fashion: 'Fashion',
+  WordInto.Beauty: 'Beauty',
+  WordInto.Health: 'Health',
+  WordInto.Fitness: 'Fitness',
+  WordInto.Lifestyle: 'Lifestyle',
+  WordInto.Relationship: 'Relationship',
+  WordInto.Family: 'Family',
+  WordInto.Education: 'Education',
+  WordInto.Career: 'Career',
+  WordInto.Money: 'Money',
+  WordInto.Home: 'Home',
+  WordInto.Garden: 'Garden',
+  WordInto.Pet: 'Pet',
+  WordInto.Car: 'Car',
+  WordInto.Motorcycle: 'Motorcycle',
+  WordInto.SportCar: 'SportCar',
+  WordInto.Other: 'Other',
+};
+
+Map<String, dynamic> _$UpdateLocationEntityToJson(
+        UpdateLocationEntity instance) =>
+    <String, dynamic>{
+      'lat': instance.lat,
+      'long': instance.long,
+      'isValid': instance.isValid,
+    };

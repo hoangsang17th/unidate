@@ -1,5 +1,4 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/modules/profile/controllers/add_pictures.controller.dart';
@@ -10,7 +9,6 @@ import '../../../../core/values/app_text_styles.dart';
 import '../../../../core/widgets/button.dart';
 import '../../../../core/widgets/image.dart';
 import '../../../../core/widgets/spacer.dart';
-import '../../../../routes/app_pages.dart';
 
 import 'update_bio.view.dart';
 
