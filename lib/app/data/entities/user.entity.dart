@@ -183,8 +183,8 @@ class WordIntoEntity {
 
 @JsonSerializable(createFactory: false)
 class UpdateLocationEntity {
-  int? lat;
-  int? long;
+  double? lat;
+  double? long;
   UpdateLocationEntity({
     this.lat,
     this.long,
