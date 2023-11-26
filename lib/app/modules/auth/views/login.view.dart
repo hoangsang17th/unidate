@@ -50,12 +50,39 @@ class LoginView extends GetView<LoginController> {
                     onChanged: (_) => controller.setEmail(_),
                   ),
                   const VSpacer(12),
-                  AppInput(
-                    placeHolder: '***',
-                    label: 'Password',
-                    obscureText: true,
-                    onChanged: (_) => controller.setPassword(_),
-                  ),
+                  Obx(() {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: AppInput(
+                            placeHolder: '***',
+                            label: 'Password',
+                            obscureText: controller.isShowPassword.isTrue,
+                            onChanged: (_) => controller.setPassword(_),
+                          ),
+                        ),
+                        const HSpacer(8),
+                        Material(
+                          color: AppColors.transparent,
+                          child: InkWell(
+                            onTap: controller.onChangedShowPassword,
+                            borderRadius: BorderRadius.circular(8),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: AppSvgPicture(
+                                controller.isShowPassword.isTrue
+                                    ? AppAssets.icons.eyeDisable
+                                    : AppAssets.icons.eye1,
+                                color: AppColors.textPrimary,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
                   const VSpacer(12),
                   PrimaryButton(
                     onPressed: controller.onLogin,

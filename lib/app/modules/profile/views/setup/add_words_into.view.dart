@@ -45,7 +45,7 @@ class AddWordsIntoView extends GetView<AddWordsIntoController> {
                       const VSpacer(16),
                       Wrap(
                         children: List.generate(
-                          WordInto.values.length,
+                          WordIntoEnum.values.length,
                           (index) => _buildWord(index),
                         ),
                       ),
@@ -66,7 +66,7 @@ class AddWordsIntoView extends GetView<AddWordsIntoController> {
   }
 
   Widget _buildWord(int index) {
-    final word = WordInto.values[index];
+    final word = WordIntoEnum.values[index];
     return Container(
       decoration: BoxDecoration(
         color: AppColors.bgPaper,

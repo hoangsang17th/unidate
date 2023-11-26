@@ -80,7 +80,7 @@ enum AcademicLevelEnum {
 }
 
 @JsonEnum()
-enum WordInto {
+enum WordIntoEnum {
   Sport,
   Music,
   Movie,
@@ -125,3 +125,6 @@ enum WordInto {
     }
   }
 }
+
+@JsonEnum()
+enum SwipeType { Dislike, Like, Reconsider, None }

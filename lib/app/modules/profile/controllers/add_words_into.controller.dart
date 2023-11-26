@@ -7,11 +7,11 @@ import 'package:unidate/app/modules/profile/enums.dart';
 class AddWordsIntoController extends GetxController {
   final ProfileProviders _profileProviders = ProfileProviders();
 
-  Rx<List<WordInto>> words = Rx<List<WordInto>>([]);
+  Rx<List<WordIntoEnum>> words = Rx<List<WordIntoEnum>>([]);
 
   bool isSubmitted = false;
 
-  void onTapedWord(WordInto _) {
+  void onTapedWord(WordIntoEnum _) {
     if (words.value.contains(_)) {
       words.value.remove(_);
     } else {
@@ -20,7 +20,7 @@ class AddWordsIntoController extends GetxController {
     words.refresh();
   }
 
-  bool isWordSelected(WordInto _) {
+  bool isWordSelected(WordIntoEnum _) {
     return words.value.contains(_);
   }
 

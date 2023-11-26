@@ -1,88 +1,56 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unidate/app/modules/dashboard/widgets/profile.view.dart';
-import 'package:unidate/generated/assets.gen.dart';
-import 'package:unidate/app/modules/dashboard/enums.dart';
+import 'package:unidate/app/data/entities/match.entity.dart';
+import 'package:unidate/app/data/providers/match.provider.dart';
+import 'package:unidate/app/modules/profile/enums.dart';
 
 class HomeController extends GetxController {
-  final RxBool _isDragging = false.obs;
-  bool get isDragging => _isDragging.value;
+  final MatchProvider _matchProvider = MatchProvider();
 
-  final Rx<Offset> _offset = Offset.zero.obs;
-  Offset get offset => _offset.value;
+  RxList<UserDiscoveryEntity> discoveries = <UserDiscoveryEntity>[].obs;
 
-  final RxDouble _angle = 0.0.obs;
-  double get angle => _angle.value;
-  set angle(double value) => _angle.value = value;
-
-  final Rx<MatchCardStatus> _swipeStatus = MatchCardStatus.none.obs;
-  MatchCardStatus get swipeStatus => _swipeStatus.value;
-
-  RxList<Profile> draggableItems = [
-    Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: AppAssets.images.users.user1),
-    Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: AppAssets.images.users.user2),
-    Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: AppAssets.images.users.user3),
-    Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: AppAssets.images.users.user4),
-    Profile(
-        name: 'Rohini',
-        distance: '10 miles away',
-        imageAsset: AppAssets.images.users.user5),
-  ].obs;
-  void onDragStart(DragStartDetails details) {
-    _isDragging(true);
-    // _offset.value = details.globalPosition;
+  @override
+  void onInit() {
+    super.onInit();
+    _getDiscoveries();
   }
 
-  void onDragUpdate(DragUpdateDetails details) {
-    _offset.value += details.delta;
-    final dx = offset.dx;
-    const position = 50;
-
-    if (dx >= position) {
-      _swipeStatus(MatchCardStatus.like);
-    } else if (dx <= -position) {
-      _swipeStatus(MatchCardStatus.dislike);
-    } else {
-      _swipeStatus(MatchCardStatus.none);
+  Future<void> _getDiscoveries() async {
+    try {
+      discoveries.value = await _matchProvider.getDiscoveries(
+        DiscoveryParam(),
+      );
+      discoveries.value = discoveries.reversed.toList();
+    } catch (e) {
+      debugPrint(e.toString());
     }
-
-    angle = (45 * dx / Get.width) * pi / 180;
   }
 
-  void onLiked() {
-    _angle(20);
-    _offset.value += Offset(Get.width * 2, 0);
-    draggableItems.removeLast();
-  }
-
-  void onDragEnd(DragEndDetails details) {
-    switch (swipeStatus) {
-      case MatchCardStatus.like:
-        onLiked();
-        break;
-      default:
+  Future<void> onSwiped(int userMatchId, SwipeType type) async {
+    debugPrint('${type.name} $userMatchId');
+    try {
+      final MatchUserEntity? match = await _matchProvider.match(
+        MatchUserParam(
+          matchUserId: userMatchId,
+          type: type,
+        ),
+      );
+      if (match != null) {
+        debugPrint(match.toString());
+      }
+    } catch (e) {
+      debugPrint(e.toString());
     }
-    _resetOffset();
   }
 
-  void _resetOffset() {
-    _swipeStatus(MatchCardStatus.none);
-    _isDragging(false);
-    angle = 0;
-    _offset.value = Offset.zero;
+  Future<void> loadMoreDiscoveries() async {
+    try {
+      final _discoveries = await _matchProvider.getDiscoveries(
+        DiscoveryParam(),
+      );
+      discoveries.insertAll(0, _discoveries.reversed.toList());
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 }

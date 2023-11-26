@@ -12,6 +12,8 @@ class LoginController extends GetxController {
   final Rx<LoginEntity> _user = LoginEntity().obs;
   LoginEntity get user => _user.value;
 
+  RxBool isShowPassword = false.obs;
+
   bool isSubmitted = false;
 
   void setEmail(String email) {
@@ -55,4 +57,9 @@ class LoginController extends GetxController {
     Get.back();
     Get.toNamed(AppRoutes.REGISTER);
   }
+
+  void onChangedShowPassword() {
+    isShowPassword.toggle();
+  }
+  
 }

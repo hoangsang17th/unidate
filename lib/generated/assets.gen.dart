@@ -34,6 +34,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/energy.svg
   String get energy => 'assets/icons/energy.svg';
 
+  /// File path: assets/icons/eye-disable.svg
+  String get eyeDisable => 'assets/icons/eye-disable.svg';
+
+  /// File path: assets/icons/eye1.svg
+  String get eye1 => 'assets/icons/eye1.svg';
+
   /// File path: assets/icons/info.svg
   String get info => 'assets/icons/info.svg';
 
@@ -48,6 +54,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/notification.svg
   String get notification => 'assets/icons/notification.svg';
+
+  /// File path: assets/icons/reconsider.svg
+  String get reconsider => 'assets/icons/reconsider.svg';
 
   /// File path: assets/icons/remove.svg
   String get remove => 'assets/icons/remove.svg';
@@ -67,10 +76,13 @@ class $AssetsIconsGen {
         chevronLeft,
         dislike,
         energy,
+        eyeDisable,
+        eye1,
         info,
         like,
         logo,
         notification,
+        reconsider,
         remove,
         shoeRun,
         trophy

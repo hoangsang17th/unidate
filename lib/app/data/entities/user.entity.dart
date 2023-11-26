@@ -169,7 +169,7 @@ class PictureIndex {
 
 @JsonSerializable(createFactory: false)
 class WordIntoEntity {
-  List<WordInto> words;
+  List<WordIntoEnum> words;
 
   WordIntoEntity({
     this.words = const [],
@@ -180,7 +180,6 @@ class WordIntoEntity {
   Map<String, dynamic> toJson() => _$WordIntoEntityToJson(this);
 }
 
-
 @JsonSerializable(createFactory: false)
 class UpdateLocationEntity {
   double? lat;
@@ -190,8 +189,7 @@ class UpdateLocationEntity {
     this.long,
   });
 
-  bool get isValid =>
-lat!= null && long != null;
+  bool get isValid => lat != null && long != null;
 
   Map<String, dynamic> toJson() => _$UpdateLocationEntityToJson(this);
 }
