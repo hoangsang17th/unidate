@@ -8,6 +8,8 @@ import 'package:unidate/app/core/values/app_text_styles.dart';
 import 'package:unidate/app/core/widgets/image.dart';
 import 'package:unidate/app/core/widgets/spacer.dart';
 import 'package:unidate/app/data/entities/match.entity.dart';
+import 'package:unidate/app/modules/dashboard/views/settings.view.dart';
+import 'package:unidate/app/modules/profile/constant.dart';
 import 'package:unidate/app/modules/profile/enums.dart';
 import 'package:unidate/app/routes/app_pages.dart';
 import 'package:unidate/generated/assets.gen.dart';
@@ -81,22 +83,10 @@ class _SwiperWidgetState extends State<SwiperWidget> {
   void _onSwiped([SwipeType? swipeStatus]) {
     widget.onSwiped(widget.items.last.id, swipeStatus ?? this.swipeStatus);
     widget.items.removeLast();
-    if (widget.items.length == 1) {
+    if (widget.items.length == whenLoadMore) {
       widget.onNeedLoadMore();
     }
     setState(() {});
-  }
-
-  void showSnackbar(String content) {
-    Get.closeCurrentSnackbar();
-    Get.snackbar("", '',
-        snackPosition: SnackPosition.TOP,
-        titleText: const SizedBox(),
-        duration: const Duration(milliseconds: 1500),
-        messageText: Text(
-          content,
-          style: AppTextStyles.body2,
-        ));
   }
 
   void _resetOffset() {
@@ -113,17 +103,29 @@ class _SwiperWidgetState extends State<SwiperWidget> {
       width: Get.width,
       height: Get.height - 56,
       child: widget.items.isEmpty
-          ? Center(
-              child: Text(
-                'No more discoveries',
-                style: AppTextStyles.h2.copyWith(
-                  color: AppColors.textPrimary,
-                ),
+          ? Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: AppColors.bgNeutral,
+                borderRadius: BorderRadius.circular(16),
               ),
-            )
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AppSvgPicture(AppAssets.images.empty),
+                  const VSpacer(32),
+                  Center(
+                    child: Text(
+                      'No more people around you',
+                      style: AppTextStyles.h5,
+                    ),
+                  ),
+                ],
+              ))
           : Stack(
               alignment: Alignment.topCenter,
               children: [
+                _buildLoading(),
                 Stack(
                   alignment: Alignment.center,
                   children: List.generate(
@@ -172,6 +174,39 @@ class _SwiperWidgetState extends State<SwiperWidget> {
                     ))
               ],
             ),
+    );
+  }
+
+  Container _buildLoading() {
+    return Container(
+      width: width,
+      height: Get.height - 180,
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+        color: AppColors.bgNeutral,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          VSpacer(32),
+          AppShimmer(height: 32, width: 150),
+          Spacer(),
+          Row(
+            children: [
+              Expanded(
+                child: AppShimmer(height: 48, width: 200),
+              ),
+              HSpacer(16),
+              AppShimmer(height: 36, width: 36),
+              HSpacer(24),
+            ],
+          ),
+          VSpacer(12),
+          AppShimmer(height: 24, width: 220),
+          VSpacer(24),
+        ],
+      ),
     );
   }
 
@@ -391,7 +426,10 @@ class _SwiperWidgetState extends State<SwiperWidget> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () => Get.toNamed(AppRoutes.PROFILE_DETAIL),
+                  onPressed: () => Get.toNamed(
+                    AppRoutes.PROFILE_DETAIL,
+                    arguments: item,
+                  ),
                   icon: AppSvgPicture(
                     AppAssets.icons.info,
                     size: 20,
@@ -450,7 +488,7 @@ class _ProfilePicturesState extends State<ProfilePictures> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: (_) {
+      onTapUp: (_) {
         // Lấy vị trí tương đối so với màn hình
 
         double flexSize = width / 2;

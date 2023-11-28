@@ -25,6 +25,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/award-55.svg
   String get award55 => 'assets/icons/award-55.svg';
 
+  /// File path: assets/icons/bio.svg
+  String get bio => 'assets/icons/bio.svg';
+
   /// File path: assets/icons/chevron.left.svg
   String get chevronLeft => 'assets/icons/chevron.left.svg';
 
@@ -39,6 +42,12 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/eye1.svg
   String get eye1 => 'assets/icons/eye1.svg';
+
+  /// File path: assets/icons/gender.svg
+  String get gender => 'assets/icons/gender.svg';
+
+  /// File path: assets/icons/height.svg
+  String get height => 'assets/icons/height.svg';
 
   /// File path: assets/icons/info.svg
   String get info => 'assets/icons/info.svg';
@@ -67,17 +76,23 @@ class $AssetsIconsGen {
   /// File path: assets/icons/trophy.svg
   String get trophy => 'assets/icons/trophy.svg';
 
+  /// File path: assets/icons/weight.svg
+  String get weight => 'assets/icons/weight.svg';
+
   /// List of all assets
   List<String> get values => [
         sportMode,
         add,
         adjustHorizontalSettings,
         award55,
+        bio,
         chevronLeft,
         dislike,
         energy,
         eyeDisable,
         eye1,
+        gender,
+        height,
         info,
         like,
         logo,
@@ -85,7 +100,8 @@ class $AssetsIconsGen {
         reconsider,
         remove,
         shoeRun,
-        trophy
+        trophy,
+        weight
       ];
 }
 
@@ -93,6 +109,9 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   $AssetsImagesAuthGen get auth => const $AssetsImagesAuthGen();
+
+  /// File path: assets/images/empty.svg
+  String get empty => 'assets/images/empty.svg';
 
   /// File path: assets/images/logo.png
   AssetGenImage get logoPng => const AssetGenImage('assets/images/logo.png');
@@ -108,7 +127,7 @@ class $AssetsImagesGen {
   $AssetsImagesUsersGen get users => const $AssetsImagesUsersGen();
 
   /// List of all assets
-  List<dynamic> get values => [logoPng, logoSvg, nativeSplash];
+  List<dynamic> get values => [empty, logoPng, logoSvg, nativeSplash];
 }
 
 class $AssetsIconsNavigationBarGen {

@@ -79,7 +79,7 @@ class AppPages {
     //
     GetPage(
       name: AppRoutes.PROFILE_DETAIL,
-      page: () => ProfileView(),
+      page: () => const ProfileView(),
     ),
   ];
 }

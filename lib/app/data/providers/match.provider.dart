@@ -29,6 +29,18 @@ class MatchProvider {
       return null;
     }
   }
+
+  Future<UserInfoDiscoveryEntity> getUserInfo(int userId) async {
+    try {
+      final res = await AppHttpHelper.instance.get(
+        'matches/user-info?userId=$userId',
+      );
+      return UserInfoDiscoveryEntity.fromJson(res.data);
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
 // - Discover
 // - Match
 //     - Like

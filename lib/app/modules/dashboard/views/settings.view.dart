@@ -167,30 +167,25 @@ class AppShimmer extends StatelessWidget {
   final double height;
   final double width;
   final double radius;
-  final Widget? child;
   const AppShimmer({
     super.key,
     required this.height,
     required this.width,
-    this.radius = 8,
-    this.child,
+    this.radius = 12,
   });
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(radius),
-      child: SizedBox(
-        height: height,
-        width: width,
-        child: Shimmer.fromColors(
-          baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
-          child: child ??
-              SizedBox(
-                height: height,
-                width: width,
-              ),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey[400]!.withOpacity(0.7),
+        highlightColor: Colors.grey[300]!,
+        period: const Duration(milliseconds: 3000),
+        child: Container(
+          height: height,
+          width: width,
+          color: Colors.white,
         ),
       ),
     );

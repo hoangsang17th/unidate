@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/data/entities/match.entity.dart';
 import 'package:unidate/app/data/providers/match.provider.dart';
+import 'package:unidate/app/modules/profile/constant.dart';
 import 'package:unidate/app/modules/profile/enums.dart';
 
 class HomeController extends GetxController {
+  static HomeController get to => Get.find();
+  
   final MatchProvider _matchProvider = MatchProvider();
 
   RxList<UserDiscoveryEntity> discoveries = <UserDiscoveryEntity>[].obs;
@@ -12,15 +15,18 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _getDiscoveries();
+    _getDiscoveries(whenLoadMore: 0);
   }
 
-  Future<void> _getDiscoveries() async {
+  Future<void> _getDiscoveries({
+    int whenLoadMore = whenLoadMore,
+  }) async {
     try {
       discoveries.value = await _matchProvider.getDiscoveries(
-        DiscoveryParam(),
+        DiscoveryParam(
+          userSkip: whenLoadMore,
+        ),
       );
-      discoveries.value = discoveries.reversed.toList();
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -48,7 +54,7 @@ class HomeController extends GetxController {
       final _discoveries = await _matchProvider.getDiscoveries(
         DiscoveryParam(),
       );
-      discoveries.insertAll(0, _discoveries.reversed.toList());
+      discoveries.insertAll(0, _discoveries.toList());
     } catch (e) {
       debugPrint(e.toString());
     }
