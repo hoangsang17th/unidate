@@ -41,8 +41,6 @@ class AppSvgPicture extends StatelessWidget {
   }
 }
 
-
-
 class AppImagePicture extends StatelessWidget {
   final AssetGenImage image;
   final double? height;
@@ -81,14 +79,14 @@ class AppNetworkPicture extends StatelessWidget {
   const AppNetworkPicture(
     this.url, {
     super.key,
-    required this.height,
+    this.height,
     this.radius = 4,
     this.width,
     this.canZoom = false,
   });
 
   final String url;
-  final double height;
+  final double? height;
   final double? width;
   final double radius;
   final bool canZoom;
@@ -100,7 +98,6 @@ class AppNetworkPicture extends StatelessWidget {
       imageBuilder: (context, imageProvider) => _buildImage(imageProvider),
     );
   }
-
 
   Widget _buildImage(ImageProvider imageProvider) {
     return ClipRRect(
@@ -114,7 +111,6 @@ class AppNetworkPicture extends StatelessWidget {
     );
   }
 }
-
 
 class AppAssetPicture extends StatelessWidget {
   final File file;

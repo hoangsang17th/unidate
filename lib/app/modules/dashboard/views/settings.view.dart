@@ -13,7 +13,7 @@ class SettingsView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetX<ProfileController>(
+    return GetBuilder<ProfileController>(
       builder: (context) {
         return Scaffold(
           backgroundColor: AppColors.bgPaper,
@@ -22,23 +22,7 @@ class SettingsView extends GetView<ProfileController> {
             child: Column(
               children: [
                 const VSpacer(72),
-                if (controller.isLoading.isTrue) ...[
-                  const AppShimmer(
-                    height: 72,
-                    width: 72,
-                    radius: 100,
-                  ),
-                  const VSpacer(16),
-                  const AppShimmer(
-                    height: 20,
-                    width: 72,
-                  ),
-                  const VSpacer(8),
-                  const AppShimmer(
-                    height: 20,
-                    width: 120,
-                  ),
-                ] else ...[
+               
                   ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: SizedBox(
@@ -60,7 +44,7 @@ class SettingsView extends GetView<ProfileController> {
                     controller.user?.email ?? 'dev@finfree.com',
                     style: AppTextStyles.body2,
                   ),
-                ],
+                
                 const VSpacer(24),
                 Row(
                   children: [

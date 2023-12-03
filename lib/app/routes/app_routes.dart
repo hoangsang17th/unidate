@@ -17,6 +17,11 @@ abstract class AppRoutes {
 
   //
   static const PROFILE_DETAIL = "/profile-detail";
+  static const MATCHED = "/matched";
+  static const SETUP_FILTER = "/setup-filter";
+
+  //
+  static const MESSAGE = "/message";
   //
   static const DASHBOARD = '/home';
 }

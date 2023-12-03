@@ -6,6 +6,7 @@ import 'package:unidate/app/core/widgets/image.dart';
 import 'package:unidate/app/core/widgets/spacer.dart';
 import 'package:unidate/app/modules/dashboard/controllers/user_profile.controller.dart';
 import 'package:unidate/app/modules/dashboard/views/settings.view.dart';
+import 'package:unidate/app/modules/dashboard/widgets/app_grid_view.dart';
 import 'package:unidate/app/modules/profile/enums.dart';
 import 'dart:math' as math;
 
@@ -52,7 +53,7 @@ class ProfileView extends GetView<UserProfileController> {
                   ),
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 20, top: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -148,23 +149,8 @@ class ProfileView extends GetView<UserProfileController> {
                           const VSpacer(20),
                           Text('UNIDATE PHOTOS', style: AppTextStyles.h4),
                           const VSpacer(12),
-                          SizedBox(
-                            height: 120,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: controller.user.pictures.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(right: 8),
-                                  child: AppNetworkPicture(
-                                    controller.user.pictures[index],
-                                    height: 120,
-                                    width: 120,
-                                    radius: 16,
-                                  ),
-                                );
-                              },
-                            ),
+                          AppGridView(
+                            images: controller.user.pictures,
                           ),
                           const VSpacer(150),
                         ],

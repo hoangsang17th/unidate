@@ -27,6 +27,8 @@ class MatchesView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Những người thích bạn
+            // Những người bạn đã reconsider TODO
             Text(
               'Liked',
               style: AppTextStyles.subtitle1,
@@ -69,7 +71,9 @@ class MatchesView extends StatelessWidget {
               style: AppTextStyles.subtitle1,
             ),
             const VSpacer(8),
-            const AppGridView()
+            const AppGridView(
+                images: [],
+            )
           ],
         ),
       ),

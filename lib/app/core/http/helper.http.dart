@@ -39,7 +39,7 @@ class AppHttpHelper {
   static AppHttpHelper get instance => AppHttpHelper._();
   static final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: 'http://192.168.1.11:3000/api/',
+      baseUrl: 'http://192.168.1.9:3000/api/',
       contentType: Headers.jsonContentType,
     ),
   );

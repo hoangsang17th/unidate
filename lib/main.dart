@@ -14,25 +14,20 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-          systemNavigationBarColor: Colors.black,
-          statusBarColor: Colors.black,
-          statusBarBrightness: Brightness.light,
-          systemNavigationBarDividerColor: Colors.black,
-          systemNavigationBarIconBrightness: Brightness.light),
-    );
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: AppColors.primary,
-        brightness: Brightness.light,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: GetMaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primaryColor: AppColors.primary,
+          brightness: Brightness.light,
+        ),
+        scrollBehavior: const AppScrollBehavior(),
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppPages.initial,
+        getPages: AppPages.routes,
+        builder: EasyLoading.init(),
       ),
-      scrollBehavior: const AppScrollBehavior(),
-      debugShowCheckedModeBanner: false,
-      initialRoute: AppPages.initial,
-      getPages: AppPages.routes,
-      builder: EasyLoading.init(),
     );
   }
 }

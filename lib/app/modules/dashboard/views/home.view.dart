@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:unidate/app/modules/dashboard/controllers/home.controller.dart';
 import 'package:unidate/app/core/values/app_colors.dart';
 import 'package:unidate/app/modules/dashboard/widgets/swiper.widget.dart';
+import 'package:unidate/app/routes/app_pages.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -19,6 +20,15 @@ class HomeView extends GetView<HomeController> {
               shadowColor: AppColors.divider,
               centerTitle: true,
               automaticallyImplyLeading: false,
+              actions: [
+                IconButton(
+                  onPressed: () => Get.toNamed(AppRoutes.SETUP_FILTER),
+                  icon: const Icon(
+                    Icons.settings,
+                    color: AppColors.primary,
+                  ),
+                ),
+              ],
             ),
             body: Obx(
               () => SwiperWidget(

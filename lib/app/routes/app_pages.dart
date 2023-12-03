@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:unidate/app/bindings/setup_profile.binding.dart';
+import 'package:unidate/app/modules/dashboard/views/matched.view.dart';
+import 'package:unidate/app/modules/dashboard/views/setup_filter.view.dart';
 import 'package:unidate/app/modules/profile/views/setup/add_pictures.view.dart';
 import '../bindings/manager.binding.dart';
 import '../modules/auth/views/login.view.dart';
@@ -80,6 +82,15 @@ class AppPages {
     GetPage(
       name: AppRoutes.PROFILE_DETAIL,
       page: () => const ProfileView(),
+    ),
+    GetPage(
+      name: AppRoutes.MATCHED,
+      page: () => const MatchedView(),
+    ),
+    GetPage(
+      name: AppRoutes.SETUP_FILTER,
+      page: () => const SetupFilterView(),
+      transition: Transition.rightToLeft,
     ),
   ];
 }

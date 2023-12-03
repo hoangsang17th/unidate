@@ -58,7 +58,7 @@ class LoginView extends GetView<LoginController> {
                           child: AppInput(
                             placeHolder: '***',
                             label: 'Password',
-                            obscureText: controller.isShowPassword.isTrue,
+                            obscureText: controller.isShowPassword.isFalse,
                             onChanged: (_) => controller.setPassword(_),
                           ),
                         ),
