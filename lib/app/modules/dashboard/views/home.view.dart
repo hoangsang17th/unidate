@@ -18,9 +18,15 @@ class HomeView extends GetView<HomeController> {
               backgroundColor: AppColors.transparent,
               elevation: 0,
               shadowColor: AppColors.divider,
-              centerTitle: true,
               automaticallyImplyLeading: false,
               actions: [
+                IconButton(
+                  onPressed: () => controller.onRefresh(),
+                  icon: const Icon(
+                    Icons.refresh_outlined,
+                    color: AppColors.primary,
+                  ),
+                ),
                 IconButton(
                   onPressed: () => Get.toNamed(AppRoutes.SETUP_FILTER),
                   icon: const Icon(

@@ -32,7 +32,7 @@ class DashBoardView extends GetView<DashBoardController> {
           bottomNavigationBar: Material(
             color: Colors.transparent,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
               child: Container(
                 decoration: BoxDecoration(
                   color: AppColors.bg,

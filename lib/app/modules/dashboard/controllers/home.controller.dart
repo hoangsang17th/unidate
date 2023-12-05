@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:unidate/app/data/entities/match.entity.dart';
 import 'package:unidate/app/data/providers/match.provider.dart';
 import 'package:unidate/app/modules/profile/constant.dart';
@@ -16,17 +18,15 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _getDiscoveries(whenLoadMore: 0);
+    getDiscoveries(whenLoadMore: 0);
   }
 
-  Future<void> _getDiscoveries({
+  Future<void> getDiscoveries({
     int whenLoadMore = whenLoadMore,
   }) async {
     try {
       discoveries.value = await _matchProvider.getDiscoveries(
-        DiscoveryParam(
-          userSkip: whenLoadMore,
-        ),
+        DiscoveryParam(userSkip: whenLoadMore),
       );
     } catch (e) {
       debugPrint(e.toString());
@@ -62,5 +62,14 @@ class HomeController extends GetxController {
     } catch (e) {
       debugPrint(e.toString());
     }
+  }
+
+  Future<void> onRefresh() async {
+    EasyLoading.show(status: 'Waiting to load data...');
+
+    await getDiscoveries(whenLoadMore: 0);
+    Future.delayed(const Duration(seconds: 1), () {
+      EasyLoading.dismiss();
+    });
   }
 }

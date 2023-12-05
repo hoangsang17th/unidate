@@ -57,6 +57,7 @@ class ProfileView extends GetView<UserProfileController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          const VSpacer(24),
                           RichText(
                             text: TextSpan(
                               children: [
@@ -186,9 +187,10 @@ class ProfileView extends GetView<UserProfileController> {
                           },
                         ),
                         const HSpacer(20),
-                        _buildActionButton(AppAssets.icons.reconsider, () {
-                          controller.onSwipeUser(SwipeType.Reconsider);
-                        }, 24),
+                        if (controller.user.isCanReconsider)
+                          _buildActionButton(AppAssets.icons.reconsider, () {
+                            controller.onSwipeUser(SwipeType.Reconsider);
+                          }, 24),
                         const HSpacer(20),
                         _buildActionButton(
                           AppAssets.icons.like,

@@ -22,42 +22,28 @@ class SettingsView extends GetView<ProfileController> {
             child: Column(
               children: [
                 const VSpacer(72),
-               
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: SizedBox(
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: SizedBox(
+                    height: 72,
+                    width: 72,
+                    child: AppNetworkPicture(
+                      controller.user!.avatar,
                       height: 72,
-                      width: 72,
-                      child: AppNetworkPicture(
-                        controller.user!.avatar,
-                        height: 72,
-                      ),
                     ),
                   ),
-                  const VSpacer(16),
-                  Text(
-                    controller.user?.fullname ?? 'FinFree',
-                    style: AppTextStyles.h5,
-                  ),
-                  const VSpacer(8),
-                  Text(
-                    controller.user?.email ?? 'dev@finfree.com',
-                    style: AppTextStyles.body2,
-                  ),
-                
-                const VSpacer(24),
-                Row(
-                  children: [
-                    _buildQuickView(AppAssets.icons.like, '12'),
-                    const HSpacer(12),
-                    _buildQuickView(AppAssets.icons.like, '12'),
-                    const HSpacer(12),
-                    _buildQuickView(AppAssets.icons.like, '12'),
-                    // Lượt thích
-                    // Lượt ghé thăm
-                    // Lượt kết nối
-                  ],
                 ),
+                const VSpacer(16),
+                Text(
+                  controller.user?.fullname ?? 'FinFree',
+                  style: AppTextStyles.h5,
+                ),
+                const VSpacer(8),
+                Text(
+                  controller.user?.email ?? 'dev@finfree.com',
+                  style: AppTextStyles.body2,
+                ),
+                const VSpacer(24),
                 const VSpacer(32),
                 _buildButton(Icons.edit, 'Update Profile'),
                 _buildButton(Icons.photo, 'My Photos'),

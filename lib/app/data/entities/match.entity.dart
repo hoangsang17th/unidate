@@ -34,6 +34,8 @@ class UserDiscoveryEntity {
   final String fullname;
   final double distance;
   List<String> pictures;
+  final String? avatar;
+  bool isCanReconsider;
 
   UserDiscoveryEntity({
     required this.id,
@@ -42,7 +44,31 @@ class UserDiscoveryEntity {
     required this.fullname,
     required this.distance,
     required this.pictures,
+    this.avatar,
+    this.isCanReconsider = true,
   });
+
+  UserDiscoveryEntity copyWith({
+    int? id,
+    int? age,
+    AcademicLevelEnum? education,
+    String? fullname,
+    double? distance,
+    List<String>? pictures,
+    String? avatar,
+    bool? isCanReconsider,
+  }) {
+    return UserDiscoveryEntity(
+      id: id ?? this.id,
+      age: age ?? this.age,
+      education: education ?? this.education,
+      fullname: fullname ?? this.fullname,
+      distance: distance ?? this.distance,
+      pictures: pictures ?? this.pictures,
+      avatar: avatar ?? this.avatar,
+      isCanReconsider: isCanReconsider ?? this.isCanReconsider,
+    );
+  }
 
   factory UserDiscoveryEntity.fromJson(Map<String, dynamic> json) =>
       _$UserDiscoveryEntityFromJson(json);

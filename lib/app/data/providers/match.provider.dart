@@ -37,10 +37,36 @@ class MatchProvider {
       );
       return UserInfoDiscoveryEntity.fromJson(res.data);
     } catch (e) {
-      print(e);
       rethrow;
     }
   }
+
+  Future<List<UserDiscoveryEntity>> getWhoLikedMe() async {
+    try {
+      final res = await AppHttpHelper.instance.get(
+        'matches/get-who-liked-me',
+      );
+      return res.data
+          .map<UserDiscoveryEntity>((e) => UserDiscoveryEntity.fromJson(e))
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<UserDiscoveryEntity>> getMyReconsider() async {
+    try {
+      final res = await AppHttpHelper.instance.get(
+        'matches/my-reconsider',
+      );
+      return res.data
+          .map<UserDiscoveryEntity>((e) => UserDiscoveryEntity.fromJson(e))
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
 // - Discover
 // - Match
 //     - Like

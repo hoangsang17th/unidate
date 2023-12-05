@@ -26,6 +26,7 @@ UserDiscoveryEntity _$UserDiscoveryEntityFromJson(Map<String, dynamic> json) =>
       distance: (json['distance'] as num).toDouble(),
       pictures:
           (json['pictures'] as List<dynamic>).map((e) => e as String).toList(),
+      avatar: json['avatar'] as String?,
     );
 
 const _$AcademicLevelEnumEnumMap = {

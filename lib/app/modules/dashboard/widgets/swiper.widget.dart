@@ -97,11 +97,12 @@ class _SwiperWidgetState extends State<SwiperWidget> {
     setState(() {});
   }
 
+  double get height => Get.height - 56 - 25 - 70;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: Get.width,
-      height: Get.height - 56,
+      height: height,
       child: widget.items.isEmpty
           ? Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -109,19 +110,10 @@ class _SwiperWidgetState extends State<SwiperWidget> {
                 color: AppColors.bgNeutral,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  AppSvgPicture(AppAssets.images.empty),
-                  const VSpacer(32),
-                  Center(
-                    child: Text(
-                      'No more people around you',
-                      style: AppTextStyles.h5,
-                    ),
-                  ),
-                ],
-              ))
+              child: const EmptyWidget(
+                message: 'No more people around you',
+              ),
+            )
           : Stack(
               alignment: Alignment.topCenter,
               children: [
@@ -451,6 +443,31 @@ class _SwiperWidgetState extends State<SwiperWidget> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class EmptyWidget extends StatelessWidget {
+  final String message;
+  const EmptyWidget({
+    super.key,
+    this.message = 'Nothing to show',
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AppSvgPicture(AppAssets.images.empty),
+        const VSpacer(32),
+        Center(
+          child: Text(
+            message,
+            style: AppTextStyles.h5,
+          ),
+        ),
+      ],
     );
   }
 }
