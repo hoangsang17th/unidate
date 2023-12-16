@@ -49,6 +49,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/height.svg
   String get height => 'assets/icons/height.svg';
 
+  /// File path: assets/icons/image.svg
+  String get image => 'assets/icons/image.svg';
+
   /// File path: assets/icons/info.svg
   String get info => 'assets/icons/info.svg';
 
@@ -93,6 +96,7 @@ class $AssetsIconsGen {
         eye1,
         gender,
         height,
+        image,
         info,
         like,
         logo,

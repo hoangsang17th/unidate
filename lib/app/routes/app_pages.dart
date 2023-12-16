@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:unidate/app/bindings/setup_profile.binding.dart';
+import 'package:unidate/app/modules/dashboard/views/chat.view.dart';
 import 'package:unidate/app/modules/dashboard/views/matched.view.dart';
 import 'package:unidate/app/modules/dashboard/views/setup_filter.view.dart';
 import 'package:unidate/app/modules/profile/views/setup/add_pictures.view.dart';
@@ -92,5 +93,9 @@ class AppPages {
       page: () => const SetupFilterView(),
       transition: Transition.rightToLeft,
     ),
+    GetPage(
+      name: AppRoutes.CHAT,
+      page: () => const ChatView(),
+    )
   ];
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/modules/dashboard/controllers/dashboard.controller.dart';
-import 'package:unidate/app/modules/dashboard/views/chat.view.dart';
+import 'package:unidate/app/modules/dashboard/views/conversation.view.dart';
 import 'package:unidate/app/modules/dashboard/views/matches.view.dart';
 import 'package:unidate/app/modules/dashboard/views/home.view.dart';
 import 'package:unidate/app/modules/dashboard/views/settings.view.dart';
@@ -23,7 +23,7 @@ class DashBoardView extends GetView<DashBoardController> {
             children: const [
               HomeView(),
               MatchesView(),
-              ChatView(),
+              ConversationView(),
               SettingsView(),
             ],
             index: controller.currentIndex,

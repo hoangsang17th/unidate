@@ -27,6 +27,7 @@ UserDiscoveryEntity _$UserDiscoveryEntityFromJson(Map<String, dynamic> json) =>
       pictures:
           (json['pictures'] as List<dynamic>).map((e) => e as String).toList(),
       avatar: json['avatar'] as String?,
+      isCanReconsider: json['isCanReconsider'] as bool? ?? true,
     );
 
 const _$AcademicLevelEnumEnumMap = {
