@@ -1,12 +1,13 @@
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:unidate/app/core/utils/datetime.util.dart';
 import 'package:unidate/app/modules/profile/constant.dart';
 import 'package:unidate/app/modules/profile/enums.dart';
 part 'match.entity.g.dart';
 
-@JsonSerializable(createFactory: false)
-class DiscoveryParam {
-  bool onlyInDistanse;
+@JsonSerializable()
+class DiscoveryParam extends Equatable {
+  bool onlyInDistance;
   bool onlyInAge;
   bool onlyInTall;
   bool onlyInWeight;
@@ -14,7 +15,7 @@ class DiscoveryParam {
   int userSkip;
 
   DiscoveryParam({
-    this.onlyInDistanse = false,
+    this.onlyInDistance = false,
     this.onlyInAge = false,
     this.onlyInTall = false,
     this.onlyInWeight = false,
@@ -23,6 +24,36 @@ class DiscoveryParam {
   });
 
   Map<String, dynamic> toJson() => _$DiscoveryParamToJson(this);
+
+  factory DiscoveryParam.fromJson(Map<String, dynamic> json) =>
+      _$DiscoveryParamFromJson(json);
+
+  @override
+  List<Object?> get props => [
+        onlyInDistance,
+        onlyInAge,
+        onlyInTall,
+        onlyInWeight,
+        onlyInEducation,
+      ];
+
+  copyWith({
+    bool? onlyInDistance,
+    bool? onlyInAge,
+    bool? onlyInTall,
+    bool? onlyInWeight,
+    bool? onlyInEducation,
+    int? userSkip,
+  }) {
+    return DiscoveryParam(
+      onlyInDistance: onlyInDistance ?? this.onlyInDistance,
+      onlyInAge: onlyInAge ?? this.onlyInAge,
+      onlyInTall: onlyInTall ?? this.onlyInTall,
+      onlyInWeight: onlyInWeight ?? this.onlyInWeight,
+      onlyInEducation: onlyInEducation ?? this.onlyInEducation,
+      userSkip: userSkip ?? this.userSkip,
+    );
+  }
 }
 
 @JsonSerializableDateTime()
@@ -136,4 +167,47 @@ class UserInfoDiscoveryEntity {
 
   factory UserInfoDiscoveryEntity.fromJson(Map<String, dynamic> json) =>
       _$UserInfoDiscoveryEntityFromJson(json);
+}
+
+@JsonSerializable()
+class UserMatchFilterEntity extends Equatable {
+  double maxDistance;
+  double ageFrom;
+  double ageTo;
+  double tallFrom;
+  double tallTo;
+  double weightFrom;
+  double weightTo;
+  List<GenderEnum> whoWantToDate;
+  List<AcademicLevelEnum> education;
+
+  UserMatchFilterEntity({
+    this.maxDistance = 20,
+    this.ageFrom = 18,
+    this.ageTo = 25,
+    this.tallFrom = 150,
+    this.tallTo = 200,
+    this.weightFrom = 40,
+    this.weightTo = 150,
+    this.whoWantToDate = const [],
+    this.education = const [],
+  });
+
+  Map<String, dynamic> toJson() => _$UserMatchFilterEntityToJson(this);
+
+  factory UserMatchFilterEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserMatchFilterEntityFromJson(json);
+
+  @override
+  List<Object?> get props => [
+        maxDistance,
+        ageFrom,
+        ageTo,
+        tallFrom,
+        tallTo,
+        weightFrom,
+        weightTo,
+        whoWantToDate,
+        education,
+      ];
 }

@@ -67,13 +67,27 @@ class MatchProvider {
     }
   }
 
-// - Discover
-// - Match
-//     - Like
-//         - matched with someone
-//             - create chat
-//     - Dislike
-//     - Reconsider
-// - Get User Detail
-// - Revert match
+  Future<UserMatchFilterEntity> getFilter() async {
+    try {
+      final res = await AppHttpHelper.instance.get(
+        'matches/filter',
+      );
+      print(res.data);
+      return UserMatchFilterEntity.fromJson(res.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> updateFilter(UserMatchFilterEntity filter) async {
+    try {
+      print(filter.toJson());
+      await AppHttpHelper.instance.put(
+        'matches/filter',
+        data: filter.toJson(),
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

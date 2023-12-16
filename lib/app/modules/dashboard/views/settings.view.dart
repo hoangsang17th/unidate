@@ -5,7 +5,6 @@ import 'package:unidate/app/core/values/app_text_styles.dart';
 import 'package:unidate/app/core/widgets/image.dart';
 import 'package:unidate/app/core/widgets/spacer.dart';
 import 'package:unidate/app/modules/dashboard/controllers/profile.controller.dart';
-import 'package:unidate/generated/assets.gen.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SettingsView extends GetView<ProfileController> {
@@ -46,7 +45,7 @@ class SettingsView extends GetView<ProfileController> {
                 const VSpacer(24),
                 const VSpacer(32),
                 _buildButton(Icons.edit, 'Update Profile'),
-                _buildButton(Icons.photo, 'My Photos'),
+                _buildButton(Icons.photo, 'Update Photos'),
                 _buildButton(Icons.notifications, 'Notifications'),
                 _buildButton(Icons.logout, 'Logout', controller.logout),
                 const VSpacer(48)

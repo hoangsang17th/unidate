@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:unidate/app/data/entities/match.entity.dart';
 import 'package:unidate/app/data/providers/match.provider.dart';
@@ -15,10 +16,26 @@ class HomeController extends GetxController {
 
   RxList<UserDiscoveryEntity> discoveries = <UserDiscoveryEntity>[].obs;
 
+  DiscoveryParam param = DiscoveryParam();
+
   @override
   void onInit() {
     super.onInit();
-    getDiscoveries(whenLoadMore: 0);
+    init();
+  }
+
+  Future<void> init() async {
+    await getParam();
+    await getDiscoveries(whenLoadMore: 0);
+  }
+
+  Future<void> getParam() async {
+    try {
+      final box = GetStorage();
+      param = DiscoveryParam.fromJson(await box.read('filterParam'));
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   Future<void> getDiscoveries({
@@ -26,7 +43,7 @@ class HomeController extends GetxController {
   }) async {
     try {
       discoveries.value = await _matchProvider.getDiscoveries(
-        DiscoveryParam(userSkip: whenLoadMore),
+        param.copyWith(userSkip: whenLoadMore),
       );
     } catch (e) {
       debugPrint(e.toString());
@@ -71,5 +88,16 @@ class HomeController extends GetxController {
     Future.delayed(const Duration(seconds: 1), () {
       EasyLoading.dismiss();
     });
+  }
+
+  Future<void> onSetupFilter() async {
+    final res = await Get.toNamed(
+      AppRoutes.SETUP_FILTER,
+      arguments: param,
+    );
+    if (res != null) {
+      param = res as DiscoveryParam;
+      getDiscoveries(whenLoadMore: 0);
+    }
   }
 }

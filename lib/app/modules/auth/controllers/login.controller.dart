@@ -61,5 +61,4 @@ class LoginController extends GetxController {
   void onChangedShowPassword() {
     isShowPassword.toggle();
   }
-  
 }

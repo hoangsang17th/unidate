@@ -137,6 +137,7 @@ class MatchesView extends GetView<MatchesController> {
             who.avatar!,
             radius: 20,
             height: 225,
+            width: double.infinity,
           ),
           const VSpacer(245),
           _buildDistance(who),
