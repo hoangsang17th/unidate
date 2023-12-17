@@ -42,7 +42,7 @@ dependencies:
   pull_to_refresh: ^2.0.0
   flutter_chat_ui: ^1.6.10
   equatable: ^2.0.5
-  syncfusion_flutter_sliders: ^23.2.7
+  syncfusion_flutter_sliders: 22.2.10
   
 dev_dependencies:
   flutter_test:
