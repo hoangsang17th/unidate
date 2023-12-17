@@ -6,9 +6,19 @@ part of 'match.entity.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+DiscoveryParam _$DiscoveryParamFromJson(Map<String, dynamic> json) =>
+    DiscoveryParam(
+      onlyInDistance: json['onlyInDistance'] as bool? ?? false,
+      onlyInAge: json['onlyInAge'] as bool? ?? false,
+      onlyInTall: json['onlyInTall'] as bool? ?? false,
+      onlyInWeight: json['onlyInWeight'] as bool? ?? false,
+      onlyInEducation: json['onlyInEducation'] as bool? ?? false,
+      userSkip: json['userSkip'] as int? ?? whenLoadMore,
+    );
+
 Map<String, dynamic> _$DiscoveryParamToJson(DiscoveryParam instance) =>
     <String, dynamic>{
-      'onlyInDistanse': instance.onlyInDistanse,
+      'onlyInDistance': instance.onlyInDistance,
       'onlyInAge': instance.onlyInAge,
       'onlyInTall': instance.onlyInTall,
       'onlyInWeight': instance.onlyInWeight,
@@ -115,3 +125,40 @@ const _$WordIntoEnumEnumMap = {
   WordIntoEnum.SportCar: 'SportCar',
   WordIntoEnum.Other: 'Other',
 };
+
+UserMatchFilterEntity _$UserMatchFilterEntityFromJson(
+        Map<String, dynamic> json) =>
+    UserMatchFilterEntity(
+      maxDistance: (json['maxDistance'] as num?)?.toDouble() ?? 20,
+      ageFrom: (json['ageFrom'] as num?)?.toDouble() ?? 18,
+      ageTo: (json['ageTo'] as num?)?.toDouble() ?? 25,
+      tallFrom: (json['tallFrom'] as num?)?.toDouble() ?? 150,
+      tallTo: (json['tallTo'] as num?)?.toDouble() ?? 200,
+      weightFrom: (json['weightFrom'] as num?)?.toDouble() ?? 40,
+      weightTo: (json['weightTo'] as num?)?.toDouble() ?? 150,
+      whoWantToDate: (json['whoWantToDate'] as List<dynamic>?)
+              ?.map((e) => $enumDecode(_$GenderEnumEnumMap, e))
+              .toList() ??
+          const [],
+      education: (json['education'] as List<dynamic>?)
+              ?.map((e) => $enumDecode(_$AcademicLevelEnumEnumMap, e))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$UserMatchFilterEntityToJson(
+        UserMatchFilterEntity instance) =>
+    <String, dynamic>{
+      'maxDistance': instance.maxDistance,
+      'ageFrom': instance.ageFrom,
+      'ageTo': instance.ageTo,
+      'tallFrom': instance.tallFrom,
+      'tallTo': instance.tallTo,
+      'weightFrom': instance.weightFrom,
+      'weightTo': instance.weightTo,
+      'whoWantToDate':
+          instance.whoWantToDate.map((e) => _$GenderEnumEnumMap[e]!).toList(),
+      'education': instance.education
+          .map((e) => _$AcademicLevelEnumEnumMap[e]!)
+          .toList(),
+    };

@@ -45,7 +45,7 @@ class SettingsView extends GetView<ProfileController> {
                 const VSpacer(24),
                 const VSpacer(32),
                 _buildButton(Icons.edit, 'Update Profile'),
-                _buildButton(Icons.photo, 'My Photos'),
+                _buildButton(Icons.photo, 'Update Photos'),
                 _buildButton(Icons.notifications, 'Notifications'),
                 _buildButton(Icons.logout, 'Logout', controller.logout),
                 const VSpacer(48)

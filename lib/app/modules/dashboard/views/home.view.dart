@@ -28,7 +28,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () => Get.toNamed(AppRoutes.SETUP_FILTER),
+                  onPressed: controller.onSetupFilter,
                   icon: const Icon(
                     Icons.settings,
                     color: AppColors.primary,
