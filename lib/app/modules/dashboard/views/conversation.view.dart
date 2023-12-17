@@ -64,7 +64,7 @@ class ConversationView extends GetView<ConversationController> {
                             )
                           : controller.conversations.isEmpty
                               ? const EmptyWidget(
-                                  message: 'You have no conversation yet',
+                                  message: 'This is where you\'ll have great conversations with your matches.',
                                 )
                               : ListView.separated(
                                   itemCount: controller.conversations.length,

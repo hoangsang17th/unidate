@@ -111,7 +111,7 @@ class _SwiperWidgetState extends State<SwiperWidget> {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: const EmptyWidget(
-                message: 'No more people around you',
+                message: 'Does\'t look like there\'s anyone to discover (yet!)',
               ),
             )
           : Stack(

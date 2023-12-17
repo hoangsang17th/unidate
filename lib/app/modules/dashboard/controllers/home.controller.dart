@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:unidate/app/data/entities/match.entity.dart';
 import 'package:unidate/app/data/providers/match.provider.dart';
 import 'package:unidate/app/modules/profile/constant.dart';
