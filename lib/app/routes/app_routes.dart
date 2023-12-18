@@ -21,7 +21,7 @@ abstract class AppRoutes {
   static const SETUP_FILTER = "/setup-filter";
 
   //
-  static const CHAT = "/chat";
+  static const MESSAGES = "/messages";
   //
-  static const DASHBOARD = '/home';
+  static const DASHBOARD = '/dashboard';
 }

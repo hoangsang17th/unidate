@@ -4,7 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/core/http/helper.http.dart';
 import 'package:unidate/app/core/utils/get.storage.dart';
-import 'package:unidate/app/data/providers/user.provider.dart';
+import 'package:unidate/app/modules/auth/user.provider.dart';
 import 'package:unidate/app/routes/app_pages.dart';
 
 class ManagerController extends GetxController {

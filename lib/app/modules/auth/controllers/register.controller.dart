@@ -8,8 +8,8 @@ import 'package:get/get.dart' hide MultipartFile;
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 import 'package:unidate/app/core/utils/get.storage.dart';
-import 'package:unidate/app/data/entities/user.entity.dart';
-import 'package:unidate/app/data/providers/user.provider.dart';
+import 'package:unidate/app/modules/auth/entities/user.entity.dart';
+import 'package:unidate/app/modules/auth/user.provider.dart';
 
 class RegisterController extends GetxController {
   final UserProviders _userProviders = UserProviders();

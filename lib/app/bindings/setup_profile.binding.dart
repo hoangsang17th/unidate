@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
-import 'package:get/get_instance/src/bindings_interface.dart';
-import 'package:unidate/app/modules/profile/controllers/add_pictures.controller.dart';
-import 'package:unidate/app/modules/profile/controllers/add_words_into.controller.dart';
-import 'package:unidate/app/modules/profile/controllers/setup_location.controller.dart';
-import 'package:unidate/app/modules/profile/controllers/update_profile.controller.dart';
+import 'package:unidate/app/modules/auth/controllers/add_pictures.controller.dart';
+import 'package:unidate/app/modules/auth/controllers/add_words_into.controller.dart';
+import 'package:unidate/app/modules/auth/controllers/setup_location.controller.dart';
+import 'package:unidate/app/modules/auth/controllers/update_profile.controller.dart';
 
-import '../modules/profile/controllers/update_bio.controller.dart';
+import '../modules/auth/controllers/update_bio.controller.dart';
 
 class SetupProfileBinding extends Bindings {
   @override

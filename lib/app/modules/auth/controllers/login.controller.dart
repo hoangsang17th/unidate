@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/core/utils/get.storage.dart';
-import 'package:unidate/app/data/entities/user.entity.dart';
-import 'package:unidate/app/data/providers/user.provider.dart';
+import 'package:unidate/app/modules/auth/entities/user.entity.dart';
+import 'package:unidate/app/modules/auth/user.provider.dart';
 import 'package:unidate/app/routes/app_pages.dart';
 
 class LoginController extends GetxController {

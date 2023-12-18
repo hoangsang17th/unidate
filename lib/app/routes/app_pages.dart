@@ -1,19 +1,19 @@
 import 'package:get/get.dart';
 import 'package:unidate/app/bindings/setup_profile.binding.dart';
-import 'package:unidate/app/modules/dashboard/views/chat.view.dart';
-import 'package:unidate/app/modules/dashboard/views/matched.view.dart';
-import 'package:unidate/app/modules/dashboard/views/setup_filter.view.dart';
-import 'package:unidate/app/modules/profile/views/setup/add_pictures.view.dart';
+import 'package:unidate/app/modules/conversations/views/messages.view.dart';
+import 'package:unidate/app/modules/dicoveries/views/matched.view.dart';
+import 'package:unidate/app/modules/dicoveries/views/setup_filter.view.dart';
+import 'package:unidate/app/modules/auth/views/setup/add_pictures.view.dart';
 import '../bindings/manager.binding.dart';
 import '../modules/auth/views/login.view.dart';
 import '../modules/auth/views/register.view.dart';
-import '../modules/profile/views/profile.view.dart';
-import '../modules/profile/views/setup/add_words_into.view.dart';
-import '../modules/profile/views/setup/location.view.dart';
-import '../modules/profile/views/setup/setup_profile.view.dart';
+import '../modules/dicoveries/views/detail_user.view.dart';
+import '../modules/auth/views/setup/add_words_into.view.dart';
+import '../modules/auth/views/setup/location.view.dart';
+import '../modules/auth/views/setup/setup_profile.view.dart';
 import '../modules/auth/views/welcome.view.dart';
-import '../modules/dashboard/views/dashboard.view.dart';
-import '../modules/profile/views/setup/update_bio.view.dart';
+import '../modules/dashboard/dashboard.view.dart';
+import '../modules/auth/views/setup/update_bio.view.dart';
 
 import '../bindings/dashboard.binding.dart';
 import '../bindings/auth.binding.dart';
@@ -82,7 +82,7 @@ class AppPages {
     //
     GetPage(
       name: AppRoutes.PROFILE_DETAIL,
-      page: () => const ProfileView(),
+      page: () => const DetailUserView(),
     ),
     GetPage(
       name: AppRoutes.MATCHED,
@@ -94,8 +94,8 @@ class AppPages {
       transition: Transition.rightToLeft,
     ),
     GetPage(
-      name: AppRoutes.CHAT,
-      page: () => const ChatView(),
+      name: AppRoutes.MESSAGES,
+      page: () => const MessagesView(),
     )
   ];
 }
