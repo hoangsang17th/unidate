@@ -6,6 +6,7 @@ import 'package:unidate/app/core/widgets/image.dart';
 import 'package:unidate/app/core/widgets/spacer.dart';
 import 'package:unidate/app/modules/profile/controllers/settings.controller.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:unidate/app/routes/app_pages.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({super.key});
@@ -44,7 +45,22 @@ class SettingsView extends GetView<SettingsController> {
                 ),
                 const VSpacer(24),
                 const VSpacer(32),
-                _buildButton(Icons.edit, 'Update Profile'),
+                _buildButton(
+                  Icons.message,
+                  'Update Bio',
+                  () => Get.toNamed(
+                    AppRoutes.SETUP_BIO,
+                    arguments: controller.user?.bio ?? '',
+                  ),
+                ),
+                _buildButton(
+                  Icons.location_on_rounded,
+                  'Update Location',
+                  () => Get.toNamed(
+                    AppRoutes.SETUP_LOCATION,
+                    arguments: true,
+                  ),
+                ),
                 _buildButton(Icons.photo, 'Update Photos'),
                 _buildButton(Icons.notifications, 'Notifications'),
                 _buildButton(Icons.logout, 'Logout', controller.logout),

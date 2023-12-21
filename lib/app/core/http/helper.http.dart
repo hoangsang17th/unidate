@@ -41,6 +41,7 @@ class AppHttpHelper {
     BaseOptions(
       baseUrl: 'http://192.168.1.10:3000/api/',
       contentType: Headers.jsonContentType,
+      connectTimeout: const Duration(seconds: 1),
     ),
   );
 

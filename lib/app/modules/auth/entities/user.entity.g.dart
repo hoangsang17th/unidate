@@ -46,6 +46,7 @@ CurrentUserEntity _$CurrentUserEntityFromJson(Map<String, dynamic> json) =>
       avatar: json['avatar'] as String,
       fullname: json['fullname'] as String,
       nextStep: $enumDecode(_$UserStepSetupEnumMap, json['nextStep']),
+      bio: json['bio'] as String?,
     );
 
 NextStepEntity _$NextStepEntityFromJson(Map<String, dynamic> json) =>

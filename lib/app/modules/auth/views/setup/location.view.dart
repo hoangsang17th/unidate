@@ -27,7 +27,8 @@ class RequestLocationView extends GetView<SetupLocationController> {
                   child: Column(
                     children: [
                       const VSpacer(25),
-                      const SetepNumber(5),
+                      if (controller.isUpdateFromSetup.isTrue)
+                        const SetepNumber(5),
                       const VSpacer(56),
                       AppSvgPicture(AppAssets.images.setup.location),
                       const VSpacer(24),

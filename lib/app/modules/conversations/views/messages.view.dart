@@ -10,7 +10,6 @@ import 'package:unidate/app/core/widgets/spacer.dart';
 import 'package:unidate/app/modules/conversations/entities/conversation.entity.dart';
 import 'package:unidate/app/modules/conversations/controllers/messages.controller.dart';
 import 'package:unidate/app/modules/dicoveries/views/widgets/swiper.widget.dart';
-import 'package:unidate/generated/assets.gen.dart';
 
 // ignore: constant_identifier_names
 enum ChatMenuEnum { Block, Info }
@@ -119,22 +118,29 @@ class MessagesView extends GetView<MessagesController> {
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    InkWell(
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.all(4),
-                        child: AppSvgPicture(
-                          AppAssets.icons.image,
-                          size: 20,
-                          color: AppColors.textPrimary,
-                        ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.photo_outlined,
                       ),
                     ),
                     const HSpacer(8),
-                    const Expanded(
-                      child: AppInput(placeHolder: 'Type a message'),
+                    Expanded(
+                      child: AppInput(
+                        placeHolder: 'Type a message',
+                        controller: controller.messageController,
+                        focusNode: controller.focusNode,
+                      ),
                     ),
+                    const HSpacer(8),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.send_outlined,
+                      ),
+                    )
                   ],
                 ),
               )

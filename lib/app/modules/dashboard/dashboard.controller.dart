@@ -51,4 +51,5 @@ class DashBoardController extends GetxController {
       isLoading(false);
     }
   }
+
 }

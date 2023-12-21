@@ -1,21 +1,27 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/modules/auth/profile.provider.dart';
+import 'package:unidate/app/modules/dashboard/dashboard.controller.dart';
+import 'package:unidate/app/modules/matches/home.controller.dart';
 
 class UpdateBioController extends GetxController {
   final ProfileProviders _profileProviders = ProfileProviders();
-
-  final RxString _newBio = ''.obs;
-  String get newBio => _newBio.value;
+  final TextEditingController bioController = TextEditingController();
 
   bool isSubmitted = false;
 
-  void setNewBio(String value) {
-    _newBio.value = value;
+  Rx<bool> isUpdateFromSetup = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    isUpdateFromSetup.value = Get.arguments == null;
+    bioController.text = Get.arguments ?? '';
   }
 
   Future<void> onUpdateBio() async {
-    if (newBio.isEmpty) {
+    if (bioController.text.isEmpty) {
       Get.snackbar('Error', 'Bio cannot be empty');
       return;
     }
@@ -23,9 +29,14 @@ class UpdateBioController extends GetxController {
       if (isSubmitted) return;
       isSubmitted = true;
       EasyLoading.show(status: 'Updating bio...');
-      final res = await _profileProviders.updateBio(newBio);
+      final res = await _profileProviders.updateBio(bioController.text);
+      if (isUpdateFromSetup.isTrue) {
+        res.nextStep.navigation();
+      } else {
+        DashBoardController.to.user?.bio = bioController.text;
 
-      res.nextStep.navigation();
+        Get.back();
+      }
     } catch (e) {
       Get.snackbar('Error', e.toString());
     }

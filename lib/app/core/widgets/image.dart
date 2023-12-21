@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:unidate/app/modules/profile/views/settings.view.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
 class AppSvgPicture extends StatelessWidget {
@@ -96,6 +97,9 @@ class AppNetworkPicture extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: url,
       imageBuilder: (context, imageProvider) => _buildImage(imageProvider),
+      placeholder: height != null && width != null
+          ? (context, url) => AppShimmer(height: height!, width: width!)
+          : null,
     );
   }
 

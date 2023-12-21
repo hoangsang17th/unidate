@@ -76,12 +76,14 @@ class CurrentUserEntity {
   String avatar;
   String fullname;
   UserStepSetup nextStep;
+  String? bio;
 
   CurrentUserEntity({
     required this.email,
     required this.avatar,
     required this.fullname,
     required this.nextStep,
+    this.bio,
   });
 
   factory CurrentUserEntity.fromJson(Map<String, dynamic> json) =>

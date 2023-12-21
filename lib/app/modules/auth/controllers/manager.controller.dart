@@ -36,16 +36,17 @@ class ManagerController extends GetxController {
     }
   }
 
-  void _navigate() {
+  Future<void> _navigate() async {
+    final accessToken = await AppGetStorage.instance.read(
+      AppGetKey.accessToken,
+    );
+    //
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final accessToken = await AppGetStorage.instance.read(
-        AppGetKey.accessToken,
-      );
       if (accessToken != null) {
-        try {
-          debugPrint('accessToken: $accessToken');
-          final res = await userProviders.currentUser();
+        debugPrint('accessToken: $accessToken');
+        final res = await userProviders.currentUser();
 
+        try {
           res.nextStep.navigation();
         } catch (e) {
           Get.offAndToNamed(AppRoutes.WELCOME);

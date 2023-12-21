@@ -7,6 +7,14 @@ import 'package:unidate/app/modules/auth/profile.provider.dart';
 class SetupLocationController extends GetxController {
   final ProfileProviders _profileProviders = ProfileProviders();
 
+  RxBool isUpdateFromSetup = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    isUpdateFromSetup.value = Get.arguments == null;
+  }
+
   Future<void> allowLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -53,13 +61,17 @@ class SetupLocationController extends GetxController {
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     final posi = await Geolocator.getCurrentPosition();
-    
+
     try {
       final res = await _profileProviders.updateLocation(UpdateLocationEntity(
         lat: posi.latitude,
         long: posi.longitude,
       ));
-      res.nextStep.navigation();
+      if (isUpdateFromSetup.isTrue) {
+        res.nextStep.navigation();
+      } else {
+        Get.back();
+      }
     } catch (e) {
       Get.snackbar('Location Error', 'Can\'t update your location');
     } finally {

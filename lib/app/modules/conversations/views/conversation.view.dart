@@ -19,7 +19,6 @@ class ConversationView extends GetView<ConversationController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ConversationController>(
-      init: Get.put(ConversationController()),
       builder: (context) {
         return Scaffold(
           appBar: AppBar(
@@ -94,7 +93,10 @@ class ConversationView extends GetView<ConversationController> {
   InkWell _buildItem(ConversationEntity item) {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
-      onTap: () => Get.toNamed(AppRoutes.MESSAGES, arguments: item),
+      onTap: () => Get.toNamed(
+        AppRoutes.MESSAGES,
+        arguments: [item],
+      ),
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(

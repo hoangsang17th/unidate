@@ -28,7 +28,8 @@ class UpdateBioScreen extends GetView<UpdateBioController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const VSpacer(25),
-                        const SetepNumber(1),
+                        if (controller.isUpdateFromSetup.isTrue)
+                          const SetepNumber(1),
                         const VSpacer(56),
                         AppSvgPicture(AppAssets.images.setup.bio),
                         const VSpacer(24),
@@ -38,7 +39,7 @@ class UpdateBioScreen extends GetView<UpdateBioController> {
                           minLines: 15,
                           maxLines: 20,
                           maxLength: 1000,
-                          onChanged: (_) => controller.setNewBio(_),
+                          controller: controller.bioController,
                         ),
                         const VSpacer(4),
                         Text(
@@ -54,7 +55,9 @@ class UpdateBioScreen extends GetView<UpdateBioController> {
                 const VSpacer(16),
                 PrimaryButton(
                   onPressed: controller.onUpdateBio,
-                  text: 'Next step',
+                  text: controller.isUpdateFromSetup.isTrue
+                      ? 'Next step'
+                      : 'Save',
                 ),
               ],
             ),

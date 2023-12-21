@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:unidate/app/modules/conversations/entities/conversation.entity.dart';
@@ -19,11 +19,23 @@ class MessagesController extends GetxController {
 
   final RefreshController refreshController = RefreshController();
 
+  final messageController = TextEditingController();
+
+  final focusNode = FocusNode();
+
   @override
   void onInit() {
     super.onInit();
-    _conversation.value = Get.arguments as ConversationEntity;
+    setArgs();
     getConversation();
+  }
+
+  void setArgs() {
+    final data = (Get.arguments as List<dynamic>);
+    _conversation.value = data.first;
+    if (data.length > 1) {
+      setMessage(data[1]);
+    }
   }
 
   Future<void> getConversation() async {
@@ -35,5 +47,10 @@ class MessagesController extends GetxController {
     } catch (e) {
       debugPrint(e.toString());
     }
+  }
+
+  void setMessage(String message) {
+    messageController.text = message;
+    focusNode.requestFocus();
   }
 }

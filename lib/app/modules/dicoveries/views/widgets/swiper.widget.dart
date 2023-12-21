@@ -465,6 +465,7 @@ class EmptyWidget extends StatelessWidget {
           child: Text(
             message,
             style: AppTextStyles.h5,
+            textAlign: TextAlign.center,
           ),
         ),
       ],
