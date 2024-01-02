@@ -43,6 +43,9 @@ dependencies:
   flutter_chat_ui: ^1.6.10
   equatable: ^2.0.5
   syncfusion_flutter_sliders: 22.2.10
+  web_socket_channel: 2.4.0
+  socket_io_client: ^2.0.3+1
+  flutter_local_notifications: ^16.3.0
   
 dev_dependencies:
   flutter_test:

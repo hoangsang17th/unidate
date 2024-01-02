@@ -94,7 +94,7 @@ class AppNetworkPicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
+return CachedNetworkImage(
       imageUrl: url,
       imageBuilder: (context, imageProvider) => _buildImage(imageProvider),
       placeholder: height != null && width != null

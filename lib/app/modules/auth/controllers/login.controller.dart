@@ -39,7 +39,7 @@ class LoginController extends GetxController {
       EasyLoading.show(status: 'Waiting...');
       try {
         final res = await _userProviders.login(user);
-        AppGetStorage.instance.write(
+        await AppGetStorage.instance.write(
           AppGetKey.accessToken,
           res.accessToken,
         );

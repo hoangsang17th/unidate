@@ -29,15 +29,18 @@ Map<String, dynamic> _$DiscoveryParamToJson(DiscoveryParam instance) =>
 UserDiscoveryEntity _$UserDiscoveryEntityFromJson(Map<String, dynamic> json) =>
     UserDiscoveryEntity(
       id: json['id'] as int,
-      age: json['age'] as int,
+      age: json['age'] as int?,
       education:
           $enumDecodeNullable(_$AcademicLevelEnumEnumMap, json['education']),
-      fullname: json['fullname'] as String,
-      distance: (json['distance'] as num).toDouble(),
-      pictures:
-          (json['pictures'] as List<dynamic>).map((e) => e as String).toList(),
+      fullname: json['fullname'] as String?,
+      distance: (json['distance'] as num?)?.toDouble(),
+      pictures: (json['pictures'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       avatar: json['avatar'] as String?,
       isCanReconsider: json['isCanReconsider'] as bool? ?? true,
+      isCanActions: json['isCanActions'] as bool? ?? true,
     );
 
 const _$AcademicLevelEnumEnumMap = {
@@ -86,7 +89,19 @@ UserInfoDiscoveryEntity _$UserInfoDiscoveryEntityFromJson(
       wordInto: (json['wordInto'] as List<dynamic>)
           .map((e) => $enumDecode(_$WordIntoEnumEnumMap, e))
           .toList(),
-      avatar: json['avatar'] as String,
+      avatar: json['avatar'] as String?,
+      id: json['id'] as int,
+      age: json['age'] as int?,
+      fullname: json['fullname'] as String?,
+      distance: (json['distance'] as num?)?.toDouble(),
+      pictures: (json['pictures'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      education:
+          $enumDecodeNullable(_$AcademicLevelEnumEnumMap, json['education']),
+      isCanReconsider: json['isCanReconsider'] as bool? ?? true,
+      isCanActions: json['isCanActions'] as bool? ?? true,
     );
 
 const _$GenderEnumEnumMap = {

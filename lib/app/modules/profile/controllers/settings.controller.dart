@@ -7,11 +7,13 @@ import 'package:unidate/app/modules/dashboard/dashboard.controller.dart';
 import 'package:unidate/app/routes/app_pages.dart';
 
 class SettingsController extends GetxController {
-  CurrentUserEntity? get user => DashBoardController.to.user;
+  DashBoardController get controller => DashBoardController.to;
+  CurrentUserEntity? get user => controller.user;
 
   Future<void> logout() async {
     try {
       EasyLoading.show(status: 'Loading...');
+      controller.ws?.disconnect();
       AppGetStorage.instance.deleteAll();
       Get.offAllNamed(AppRoutes.WELCOME);
       EasyLoading.dismiss();

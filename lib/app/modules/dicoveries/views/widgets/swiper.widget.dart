@@ -273,13 +273,27 @@ class _SwiperWidgetState extends State<SwiperWidget> {
   }
 
   Widget _buildCard(Offset? center, UserDiscoveryEntity item) {
-    return ProfilePictures(
-      pictures: item.pictures,
-      children: [
-        if (center != null) _buildLabelPosition(center),
-        _buildDistance(item),
-        _buildInfo(item)
-      ],
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.bg,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withOpacity(0.2),
+            offset: const Offset(4, 4),
+            blurRadius: 20,
+            spreadRadius: 2,
+          )
+        ],
+      ),
+      child: ProfilePictures(
+        pictures: item.pictures,
+        children: [
+          if (center != null) _buildLabelPosition(center),
+          _buildDistance(item),
+          _buildInfo(item)
+        ],
+      ),
     );
   }
 
@@ -398,7 +412,7 @@ class _SwiperWidgetState extends State<SwiperWidget> {
                     children: [
                       Flexible(
                         child: Text(
-                          item.fullname,
+                          item.fullname!,
                           style: AppTextStyles.h2.copyWith(
                             color: AppColors.textContrast,
                           ),

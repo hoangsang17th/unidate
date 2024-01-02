@@ -1,10 +1,19 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/core/utils/get.storage.dart';
+import 'package:unidate/app/core/values/app_url.dart';
 import 'package:unidate/app/modules/auth/entities/user.entity.dart';
 import 'package:unidate/app/modules/auth/user.provider.dart';
+import 'package:unidate/app/modules/conversations/controllers/conversation.controller.dart';
+import 'package:unidate/app/modules/conversations/controllers/messages.controller.dart';
+import 'package:unidate/app/modules/conversations/entities/conversation.entity.dart';
+import 'package:unidate/app/modules/dicoveries/entities/discovery.entity.dart';
 import 'package:unidate/app/routes/app_pages.dart';
 import 'package:unidate/generated/assets.gen.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 
 class DashBoardController extends GetxController {
   final UserProviders _userProviders = UserProviders();
@@ -19,6 +28,8 @@ class DashBoardController extends GetxController {
   final RxInt _currentIndex = 0.obs;
   int get currentIndex => _currentIndex.value;
   set currentIndex(int value) => _currentIndex.value = value;
+
+  Socket? ws;
 
   void onChangedTab(int index) {
     currentIndex = index;
@@ -39,7 +50,41 @@ class DashBoardController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    initWs();
     getCurrentUser();
+  }
+
+  Future<void> initWs() async {
+    String? token = await AppGetStorage.instance.read(AppGetKey.accessToken);
+    try {
+      ws = io(
+        //  'wss://ws-feed.pro.coinbase.com'
+        appWebsocketUrl,
+        OptionBuilder()
+            .setTransports(['websocket'])
+            .disableAutoConnect()
+            .setExtraHeaders({
+              HttpHeaders.contentTypeHeader: Headers.jsonContentType,
+              HttpHeaders.authorizationHeader: token,
+            }) // optional
+            .build(),
+      );
+      ws!.connect();
+      ws!.onConnect((_) {
+        onWsEvent();
+      });
+     
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    if (ws != null) {
+      ws!.disconnect();
+    }
   }
 
   Future<void> getCurrentUser() async {
@@ -52,4 +97,24 @@ class DashBoardController extends GetxController {
     }
   }
 
+  void onWsEvent() {
+    ws!.on('conversation', (data) {
+      final MessageEntity message = MessageEntity.fromJson(data);
+      if (Get.isRegistered<ConversationController>()) {
+        ConversationController.to.onWsMessage(message);
+      }
+      if (Get.isRegistered<MessagesController>()) {
+        MessagesController.to.onWsMessage(message);
+      }
+    });
+
+    ws!.on('matching', (data) {
+      Get.toNamed(
+        AppRoutes.MATCHED,
+        arguments: MatchUserEntity.fromJson(data),
+      );
+    });
+
+    
+  }
 }

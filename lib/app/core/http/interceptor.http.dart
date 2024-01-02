@@ -15,6 +15,9 @@ class AppHttpInterceptor extends QueuedInterceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    debugPrint(
+      'Request ${options.method.toUpperCase()} ${options.uri}',
+    );
     if (!AppHttpSpecialUrls.withoutToken.contains(options.uri.path)) {
       String? token = await AppGetStorage.instance.read(AppGetKey.accessToken);
       if (token != null) {

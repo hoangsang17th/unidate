@@ -56,4 +56,17 @@ class ConversationController extends GetxController {
       ],
     );
   }
+
+  void onWsMessage(MessageEntity message) {
+    final conversation =
+        conversations.firstWhere((_) => _.id == message.conversationId);
+    conversation.content = message.text;
+    conversation.lastTime = message.sendTime;
+    _conversations.refresh();
+  }
+
+  void onRemoveConversation(int partnerId) {
+    _conversations.removeWhere((_) => _.partnerId == partnerId);
+    _conversations.refresh();
+  }
 }

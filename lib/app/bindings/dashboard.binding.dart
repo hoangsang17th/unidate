@@ -8,10 +8,7 @@ import '../modules/dicoveries/controllers/home.controller.dart';
 class DashBoardBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(
-      DashBoardController(),
-      permanent: true,
-    );
+    Get.put(DashBoardController());
     Get.lazyPut(
       () => MatchingController(),
       fenix: true,

@@ -9,7 +9,9 @@ import 'package:unidate/app/core/widgets/image.dart';
 import 'package:unidate/app/core/widgets/spacer.dart';
 import 'package:unidate/app/modules/conversations/entities/conversation.entity.dart';
 import 'package:unidate/app/modules/conversations/controllers/messages.controller.dart';
+import 'package:unidate/app/modules/dicoveries/entities/discovery.entity.dart';
 import 'package:unidate/app/modules/dicoveries/views/widgets/swiper.widget.dart';
+import 'package:unidate/app/routes/app_pages.dart';
 
 // ignore: constant_identifier_names
 enum ChatMenuEnum { Block, Info }
@@ -51,13 +53,21 @@ class MessagesView extends GetView<MessagesController> {
                     );
 
                     showMenu(context: context, position: position, items: [
-                      const PopupMenuItem(
-                        child: Text('Block'),
+                      PopupMenuItem(
+                        child: const Text('Block user'),
                         value: ChatMenuEnum.Block,
+                        onTap: controller.onBlocking,
                       ),
-                      const PopupMenuItem(
-                        child: Text('Info'),
+                      PopupMenuItem(
+                        child: const Text('Info'),
                         value: ChatMenuEnum.Info,
+                        onTap: () => Get.toNamed(
+                          AppRoutes.PROFILE_DETAIL,
+                          arguments: UserDiscoveryEntity(
+                            id: controller.conversation.partnerId,
+                            isCanActions: false,
+                          ),
+                        ),
                       ),
                     ]);
                   },
@@ -80,6 +90,7 @@ class MessagesView extends GetView<MessagesController> {
                           )
                         : SmartRefresher(
                             controller: controller.refreshController,
+                            scrollController: controller.scrollController,
                             onRefresh: controller.getConversation,
                             enablePullDown: true,
                             enablePullUp: false,
@@ -103,6 +114,7 @@ class MessagesView extends GetView<MessagesController> {
                                   controller.messages[index],
                                   isJustSent,
                                   isShowTime,
+                                  index == controller.messages.length - 1,
                                 );
                               },
                             ),
@@ -121,7 +133,7 @@ class MessagesView extends GetView<MessagesController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: controller.onSendImage,
                       icon: const Icon(
                         Icons.photo_outlined,
                       ),
@@ -136,7 +148,7 @@ class MessagesView extends GetView<MessagesController> {
                     ),
                     const HSpacer(8),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: controller.onSendMessage,
                       icon: const Icon(
                         Icons.send_outlined,
                       ),
@@ -155,8 +167,9 @@ class MessagesView extends GetView<MessagesController> {
     MessageEntity e,
     bool isJustSent,
     bool isNeedInfo,
+    bool isLastMessage,
   ) {
-    final isImage = e.text.isImageFileName;
+    final isImage = e.text.isImageFileName || e.text.endsWith('.webp');
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
         top: isNeedInfo ? 16 : 0,
@@ -175,6 +188,7 @@ class MessagesView extends GetView<MessagesController> {
           Row(
             mainAxisAlignment:
                 e.isYouSend ? MainAxisAlignment.end : MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (!e.isYouSend) ...[
                 if (!isJustSent) ...[
@@ -244,7 +258,7 @@ class MessagesView extends GetView<MessagesController> {
             child: Text(
               controller.conversation.title,
               overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.h6,
+              style: AppTextStyles.h6.copyWith(color: AppColors.white),
               maxLines: 1,
             ),
           ),

@@ -15,6 +15,7 @@ ConversationEntity _$ConversationEntityFromJson(Map<String, dynamic> json) =>
       lastTime: _$JsonConverterFromJson<String, DateTime>(
           json['lastTime'], const JsonSerializableDateTime().fromJson),
       gender: $enumDecodeNullable(_$GenderEnumEnumMap, json['gender']),
+      partnerId: json['partnerId'] as int,
       content: json['content'] as String?,
     );
 
@@ -32,6 +33,7 @@ const _$GenderEnumEnumMap = {
 
 MessageEntity _$MessageEntityFromJson(Map<String, dynamic> json) =>
     MessageEntity(
+      conversationId: json['conversationId'] as int?,
       id: json['id'] as int,
       text: json['text'] as String,
       avatar: json['avatar'] as String,
@@ -39,3 +41,10 @@ MessageEntity _$MessageEntityFromJson(Map<String, dynamic> json) =>
           const JsonSerializableDateTime().fromJson(json['sendTime'] as String),
       isYouSend: json['isYouSend'] as bool? ?? true,
     );
+
+Map<String, dynamic> _$ChatMessageEntityToJson(ChatMessageEntity instance) =>
+    <String, dynamic>{
+      'conversationId': instance.conversationId,
+      'text': instance.text,
+      'image': instance.image,
+    };

@@ -20,12 +20,13 @@ class DetailUserController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _user.value = Get.arguments;
+    _user.value = Get.arguments as UserDiscoveryEntity;
     getDetailUser();
   }
 
   Future<void> getDetailUser() async {
     try {
+      _isLoading(true);
       _userInfo.value = await _matchProvider.getUserInfo(_user.value!.id);
 
       _isLoading(false);

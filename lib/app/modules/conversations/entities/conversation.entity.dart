@@ -11,9 +11,10 @@ class ConversationEntity {
   final int id;
   final String title;
   final String avatar;
-  final DateTime? lastTime;
+  DateTime? lastTime;
   final GenderEnum? gender;
-  final String? content;
+  String? content;
+  int partnerId;
   final bool isYouSend;
 
   String get message {
@@ -31,6 +32,7 @@ class ConversationEntity {
     this.isYouSend = true,
     this.lastTime,
     this.gender,
+    required this.partnerId,
     this.content,
   });
 
@@ -41,6 +43,8 @@ class ConversationEntity {
 @JsonSerializableDateTime()
 @JsonSerializable(createToJson: false)
 class MessageEntity {
+  // WS will return conversationId
+  final int? conversationId;
   final int id;
   final String text;
   final String avatar;
@@ -48,6 +52,7 @@ class MessageEntity {
   final bool isYouSend;
 
   MessageEntity({
+    this.conversationId,
     required this.id,
     required this.text,
     required this.avatar,
@@ -57,4 +62,19 @@ class MessageEntity {
 
   factory MessageEntity.fromJson(Map<String, dynamic> json) =>
       _$MessageEntityFromJson(json);
+}
+
+@JsonSerializable(createFactory: false)
+class ChatMessageEntity {
+  final int conversationId;
+  final String? text;
+  final dynamic image;
+
+  ChatMessageEntity({
+    required this.conversationId,
+    this.text,
+    this.image,
+  });
+
+  Map<String, dynamic> toJson() => _$ChatMessageEntityToJson(this);
 }

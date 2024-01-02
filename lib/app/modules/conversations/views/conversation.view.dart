@@ -132,7 +132,7 @@ class ConversationView extends GetView<ConversationController> {
                       ),
                       if (item.lastTime != null)
                         Text(
-                          DateFormat('dd/MM hh:mm').format(item.lastTime!),
+                          DateFormat('dd/MM HH:mm').format(item.lastTime!),
                           style: AppTextStyles.overline,
                         ),
                     ],

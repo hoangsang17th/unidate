@@ -24,4 +24,5 @@ abstract class AppRoutes {
   static const MESSAGES = "/messages";
   //
   static const DASHBOARD = '/dashboard';
+  static const NOTIFICATIONS = '/notifications';
 }

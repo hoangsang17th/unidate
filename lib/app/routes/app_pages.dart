@@ -4,6 +4,7 @@ import 'package:unidate/app/modules/conversations/views/messages.view.dart';
 import 'package:unidate/app/modules/dicoveries/views/matched.view.dart';
 import 'package:unidate/app/modules/dicoveries/views/setup_filter.view.dart';
 import 'package:unidate/app/modules/auth/views/setup/add_pictures.view.dart';
+import 'package:unidate/app/modules/profile/views/notification.view.dart';
 import '../bindings/manager.binding.dart';
 import '../modules/auth/views/login.view.dart';
 import '../modules/auth/views/register.view.dart';
@@ -96,6 +97,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.MESSAGES,
       page: () => const MessagesView(),
+    ),
+    GetPage(
+      name: AppRoutes.NOTIFICATIONS,
+      page: () => const NotificationView(),
     )
   ];
 }

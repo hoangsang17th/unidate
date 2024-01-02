@@ -1,6 +1,7 @@
 // 🎯 Dart imports:
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:unidate/app/core/values/app_url.dart';
 
 import 'interceptor.http.dart';
 
@@ -39,7 +40,7 @@ class AppHttpHelper {
   static AppHttpHelper get instance => AppHttpHelper._();
   static final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: 'http://192.168.1.10:3000/api/',
+      baseUrl: appUrl,
       contentType: Headers.jsonContentType,
       connectTimeout: const Duration(seconds: 1),
     ),

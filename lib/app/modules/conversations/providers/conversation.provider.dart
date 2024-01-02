@@ -29,4 +29,25 @@ class ConversationProvider {
       rethrow;
     }
   }
+
+  Future<String?> chat(ChatMessageEntity mess) async {
+    try {
+      final response = await AppHttpHelper.instance.post(
+        '$_baseUrl/${mess.conversationId}',
+        formData: mess.toJson(),
+      );
+      return response.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<bool> block(int blockedUserId) async {
+    try {
+      await AppHttpHelper.instance.post('blocks/$blockedUserId');
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

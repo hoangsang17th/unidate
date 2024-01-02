@@ -62,7 +62,11 @@ class SettingsView extends GetView<SettingsController> {
                   ),
                 ),
                 _buildButton(Icons.photo, 'Update Photos'),
-                _buildButton(Icons.notifications, 'Notifications'),
+                _buildButton(
+                  Icons.notifications,
+                  'Notifications',
+                  () => Get.toNamed(AppRoutes.NOTIFICATIONS),
+                ),
                 _buildButton(Icons.logout, 'Logout', controller.logout),
                 const VSpacer(48)
               ],

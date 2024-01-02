@@ -62,23 +62,25 @@ class DiscoveryParam extends Equatable {
 @JsonSerializable(createToJson: false)
 class UserDiscoveryEntity {
   final int id;
-  final int age;
+  final int? age;
   final AcademicLevelEnum? education;
-  final String fullname;
-  final double distance;
+  final String? fullname;
+  final double? distance;
   List<String> pictures;
   final String? avatar;
   bool isCanReconsider;
+  bool isCanActions;
 
   UserDiscoveryEntity({
     required this.id,
-    required this.age,
+    this.age,
     this.education,
-    required this.fullname,
-    required this.distance,
-    required this.pictures,
+    this.fullname,
+    this.distance,
+    this.pictures = const [],
     this.avatar,
     this.isCanReconsider = true,
+    this.isCanActions = true,
   });
 
   UserDiscoveryEntity copyWith({
@@ -90,6 +92,7 @@ class UserDiscoveryEntity {
     List<String>? pictures,
     String? avatar,
     bool? isCanReconsider,
+    bool? isCanActions,
   }) {
     return UserDiscoveryEntity(
       id: id ?? this.id,
@@ -100,6 +103,7 @@ class UserDiscoveryEntity {
       pictures: pictures ?? this.pictures,
       avatar: avatar ?? this.avatar,
       isCanReconsider: isCanReconsider ?? this.isCanReconsider,
+      isCanActions: isCanActions ?? this.isCanActions,
     );
   }
 
@@ -152,13 +156,12 @@ class WhoEntity {
 
 @JsonSerializableDateTime()
 @JsonSerializable(createToJson: false)
-class UserInfoDiscoveryEntity {
+class UserInfoDiscoveryEntity extends UserDiscoveryEntity {
   final int tall;
   final int weight;
   final String? biography;
   final GenderEnum gender;
   final List<WordIntoEnum> wordInto;
-  final String avatar;
 
   UserInfoDiscoveryEntity({
     required this.tall,
@@ -166,7 +169,15 @@ class UserInfoDiscoveryEntity {
     this.biography,
     required this.gender,
     required this.wordInto,
-    required this.avatar,
+    required super.avatar,
+    required super.id,
+    required super.age,
+    required super.fullname,
+    required super.distance,
+    required super.pictures,
+    required super.education,
+    super.isCanReconsider,
+    super.isCanActions,
   });
 
   factory UserInfoDiscoveryEntity.fromJson(Map<String, dynamic> json) =>
