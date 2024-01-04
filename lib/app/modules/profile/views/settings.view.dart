@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unidate/app/core/values/app_colors.dart';
-import 'package:unidate/app/core/values/app_text_styles.dart';
-import 'package:unidate/app/core/widgets/image.dart';
-import 'package:unidate/app/core/widgets/spacer.dart';
-import 'package:unidate/app/modules/profile/controllers/settings.controller.dart';
+import '../../../core/values/app_colors.dart';
+import '../../../core/values/app_text_styles.dart';
+import '../../../core/widgets/image.dart';
+import '../../../core/widgets/spacer.dart';
+import '../controllers/settings.controller.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:unidate/app/routes/app_pages.dart';
+import '../../../routes/app_pages.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({super.key});
@@ -68,53 +68,15 @@ class SettingsView extends GetView<SettingsController> {
                   () => Get.toNamed(AppRoutes.NOTIFICATIONS),
                 ),
                 _buildButton(Icons.logout, 'Logout', controller.logout),
+                // TODO: Connect account
+                // Connect your instagram account
+                // Connecting your Instagram will add your lasest photos to your profile. Your Instagram username will also be visible on your profile.
                 const VSpacer(48)
               ],
             ),
           ),
         );
       },
-    );
-  }
-
-  Widget _buildQuickView(String icon, String value) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.bgNeutral,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Material(
-          color: AppColors.transparent,
-          child: InkWell(
-            onTap: () {},
-            borderRadius: BorderRadius.circular(16),
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.bg,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    padding: const EdgeInsets.all(8),
-                    child: AppSvgPicture(
-                      icon,
-                      size: 24,
-                    ),
-                  ),
-                  const VSpacer(8),
-                  Text(
-                    value,
-                    style: AppTextStyles.h5,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 

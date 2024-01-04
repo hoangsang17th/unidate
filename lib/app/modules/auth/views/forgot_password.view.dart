@@ -34,9 +34,7 @@ class ForgotPasswordView extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () {
-                // TODO: Implement password reset logic
-              },
+              onPressed: () {},
               child: const Text('Reset Password'),
             ),
           ],

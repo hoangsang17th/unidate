@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:unidate/app/core/values/app_colors.dart';
-import 'package:unidate/app/core/values/app_text_styles.dart';
-import 'package:unidate/app/core/widgets/image.dart';
-import 'package:unidate/app/core/widgets/spacer.dart';
-import 'package:unidate/app/modules/dicoveries/views/widgets/swiper.widget.dart';
-import 'package:unidate/app/modules/profile/controllers/notification.controller.dart';
+
+import '../../../core/values/app_colors.dart';
+import '../../../core/values/app_text_styles.dart';
+import '../../../core/widgets/image.dart';
+import '../../../core/widgets/spacer.dart';
+import '../../dicoveries/views/widgets/swiper.widget.dart';
+import '../controllers/notification.controller.dart';
 
 class NotificationView extends GetView<NotificationController> {
   const NotificationView({super.key});

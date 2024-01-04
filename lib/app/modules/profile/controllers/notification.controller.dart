@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:unidate/app/modules/profile/entities/notification.entity.dart';
-import 'package:unidate/app/modules/profile/providers/notification.provider.dart';
+
+import '../entities/notification.entity.dart';
+import '../providers/notification.provider.dart';
 
 class NotificationController extends GetxController {
   final NotificationProvider _notificationProvider = NotificationProvider();
@@ -26,7 +28,7 @@ class NotificationController extends GetxController {
     try {
       _notificationList.value = await _notificationProvider.getNotifications();
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     } finally {
       isLoading = false;
     }
@@ -41,7 +43,7 @@ class NotificationController extends GetxController {
           .isRead = true;
       _notificationList.refresh();
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 }

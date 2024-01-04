@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:unidate/app/modules/auth/profile.provider.dart';
-import 'package:unidate/app/modules/dashboard/dashboard.controller.dart';
-import 'package:unidate/app/modules/matches/home.controller.dart';
+
+import '../../dashboard/dashboard.controller.dart';
+import '../profile.provider.dart';
 
 class UpdateBioController extends GetxController {
   final ProfileProviders _profileProviders = ProfileProviders();
