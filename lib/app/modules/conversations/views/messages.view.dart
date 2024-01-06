@@ -198,24 +198,26 @@ class MessagesView extends GetView<MessagesController> {
                   const HSpacer(40),
                 ],
               ],
-              Container(
-                padding: EdgeInsets.all(isImage ? 3 : 8),
-                margin: const EdgeInsets.symmetric(vertical: 2),
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(8),
+              Flexible(
+                child: Container(
+                  padding: EdgeInsets.all(isImage ? 3 : 8),
+                  margin: const EdgeInsets.symmetric(vertical: 2),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: isImage
+                      ? AppNetworkPicture(
+                          e.text,
+                          height: 200,
+                          width: 200,
+                        )
+                      : Text(
+                          e.text,
+                          style: AppTextStyles.body2
+                              .copyWith(color: AppColors.white),
+                        ),
                 ),
-                child: isImage
-                    ? AppNetworkPicture(
-                        e.text,
-                        height: 200,
-                        width: 200,
-                      )
-                    : Text(
-                        e.text,
-                        style: AppTextStyles.body2
-                            .copyWith(color: AppColors.white),
-                      ),
               ),
               if (e.isYouSend) ...[
                 if (!isJustSent) ...[
