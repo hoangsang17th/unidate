@@ -58,7 +58,7 @@ class MatchedView extends GetView<MatchedController> {
                 const VSpacer(20),
                 Text(
                   'You and ${controller.user.fullname.split(' ').last} like each other. Why not make the first move?',
-                  style: AppTextStyles.h2.copyWith(
+                  style: AppTextStyles.subtitle1.copyWith(
                     color: AppColors.error,
                     fontStyle: FontStyle.italic,
                   ),
@@ -67,7 +67,7 @@ class MatchedView extends GetView<MatchedController> {
                 const VSpacer(12),
                 Text(
                   'Start a conversation now with ${controller.userMatched.who.fullname}!',
-                  style: AppTextStyles.subtitle1,
+                  style: AppTextStyles.body2,
                   textAlign: TextAlign.center,
                 ),
                 const VSpacer(80),

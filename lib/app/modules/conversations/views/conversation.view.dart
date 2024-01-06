@@ -70,6 +70,7 @@ class ConversationView extends GetView<ConversationController> {
                                   itemCount: controller.conversations.length,
                                   primary: false,
                                   shrinkWrap: true,
+                                  reverse: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   separatorBuilder: (context, index) =>
                                       const VSpacer(8),
@@ -128,6 +129,8 @@ class ConversationView extends GetView<ConversationController> {
                         child: Text(
                           item.title,
                           style: AppTextStyles.subtitle1,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       if (item.lastTime != null)
@@ -145,7 +148,7 @@ class ConversationView extends GetView<ConversationController> {
                           ? AppColors.textSecondary
                           : AppColors.primary,
                     ),
-                    maxLines: 1,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ],
