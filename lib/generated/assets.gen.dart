@@ -117,6 +117,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/empty.svg
   String get empty => 'assets/images/empty.svg';
 
+  /// File path: assets/images/it_is_match.svg
+  String get itIsMatch => 'assets/images/it_is_match.svg';
+
   /// File path: assets/images/logo.png
   AssetGenImage get logoPng => const AssetGenImage('assets/images/logo.png');
 
@@ -131,7 +134,8 @@ class $AssetsImagesGen {
   $AssetsImagesUsersGen get users => const $AssetsImagesUsersGen();
 
   /// List of all assets
-  List<dynamic> get values => [empty, logoPng, logoSvg, nativeSplash];
+  List<dynamic> get values =>
+      [empty, itIsMatch, logoPng, logoSvg, nativeSplash];
 }
 
 class $AssetsIconsNavigationBarGen {

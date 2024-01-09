@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 
-enum AppGetKey { accessToken, accessTokenExpired, refreshTokenExpired }
+enum AppGetKey { accessToken, accessTokenExpired, refreshTokenExpired, allowRealtimeLocation }
 
 class AppGetStorage {
   AppGetStorage._();

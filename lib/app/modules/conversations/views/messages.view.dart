@@ -144,6 +144,7 @@ class MessagesView extends GetView<MessagesController> {
                         placeHolder: 'Type a message',
                         controller: controller.messageController,
                         focusNode: controller.focusNode,
+                        maxLines: 5,
                       ),
                     ),
                     const HSpacer(8),

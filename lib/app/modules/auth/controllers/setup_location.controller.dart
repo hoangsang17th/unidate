@@ -1,6 +1,7 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:unidate/app/core/utils/get.storage.dart';
 import 'package:unidate/app/modules/auth/entities/user.entity.dart';
 import 'package:unidate/app/modules/auth/profile.provider.dart';
 
@@ -8,11 +9,29 @@ class SetupLocationController extends GetxController {
   final ProfileProviders _profileProviders = ProfileProviders();
 
   RxBool isUpdateFromSetup = false.obs;
+  RxBool isAllowRealtimeLocation = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     isUpdateFromSetup.value = Get.arguments == null;
+    getAllowRealtimeLocation();
+  }
+
+  Future<void> getAllowRealtimeLocation() async {
+    final isAllow =
+        await AppGetStorage.instance.read(AppGetKey.allowRealtimeLocation);
+    if (isAllow == true) {
+      isAllowRealtimeLocation.value = true;
+    }
+  }
+
+  Future<void> allowRealtimeLocation(bool value) async {
+    isAllowRealtimeLocation.value = value;
+    await AppGetStorage.instance.write(
+      AppGetKey.allowRealtimeLocation,
+      value,
+    );
   }
 
   Future<void> allowLocation() async {

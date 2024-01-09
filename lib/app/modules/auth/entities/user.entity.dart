@@ -43,12 +43,16 @@ class LoginResponseEntity {
   String avatar;
   String fullname;
   UserStepSetup nextStep;
+  bool isAdmin;
+  bool isVerified;
 
   LoginResponseEntity({
     required this.accessToken,
     required this.avatar,
     required this.fullname,
     required this.nextStep,
+    this.isAdmin = false,
+    this.isVerified = false,
   });
 
   factory LoginResponseEntity.fromJson(Map<String, dynamic> json) =>
@@ -77,6 +81,8 @@ class CurrentUserEntity {
   String fullname;
   UserStepSetup nextStep;
   String? bio;
+  bool isAdmin;
+  bool isVerified;
 
   CurrentUserEntity({
     required this.email,
@@ -84,6 +90,8 @@ class CurrentUserEntity {
     required this.fullname,
     required this.nextStep,
     this.bio,
+    this.isAdmin = false,
+    this.isVerified = false,
   });
 
   factory CurrentUserEntity.fromJson(Map<String, dynamic> json) =>

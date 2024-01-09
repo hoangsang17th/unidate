@@ -38,6 +38,7 @@ class DetailUserView extends GetView<DetailUserController> {
                       child: AppNetworkPicture(
                         controller.userInfo.avatar!,
                         height: Get.height / 2,
+                        width: Get.width,
                       ),
                     ),
                     SliverToBoxAdapter(

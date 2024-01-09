@@ -36,4 +36,13 @@ class UserProviders {
       rethrow;
     }
   }
+
+  Future<void> requestVerify() async {
+    try {
+      await AppHttpHelper.instance.post('users/request-verify');
+      return;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

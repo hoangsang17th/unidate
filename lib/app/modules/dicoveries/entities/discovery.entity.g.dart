@@ -41,6 +41,7 @@ UserDiscoveryEntity _$UserDiscoveryEntityFromJson(Map<String, dynamic> json) =>
       avatar: json['avatar'] as String?,
       isCanReconsider: json['isCanReconsider'] as bool? ?? true,
       isCanActions: json['isCanActions'] as bool? ?? true,
+      isVerified: json['isVerified'] as bool? ?? false,
     );
 
 const _$AcademicLevelEnumEnumMap = {
@@ -102,6 +103,7 @@ UserInfoDiscoveryEntity _$UserInfoDiscoveryEntityFromJson(
           $enumDecodeNullable(_$AcademicLevelEnumEnumMap, json['education']),
       isCanReconsider: json['isCanReconsider'] as bool? ?? true,
       isCanActions: json['isCanActions'] as bool? ?? true,
+      isVerified: json['isVerified'] as bool? ?? false,
     );
 
 const _$GenderEnumEnumMap = {

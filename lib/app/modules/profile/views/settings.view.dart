@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unidate/app/modules/dashboard/dashboard.controller.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../core/values/app_text_styles.dart';
 import '../../../core/widgets/image.dart';
@@ -15,66 +16,94 @@ class SettingsView extends GetView<SettingsController> {
   Widget build(BuildContext context) {
     return GetBuilder<SettingsController>(
       builder: (context) {
-        return Scaffold(
-          backgroundColor: AppColors.bgPaper,
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                const VSpacer(72),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: SizedBox(
-                    height: 72,
-                    width: 72,
-                    child: AppNetworkPicture(
-                      controller.user!.avatar,
-                      height: 72,
+        return Stack(
+          children: [
+            Scaffold(
+              backgroundColor: AppColors.bgPaper,
+              body: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    const VSpacer(72),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: SizedBox(
+                        height: 72,
+                        width: 72,
+                        child: AppNetworkPicture(
+                          controller.user!.avatar,
+                          height: 72,
+                        ),
+                      ),
                     ),
-                  ),
+                    const VSpacer(16),
+                    Text(
+                      controller.user?.fullname ?? 'FinFree',
+                      style: AppTextStyles.h5,
+                    ),
+                    const VSpacer(8),
+                    Text(
+                      controller.user?.email ?? 'dev@finfree.com',
+                      style: AppTextStyles.body2,
+                    ),
+                    const VSpacer(24),
+                    const VSpacer(32),
+                    _buildButton(
+                      Icons.message,
+                      'Update Bio',
+                      () => Get.toNamed(
+                        AppRoutes.SETUP_BIO,
+                        arguments: controller.user?.bio ?? '',
+                      ),
+                    ),
+                    _buildButton(
+                      Icons.location_on_rounded,
+                      'Update Location',
+                      () {
+                        Get.toNamed(
+                          AppRoutes.SETUP_LOCATION,
+                          arguments: true,
+                        );
+                        DashBoardController.to.setAllowRealtimeLocation();
+                      },
+                    ),
+                    _buildButton(Icons.photo, 'Update Photos'),
+                    _buildButton(
+                      Icons.notifications,
+                      'Notifications',
+                      () => Get.toNamed(AppRoutes.NOTIFICATIONS),
+                    ),
+                    _buildButton(
+                      Icons.verified_outlined,
+                      'Request Verify',
+                      controller.requestVerify,
+                    ),
+                    _buildButton(Icons.logout, 'Logout', controller.logout),
+                    // TODO: Connect account
+                    // Connect your instagram account
+                    // Connecting your Instagram will add your lasest photos to your profile. Your Instagram username will also be visible on your profile.
+                    const VSpacer(48)
+                  ],
                 ),
-                const VSpacer(16),
-                Text(
-                  controller.user?.fullname ?? 'FinFree',
-                  style: AppTextStyles.h5,
-                ),
-                const VSpacer(8),
-                Text(
-                  controller.user?.email ?? 'dev@finfree.com',
-                  style: AppTextStyles.body2,
-                ),
-                const VSpacer(24),
-                const VSpacer(32),
-                _buildButton(
-                  Icons.message,
-                  'Update Bio',
-                  () => Get.toNamed(
-                    AppRoutes.SETUP_BIO,
-                    arguments: controller.user?.bio ?? '',
-                  ),
-                ),
-                _buildButton(
-                  Icons.location_on_rounded,
-                  'Update Location',
-                  () => Get.toNamed(
-                    AppRoutes.SETUP_LOCATION,
-                    arguments: true,
-                  ),
-                ),
-                _buildButton(Icons.photo, 'Update Photos'),
-                _buildButton(
-                  Icons.notifications,
-                  'Notifications',
-                  () => Get.toNamed(AppRoutes.NOTIFICATIONS),
-                ),
-                _buildButton(Icons.logout, 'Logout', controller.logout),
-                // TODO: Connect account
-                // Connect your instagram account
-                // Connecting your Instagram will add your lasest photos to your profile. Your Instagram username will also be visible on your profile.
-                const VSpacer(48)
-              ],
+              ),
             ),
-          ),
+            Positioned(
+              top: 40,
+              right: 20,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Text(
+                  (controller.user?.isVerified ?? false)
+                      ? 'Verified'
+                      : 'Unverified',
+                ),
+              ),
+            ),
+          ],
         );
       },
     );

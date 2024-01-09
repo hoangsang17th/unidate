@@ -22,6 +22,8 @@ LoginResponseEntity _$LoginResponseEntityFromJson(Map<String, dynamic> json) =>
       avatar: json['avatar'] as String,
       fullname: json['fullname'] as String,
       nextStep: $enumDecode(_$UserStepSetupEnumMap, json['nextStep']),
+      isAdmin: json['isAdmin'] as bool? ?? false,
+      isVerified: json['isVerified'] as bool? ?? false,
     );
 
 const _$UserStepSetupEnumMap = {
@@ -47,6 +49,8 @@ CurrentUserEntity _$CurrentUserEntityFromJson(Map<String, dynamic> json) =>
       fullname: json['fullname'] as String,
       nextStep: $enumDecode(_$UserStepSetupEnumMap, json['nextStep']),
       bio: json['bio'] as String?,
+      isAdmin: json['isAdmin'] as bool? ?? false,
+      isVerified: json['isVerified'] as bool? ?? false,
     );
 
 NextStepEntity _$NextStepEntityFromJson(Map<String, dynamic> json) =>

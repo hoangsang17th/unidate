@@ -12,6 +12,7 @@ class NotificationController extends GetxController {
 
   final RxList<NotificationEntity> _notificationList =
       <NotificationEntity>[].obs;
+  // ignore: invalid_use_of_protected_member
   List<NotificationEntity> get notifications => _notificationList.value;
 
   final _isLoading = true.obs;

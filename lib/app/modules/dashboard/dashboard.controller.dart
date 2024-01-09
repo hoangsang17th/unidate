@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/core/utils/get.storage.dart';
 import 'package:unidate/app/core/values/app_url.dart';
+import 'package:unidate/app/core/websocket/enums/web_socket.enum.dart';
 import 'package:unidate/app/modules/auth/entities/user.entity.dart';
+import 'package:unidate/app/modules/auth/profile.provider.dart';
 import 'package:unidate/app/modules/auth/user.provider.dart';
 import 'package:unidate/app/modules/conversations/controllers/conversation.controller.dart';
 import 'package:unidate/app/modules/conversations/controllers/messages.controller.dart';
@@ -28,6 +31,9 @@ class DashBoardController extends GetxController {
   final RxInt _currentIndex = 0.obs;
   int get currentIndex => _currentIndex.value;
   set currentIndex(int value) => _currentIndex.value = value;
+
+  bool isTurnOnRealtimeLocation = false;
+  Position? currentLocation;
 
   Socket? ws;
 
@@ -52,6 +58,7 @@ class DashBoardController extends GetxController {
     super.onInit();
     initWs();
     getCurrentUser();
+    setAllowRealtimeLocation();
   }
 
   Future<void> initWs() async {
@@ -73,7 +80,6 @@ class DashBoardController extends GetxController {
       ws!.onConnect((_) {
         onWsEvent();
       });
-     
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -98,23 +104,61 @@ class DashBoardController extends GetxController {
   }
 
   void onWsEvent() {
-    ws!.on('conversation', (data) {
-      final MessageEntity message = MessageEntity.fromJson(data);
-      if (Get.isRegistered<ConversationController>()) {
-        ConversationController.to.onWsMessage(message);
-      }
-      if (Get.isRegistered<MessagesController>()) {
-        MessagesController.to.onWsMessage(message);
+    ws!.onAny((event, data) {
+      switch (event) {
+        case WebSocketActionType.conversation:
+          final MessageEntity message = MessageEntity.fromJson(data);
+          if (Get.isRegistered<ConversationController>()) {
+            ConversationController.to.onWsMessage(message);
+          }
+          if (Get.isRegistered<MessagesController>()) {
+            MessagesController.to.onWsMessage(message);
+          }
+          break;
+        case WebSocketActionType.matching:
+          Get.toNamed(
+            AppRoutes.MATCHED,
+            arguments: MatchUserEntity.fromJson(data),
+          );
+          break;
+        case WebSocketActionType.notification:
+          break;
+        case WebSocketActionType.blocking:
+          break;
+        case WebSocketActionType.matchingRecently:
+          break;
+        default:
       }
     });
+  }
 
-    ws!.on('matching', (data) {
-      Get.toNamed(
-        AppRoutes.MATCHED,
-        arguments: MatchUserEntity.fromJson(data),
-      );
+  Future<void> setAllowRealtimeLocation() async {
+    final isAllow =
+        await AppGetStorage.instance.read(AppGetKey.allowRealtimeLocation);
+    if (!isAllow) return;
+    if (isTurnOnRealtimeLocation) return;
+    LocationSettings locationSettings = AndroidSettings(
+      accuracy: LocationAccuracy.high,
+      distanceFilter: 100,
+      forceLocationManager: true,
+      // Ngoài thực tế thì sẽ là 10 phút
+      // Và vị trí mới cách vị trí cũ tối thiểu 1km
+      intervalDuration: const Duration(seconds: 10),
+    );
+
+    Geolocator.getPositionStream(locationSettings: locationSettings)
+        .listen((event) async {
+      if (event.latitude.toStringAsFixed(4) ==
+              currentLocation?.latitude.toStringAsFixed(4) &&
+          event.longitude.toStringAsFixed(4) ==
+              currentLocation?.longitude.toStringAsFixed(4)) return;
+
+      currentLocation = event;
+
+      await ProfileProviders().updateLocation(UpdateLocationEntity(
+        lat: event.latitude,
+        long: event.longitude,
+      ));
     });
-
-    
   }
 }

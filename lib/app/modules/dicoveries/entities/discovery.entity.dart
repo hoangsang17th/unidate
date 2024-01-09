@@ -70,6 +70,7 @@ class UserDiscoveryEntity {
   final String? avatar;
   bool isCanReconsider;
   bool isCanActions;
+  bool isVerified;
 
   UserDiscoveryEntity({
     required this.id,
@@ -81,6 +82,7 @@ class UserDiscoveryEntity {
     this.avatar,
     this.isCanReconsider = true,
     this.isCanActions = true,
+    this.isVerified = false,
   });
 
   UserDiscoveryEntity copyWith({
@@ -178,6 +180,7 @@ class UserInfoDiscoveryEntity extends UserDiscoveryEntity {
     required super.education,
     super.isCanReconsider,
     super.isCanActions,
+    super.isVerified
   });
 
   factory UserInfoDiscoveryEntity.fromJson(Map<String, dynamic> json) =>

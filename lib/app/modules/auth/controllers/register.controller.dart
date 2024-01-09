@@ -40,7 +40,7 @@ class RegisterController extends GetxController {
   Future<void> setAvatar() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
-      type: FileType.image,
+      type: FileType.media,
     );
 
     if (result != null) {

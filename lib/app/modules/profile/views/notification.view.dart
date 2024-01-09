@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../core/values/app_colors.dart';
-import '../../../core/values/app_text_styles.dart';
 import '../../../core/widgets/image.dart';
 import '../../../core/widgets/spacer.dart';
 import '../../dicoveries/views/widgets/swiper.widget.dart';
@@ -67,23 +67,23 @@ class NotificationView extends GetView<NotificationController> {
                                       ),
                                       const HSpacer(16),
                                       Expanded(
-                                        child: Text(
-                                          noti.content,
-                                          style: AppTextStyles.body2,
+                                        child: Html(
+                                          data: noti.content,
+                                          style: const {},
                                         ),
                                       ),
-                                      if (!noti.isRead)
-                                        Container(
-                                          height: 12,
-                                          width: 12,
-                                          margin:
-                                              const EdgeInsets.only(left: 16),
-                                          decoration: BoxDecoration(
-                                            color: AppColors.primary,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
+                                      Container(
+                                        height: 12,
+                                        width: 12,
+                                        margin: const EdgeInsets.only(left: 16),
+                                        decoration: BoxDecoration(
+                                          color: !noti.isRead
+                                              ? AppColors.primary
+                                              : null,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
+                                      ),
                                     ],
                                   ),
                                 ),

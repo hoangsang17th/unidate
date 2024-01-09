@@ -25,4 +25,7 @@ abstract class AppRoutes {
   //
   static const DASHBOARD = '/dashboard';
   static const NOTIFICATIONS = '/notifications';
+
+  //
+  static const ADMIN = '/admin';
 }

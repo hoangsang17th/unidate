@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:unidate/app/core/values/app_colors.dart';
 import 'package:unidate/app/modules/auth/controllers/setup_location.controller.dart';
 
 import '../../../../../generated/assets.gen.dart';
@@ -37,6 +38,28 @@ class RequestLocationView extends GetView<SetupLocationController> {
                         textAlign: TextAlign.center,
                         style: AppTextStyles.h6,
                       ),
+                      const VSpacer(16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Receive notifications when someone is suitable for you within 10 km?',
+                              style: AppTextStyles.caption.copyWith(
+                                color: AppColors.textSecondary,
+                              ),
+                            ),
+                          ),
+                          Obx(
+                            () => Switch(
+                              value: controller.isAllowRealtimeLocation.value,
+                              onChanged: controller.allowRealtimeLocation,
+                              activeColor: AppColors.primary,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.padded,
+                            ),
+                          )
+                        ],
+                      ),
                       const VSpacer(32),
                       SecondaryButton(
                         onPressed: controller.allowLocation,
@@ -47,10 +70,11 @@ class RequestLocationView extends GetView<SetupLocationController> {
                 ),
               ),
               const VSpacer(16),
-              PrimaryButton(
-                onPressed: () => Get.toNamed(AppRoutes.DASHBOARD),
-                text: 'DONE',
-              ),
+              if (controller.isUpdateFromSetup.isTrue)
+                PrimaryButton(
+                  onPressed: () => Get.toNamed(AppRoutes.DASHBOARD),
+                  text: 'DONE',
+                ),
             ],
           ),
         ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -47,6 +49,10 @@ class ManagerController extends GetxController {
         final res = await userProviders.currentUser();
 
         try {
+          if (res.isAdmin && Platform.isWindows) {
+            Get.offAndToNamed(AppRoutes.ADMIN);
+            return;
+          }
           res.nextStep.navigation();
         } catch (e) {
           Get.offAndToNamed(AppRoutes.WELCOME);

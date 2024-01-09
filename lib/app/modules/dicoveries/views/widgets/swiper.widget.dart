@@ -279,10 +279,10 @@ class _SwiperWidgetState extends State<SwiperWidget> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: AppColors.black.withOpacity(0.2),
-            offset: const Offset(4, 4),
-            blurRadius: 20,
-            spreadRadius: 2,
+            color: AppColors.black.withOpacity(0.1),
+            offset: const Offset(0, 3),
+            blurRadius: 5,
+            spreadRadius: 1,
           )
         ],
       ),
@@ -291,6 +291,7 @@ class _SwiperWidgetState extends State<SwiperWidget> {
         children: [
           if (center != null) _buildLabelPosition(center),
           _buildDistance(item),
+          _buildVerify(item),
           _buildInfo(item)
         ],
       ),
@@ -352,29 +353,65 @@ class _SwiperWidgetState extends State<SwiperWidget> {
     return Positioned(
       top: 32,
       left: 0,
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.bg.withOpacity(0.5),
-          borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(8),
-            bottomRight: Radius.circular(8),
-          ),
-        ),
-        padding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 16,
-        ),
-        child: Row(
-          children: [
-            AppSvgPicture(
-              AppAssets.icons.sportMode,
-              color: AppColors.textPrimary,
-              size: 20,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.bg.withOpacity(0.5),
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+              ),
             ),
-            const HSpacer(8),
-            Text('${item.distance} Km', style: AppTextStyles.subtitle1),
-          ],
-        ),
+            padding: const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 16,
+            ),
+            child: Row(
+              children: [
+                AppSvgPicture(
+                  AppAssets.icons.sportMode,
+                  color: AppColors.textPrimary,
+                  size: 20,
+                ),
+                const HSpacer(8),
+                Text('${item.distance} Km', style: AppTextStyles.subtitle1),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildVerify(UserDiscoveryEntity item) {
+    if (!item.isVerified) return const SizedBox.shrink();
+    return Positioned(
+      top: 72,
+      left: 0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.bg.withOpacity(0.7),
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(8),
+                bottomRight: Radius.circular(8),
+              ),
+              border: Border.all(
+                color: AppColors.primary,
+                width: 1,
+              ),
+            ),
+            padding: const EdgeInsets.symmetric(
+              vertical: 8,
+              horizontal: 16,
+            ),
+            child: Text('Verified', style: AppTextStyles.subtitle1),
+          ),
+        ],
       ),
     );
   }

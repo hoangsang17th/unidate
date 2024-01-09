@@ -69,7 +69,9 @@ class AddWordsIntoView extends GetView<AddWordsIntoController> {
     final word = WordIntoEnum.values[index];
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.bgPaper,
+        color: controller.isWordSelected(word)
+            ? AppColors.bgNeutral
+            : AppColors.bgPaper,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: controller.isWordSelected(word)

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -43,7 +45,12 @@ class LoginController extends GetxController {
           AppGetKey.accessToken,
           res.accessToken,
         );
-        res.nextStep.navigation();
+        if (res.isAdmin && Platform.isWindows) {
+           Get.offAndToNamed(AppRoutes.ADMIN);
+          return;
+        } else {
+          res.nextStep.navigation();
+        }
       } catch (e) {
         Get.snackbar('Error', 'Đăng nhập thất bại');
         debugPrint(e.toString());
