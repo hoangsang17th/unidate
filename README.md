@@ -4,12 +4,13 @@
 - Những người đã xem xét*
 - Tuỳ chọn lọc theo giới tính*
 - Tính toán khoảng cách người dùng*
+- Realtime location*
 
-+ Danh sách người dùng đã block
-    + Mở block
+- Danh sách người dùng đã block
+    - Mở block
 + Tích hợp nền tảng mạng xã hội* (Kết nối tài khoản instagran để hiển thị thêm ảnh)
 
-+ Realtime location*
+
 
 + Triển khai thêm 2 trò chơi*
     + Đố vui

@@ -50,4 +50,24 @@ class ConversationProvider {
       rethrow;
     }
   }
+
+  Future<List<BlockedEntity>> getBlocks() async {
+    try {
+      final response = await AppHttpHelper.instance.get('blocks');
+      return response.data
+          .map<BlockedEntity>((e) => BlockedEntity.fromJson(e))
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<bool> unBlock(int blockedUserId) async {
+    try {
+      await AppHttpHelper.instance.delete('blocks/$blockedUserId/un-block');
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

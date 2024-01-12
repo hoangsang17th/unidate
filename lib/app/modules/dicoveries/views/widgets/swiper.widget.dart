@@ -291,7 +291,6 @@ class _SwiperWidgetState extends State<SwiperWidget> {
         children: [
           if (center != null) _buildLabelPosition(center),
           _buildDistance(item),
-          _buildVerify(item),
           _buildInfo(item)
         ],
       ),
@@ -385,37 +384,6 @@ class _SwiperWidgetState extends State<SwiperWidget> {
     );
   }
 
-  Widget _buildVerify(UserDiscoveryEntity item) {
-    if (!item.isVerified) return const SizedBox.shrink();
-    return Positioned(
-      top: 72,
-      left: 0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.bg.withOpacity(0.7),
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(8),
-                bottomRight: Radius.circular(8),
-              ),
-              border: Border.all(
-                color: AppColors.primary,
-                width: 1,
-              ),
-            ),
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 16,
-            ),
-            child: Text('Verified', style: AppTextStyles.subtitle1),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildInfo(UserDiscoveryEntity item) {
     return Positioned(
       bottom: 0,
@@ -468,6 +436,11 @@ class _SwiperWidgetState extends State<SwiperWidget> {
                     ],
                   ),
                 ),
+                if (item.isVerified)
+                  AppSvgPicture(
+                    AppAssets.icons.verify,
+                    size: 20,
+                  ),
                 IconButton(
                   onPressed: () => Get.toNamed(
                     AppRoutes.PROFILE_DETAIL,

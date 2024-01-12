@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:unidate/app/bindings/setup_profile.binding.dart';
 import 'package:unidate/app/modules/admin/views/admin_base.view.dart';
+import 'package:unidate/app/modules/conversations/views/blocked.view.dart';
 import 'package:unidate/app/modules/conversations/views/messages.view.dart';
 import 'package:unidate/app/modules/dicoveries/views/matched.view.dart';
 import 'package:unidate/app/modules/dicoveries/views/setup_filter.view.dart';
@@ -108,6 +109,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.ADMIN,
       page: () => const AdminBaseView(),
+    ),
+
+    GetPage(
+      name: AppRoutes.BLOCKED,
+      page: () => const BlockedView(),
     ),
   ];
 }

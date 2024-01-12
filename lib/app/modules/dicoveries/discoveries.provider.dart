@@ -88,4 +88,21 @@ class DiscoveriesProvider {
       rethrow;
     }
   }
+
+    Future<List<UserDiscoveryEntity>> getDiscoveriesMax() async {
+    try {
+      final response = await AppHttpHelper.instance.get(
+        'matches/discoveries-recently',
+        queryParameters: {
+          'maxDistance': 10
+        },
+      );
+      return response.data
+          .map<UserDiscoveryEntity>((e) => UserDiscoveryEntity.fromJson(e))
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
 }

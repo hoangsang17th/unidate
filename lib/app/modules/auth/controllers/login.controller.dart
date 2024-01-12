@@ -46,7 +46,7 @@ class LoginController extends GetxController {
           res.accessToken,
         );
         if (res.isAdmin && Platform.isWindows) {
-           Get.offAndToNamed(AppRoutes.ADMIN);
+          Get.offAndToNamed(AppRoutes.ADMIN);
           return;
         } else {
           res.nextStep.navigation();
@@ -54,9 +54,10 @@ class LoginController extends GetxController {
       } catch (e) {
         Get.snackbar('Error', 'Đăng nhập thất bại');
         debugPrint(e.toString());
+      } finally {
+        EasyLoading.dismiss();
       }
     }
-    EasyLoading.dismiss();
     isSubmitted = false;
   }
 

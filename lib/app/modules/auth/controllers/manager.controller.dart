@@ -45,10 +45,9 @@ class ManagerController extends GetxController {
     //
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (accessToken != null) {
-        debugPrint('accessToken: $accessToken');
-        final res = await userProviders.currentUser();
-
         try {
+          debugPrint('accessToken: $accessToken');
+          final res = await userProviders.currentUser();
           if (res.isAdmin && Platform.isWindows) {
             Get.offAndToNamed(AppRoutes.ADMIN);
             return;

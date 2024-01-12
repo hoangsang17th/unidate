@@ -57,7 +57,7 @@ class MatchedView extends GetView<MatchedController> {
                 ),
                 const VSpacer(20),
                 Text(
-                  'You and ${controller.user.fullname.split(' ').last} like each other. Why not make the first move?',
+                  'You and ${controller.userMatched.who.fullname.split(' ').last} like each other. Why not make the first move?',
                   style: AppTextStyles.subtitle1.copyWith(
                     color: AppColors.error,
                     fontStyle: FontStyle.italic,

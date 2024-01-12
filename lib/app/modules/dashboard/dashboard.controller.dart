@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/core/utils/get.storage.dart';
+import 'package:unidate/app/core/utils/notification_service.dart';
 import 'package:unidate/app/core/values/app_url.dart';
 import 'package:unidate/app/core/websocket/enums/web_socket.enum.dart';
 import 'package:unidate/app/modules/auth/entities/user.entity.dart';
@@ -13,6 +14,7 @@ import 'package:unidate/app/modules/auth/user.provider.dart';
 import 'package:unidate/app/modules/conversations/controllers/conversation.controller.dart';
 import 'package:unidate/app/modules/conversations/controllers/messages.controller.dart';
 import 'package:unidate/app/modules/conversations/entities/conversation.entity.dart';
+import 'package:unidate/app/modules/dicoveries/discoveries.provider.dart';
 import 'package:unidate/app/modules/dicoveries/entities/discovery.entity.dart';
 import 'package:unidate/app/routes/app_pages.dart';
 import 'package:unidate/generated/assets.gen.dart';
@@ -20,6 +22,7 @@ import 'package:socket_io_client/socket_io_client.dart';
 
 class DashBoardController extends GetxController {
   final UserProviders _userProviders = UserProviders();
+  final DiscoveriesProvider _discoveriesProvider = DiscoveriesProvider();
 
   RxBool isLoading = true.obs;
 
@@ -54,11 +57,20 @@ class DashBoardController extends GetxController {
   }
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     initWs();
     getCurrentUser();
+    await NotificationService.instance.init();
     setAllowRealtimeLocation();
+  }
+
+  @override
+  dispose() {
+    super.dispose();
+    if (ws != null) {
+      ws!.disconnect();
+    }
   }
 
   Future<void> initWs() async {
@@ -105,6 +117,7 @@ class DashBoardController extends GetxController {
 
   void onWsEvent() {
     ws!.onAny((event, data) {
+      debugPrint('event: $event');
       switch (event) {
         case WebSocketActionType.conversation:
           final MessageEntity message = MessageEntity.fromJson(data);
@@ -115,16 +128,36 @@ class DashBoardController extends GetxController {
             MessagesController.to.onWsMessage(message);
           }
           break;
+
         case WebSocketActionType.matching:
           Get.toNamed(
             AppRoutes.MATCHED,
             arguments: MatchUserEntity.fromJson(data),
           );
           break;
-        case WebSocketActionType.notification:
-          break;
+
         case WebSocketActionType.blocking:
+          if (Get.isRegistered<ConversationController>()) {
+            ConversationController.to.getConversations();
+          }
+          if (Get.isRegistered<MessagesController>()) {
+            final blocking = BlockEntity.fromJson(data);
+            if (MessagesController.to.conversation.partnerId ==
+                blocking.userId) {
+              Get.back();
+            }
+          }
+
           break;
+        case WebSocketActionType.notification:
+          final notification = NotificationEntity.fromJson(data);
+          NotificationService.instance.showNotification(
+            title: 'New notification',
+            body: "${notification.relater.fullname} đã tương tác với bạn",
+            payload: WebSocketActionType.notification,
+          );
+          break;
+
         case WebSocketActionType.matchingRecently:
           break;
         default:
@@ -135,7 +168,7 @@ class DashBoardController extends GetxController {
   Future<void> setAllowRealtimeLocation() async {
     final isAllow =
         await AppGetStorage.instance.read(AppGetKey.allowRealtimeLocation);
-    if (!isAllow) return;
+    if (isAllow == null || !isAllow) return;
     if (isTurnOnRealtimeLocation) return;
     LocationSettings locationSettings = AndroidSettings(
       accuracy: LocationAccuracy.high,
@@ -159,6 +192,16 @@ class DashBoardController extends GetxController {
         lat: event.latitude,
         long: event.longitude,
       ));
+      final discoveries = await _discoveriesProvider.getDiscoveriesMax();
+      if (discoveries.isNotEmpty) {
+        NotificationService.instance.showNotification(
+          title: 'New discovery',
+          body:
+              '${discoveries.first.fullname} is near you. Distance is only ${discoveries.first.distance}km, connect now!',
+          payload:
+              '${WebSocketActionType.matchingRecently}:${discoveries.first.id}',
+        );
+      }
     });
   }
 }

@@ -28,4 +28,5 @@ abstract class AppRoutes {
 
   //
   static const ADMIN = '/admin';
+  static const BLOCKED = '/blocked';
 }

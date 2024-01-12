@@ -27,7 +27,7 @@ class AdminController extends DashBoardController {
   Rx<VerifyStatus> verifyStatus = VerifyStatus.Waiting.obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     fetchUserVerify('');
     fetchUsers('');

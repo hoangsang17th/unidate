@@ -78,3 +78,75 @@ class ChatMessageEntity {
 
   Map<String, dynamic> toJson() => _$ChatMessageEntityToJson(this);
 }
+
+@JsonSerializable()
+class BlockEntity {
+  final int userId;
+  final int blockedUserId;
+
+  BlockEntity({
+    required this.userId,
+    required this.blockedUserId,
+  });
+
+  factory BlockEntity.fromJson(Map<String, dynamic> json) =>
+      _$BlockEntityFromJson(json);
+}
+
+@JsonSerializable(explicitToJson: true)
+class NotificationEntity {
+  final int to;
+  final RelaterEntity relater;
+
+  NotificationEntity({
+    required this.to,
+    required this.relater,
+  });
+
+  factory NotificationEntity.fromJson(Map<String, dynamic> json) =>
+      _$NotificationEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NotificationEntityToJson(this);
+}
+
+@JsonSerializable()
+class RelaterEntity {
+  final String fullname;
+  final String avatar;
+  final int id;
+
+  RelaterEntity({
+    required this.fullname,
+    required this.avatar,
+    required this.id,
+  });
+
+  factory RelaterEntity.fromJson(Map<String, dynamic> json) =>
+      _$RelaterEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RelaterEntityToJson(this);
+}
+
+@JsonSerializable()
+class BlockedEntity {
+  int id;
+  DateTime createdAt;
+  String fullname;
+  String avatar;
+  int userId;
+  String email;
+
+  BlockedEntity({
+    required this.id,
+    required this.createdAt,
+    required this.fullname,
+    required this.avatar,
+    required this.userId,
+    required this.email,
+  });
+
+  factory BlockedEntity.fromJson(Map<String, dynamic> json) =>
+      _$BlockedEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BlockedEntityToJson(this);
+}

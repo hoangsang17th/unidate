@@ -38,7 +38,15 @@ class ConversationView extends GetView<ConversationController> {
                 ),
               ],
             ),
-            actions: const [],
+            actions: [
+              IconButton(
+                onPressed: () => Get.toNamed(AppRoutes.BLOCKED),
+                icon: Icon(
+                  Icons.person_off_outlined,
+                  color: AppColors.textPrimary,
+                ),
+              )
+            ],
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),

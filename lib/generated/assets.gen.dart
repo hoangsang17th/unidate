@@ -58,6 +58,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/like.svg
   String get like => 'assets/icons/like.svg';
 
+  /// File path: assets/icons/lock.svg
+  String get lock => 'assets/icons/lock.svg';
+
   /// File path: assets/icons/logo.svg
   String get logo => 'assets/icons/logo.svg';
 
@@ -79,6 +82,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/trophy.svg
   String get trophy => 'assets/icons/trophy.svg';
 
+  /// File path: assets/icons/verify.svg
+  String get verify => 'assets/icons/verify.svg';
+
   /// File path: assets/icons/weight.svg
   String get weight => 'assets/icons/weight.svg';
 
@@ -99,12 +105,14 @@ class $AssetsIconsGen {
         image,
         info,
         like,
+        lock,
         logo,
         notification,
         reconsider,
         remove,
         shoeRun,
         trophy,
+        verify,
         weight
       ];
 }

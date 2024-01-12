@@ -226,7 +226,9 @@ class UsersManagementView extends GetView<AdminController> {
                         ? const EmptyWidget(
                             message: 'User not found',
                           )
-                        : ListView.builder(
+                        : ListView.separated(
+                            separatorBuilder: (context, index) =>
+                                const VSpacer(12),
                             itemBuilder: (context, index) {
                               final user = controller.users[index];
                               return Row(
@@ -377,7 +379,7 @@ class UserVerifyView extends GetView<AdminController> {
                                     onPressed: () => Get.toNamed(
                                       AppRoutes.PROFILE_DETAIL,
                                       arguments: UserDiscoveryEntity(
-                                        id: user.id,
+                                        id: user.userId,
                                         isCanActions: false,
                                       ),
                                     ),
