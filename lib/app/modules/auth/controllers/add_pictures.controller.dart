@@ -19,7 +19,7 @@ class AddPicturesController extends GetxController {
   Future<void> pickImage(int index) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
-      type: FileType.image,
+      type: FileType.media,
     );
     pictures.value.picturesFile.add(PictureIndex(
       index: index,

@@ -303,9 +303,42 @@ class UserVerifyView extends GetView<AdminController> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              AppInput(
-                placeHolder: 'Search',
-                onChanged: (p0) => controller.fetchUserVerify(p0),
+              Row(
+                children: [
+                  Expanded(
+                    child: AppInput(
+                      placeHolder: 'Search',
+                      onChanged: (p0) => controller.fetchUserVerify(p0),
+                    ),
+                  ),
+                  Obx(
+                    () => DropdownButton(
+                      // selectedItemBuilder: (context) {
+                      //   return Text(controller.verifyStatus.value.name);
+                      // },
+
+                      value: controller.verifyStatus.value,
+                      items: const [
+                        DropdownMenuItem(
+                          child: Text('Waiting'),
+                          value: VerifyStatus.Waiting,
+                        ),
+                        DropdownMenuItem(
+                          child: Text('Verified'),
+                          value: VerifyStatus.Verified,
+                        ),
+                        DropdownMenuItem(
+                          child: Text('Rejected'),
+                          value: VerifyStatus.Reject,
+                        ),
+                      ],
+                      onChanged: (_) {
+                        controller.verifyStatus.value = _ as VerifyStatus;
+                        controller.fetchUserVerify(null);
+                      },
+                    ),
+                  ),
+                ],
               ),
               const VSpacer(12),
               // TODO: Đưa thêm chức năng lọc theo trạng thái

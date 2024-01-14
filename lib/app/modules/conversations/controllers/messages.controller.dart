@@ -74,7 +74,7 @@ class MessagesController extends GetxController {
   Future<void> onSendImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
-      type: FileType.image,
+      type: FileType.media,
     );
 
     if (result != null) {

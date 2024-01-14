@@ -173,13 +173,15 @@ class MessagesView extends GetView<MessagesController> {
     final isImage = e.text.isImageFileName || e.text.endsWith('.webp');
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
-        top: isNeedInfo ? 16 : 0,
+        top: isNeedInfo || !isJustSent ? 16 : 0,
       ),
       child: Column(
         children: [
           if (isNeedInfo) ...[
             Text(
-              DateFormat('hh:mm a').format(e.sendTime),
+              DateTime.now().difference(e.sendTime).inDays > 0
+                  ? DateFormat('dd/MM hh:mm a').format(e.sendTime)
+                  : DateFormat('hh:mm a').format(e.sendTime),
               style: AppTextStyles.overline.copyWith(
                 color: AppColors.textSecondary,
               ),
@@ -204,7 +206,9 @@ class MessagesView extends GetView<MessagesController> {
                   padding: EdgeInsets.all(isImage ? 3 : 8),
                   margin: const EdgeInsets.symmetric(vertical: 2),
                   decoration: BoxDecoration(
-                    color: AppColors.primary,
+                    color: e.isYouSend
+                        ? AppColors.primary
+                        : AppColors.textSecondary,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: isImage
