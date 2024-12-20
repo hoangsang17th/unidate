@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unidate/app/modules/auth/controllers/login.controller.dart';
-import 'package:unidate/core/values/app_colors.dart';
-import 'package:unidate/core/values/app_text_styles.dart';
-import 'package:unidate/core/widgets/app_bar.dart';
-import 'package:unidate/core/widgets/app_text_field.dart';
-import 'package:unidate/core/widgets/button.dart';
+import 'package:unidate/app/core/values/app_colors.dart';
+import 'package:unidate/app/core/values/app_text_styles.dart';
+import 'package:unidate/app/core/widgets/app_bar.dart';
+import 'package:unidate/app/core/widgets/app_text_field.dart';
+import 'package:unidate/app/core/widgets/button.dart';
 
-import 'package:unidate/core/widgets/image.dart';
-import 'package:unidate/core/widgets/spacer.dart';
+import 'package:unidate/app/core/widgets/image.dart';
+import 'package:unidate/app/core/widgets/spacer.dart';
 import 'package:unidate/generated/assets.gen.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -44,16 +44,45 @@ class LoginView extends GetView<LoginController> {
                     style: AppTextStyles.h3,
                   ),
                   const VSpacer(24),
-                  const AppInput(
+                  AppInput(
                     placeHolder: 'phsang@gmail.com',
                     label: 'Email',
+                    onChanged: (_) => controller.setEmail(_),
                   ),
                   const VSpacer(12),
-                  const AppInput(
-                    placeHolder: '***',
-                    label: 'Password',
-                    obscureText: true,
-                  ),
+                  Obx(() {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: AppInput(
+                            placeHolder: '***',
+                            label: 'Password',
+                            obscureText: controller.isShowPassword.isFalse,
+                            onChanged: (_) => controller.setPassword(_),
+                          ),
+                        ),
+                        const HSpacer(8),
+                        Material(
+                          color: AppColors.transparent,
+                          child: InkWell(
+                            onTap: controller.onChangedShowPassword,
+                            borderRadius: BorderRadius.circular(8),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: AppSvgPicture(
+                                controller.isShowPassword.isTrue
+                                    ? AppAssets.icons.eyeDisable
+                                    : AppAssets.icons.eye1,
+                                color: AppColors.textPrimary,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
                   const VSpacer(12),
                   PrimaryButton(
                     onPressed: controller.onLogin,

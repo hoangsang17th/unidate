@@ -1,0 +1,10 @@
+{
+    // "dart.flutterSdkPath": "~/fvm/versions/3.13.7",
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "latex",
+        "plaintext"
+    ]
+}
